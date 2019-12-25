@@ -78,13 +78,13 @@ body {
 }
 
 #Westfall {
-  background-image: url('/images/Westfall.jpg');
+  background-image: url('../images/Westfall.jpg');
   background-position: center;
   background-size: cover;
 }
 
 #Hilsbrad {
-  background-image: url('/images/hillsbrad.jpg');
+  background-image: url('../images/hillsbrad.jpg');
   background-position: bottom;
   background-size: cover;
 }
@@ -239,7 +239,7 @@ body {
 }
 
 #Zul_Drak {
-  background-image: url('/images/ZulDrak.jpg');
+  background-image: url('../images/ZulDrak.jpg');
   background-position: right;
   background-size: cover;
 }
