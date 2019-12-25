@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/cube.css" />
+  <link rel="stylesheet" href="style/choose.css" />
+  <script defer src="javascript/cities.js"></script>
+  <script defer src="javascript/cube.js"></script>
+  <script defer src="javascript/player.js"></script>
+  <script defer src="javascript/map.js"></script>
+  <script defer src="javascript/game.js"></script>
+  <title>Monopoly</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="board">
+      <!--BOARD-->
+      <div class="board__kalimdor-container">
+        <div id="jail" class="8">WIEZENIE</div>
+        <div id="Durotar" class="9">Durotar</div>
+        <div id="Barrens" class="10">The Barrens</div>
+        <div id="Thousand_Needles" class="11">Thousand Needles</div>
+        <div id="Card_Of_Horde" class="12">KARTA</div>
+        <div id="Tanaris" class="13">Tanaris</div>
+        <div id="Orgrimmar" class="14">Orgrimmar</div>
+        <div id="Un_Goro" class="15">Un Goro</div>
+        <div id="Event" class="16">EVENT</div>
+      </div>
+      <div class="board__center-container">
+        <!--CENTER CONTAINER-->
+        <div class="board__eastern-kingdom-container">
+          <div id="Burning_Steppes" class="7">Burning Steppes</div>
+          <div id="Hinterlands" class="6">The Hinterlands</div>
+          <div id="Stranglethorn" class="5">Northern Stranglethorn</div>
+          <div id="Stormwind" class="4">Stormwind</div>
+          <div id="Hilsbrad" class="3">Hilsbrad Foothils</div>
+          <div id="Westfall" class="2">Westfall</div>
+          <div id="Elwynn" class="1">Elwynn Forest</div>
+        </div>
+        <div class="board__content-container">
+          <div class="string_Eastern_Kingdom">Eastern Kingdom</div>
+          <div class="stringKalimdor">KALIMDOR
+            <div class="string_Northrend">NORTHREND</div>
+          </div>
+          <div class="string_Outland">Outland</div>
+          <div class="container_cube_button">
+            <div class="cube firstCube">
+              <div class="front"><span class="dot1"></span></div>
+              <div class="back">
+                <span class="dot1"></span> <span class="dot2"></span>
+              </div>
+              <div class="top">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span>
+              </div>
+              <div class="bottom">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span> <span class="dot4"></span>
+              </div>
+              <div class="left">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span> <span class="dot4"></span>
+                <span class="dot5"></span>
+              </div>
+              <div class="right">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span> <span class="dot4"></span>
+                <span class="dot5"></span> <span class="dot6"></span>
+              </div>
+            </div>
+            <div class="cube secondCube">
+              <div class="front"><span class="dot1"></span></div>
+              <div class="back">
+                <span class="dot1"></span> <span class="dot2"></span>
+              </div>
+              <div class="top">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span>
+              </div>
+              <div class="bottom">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span> <span class="dot4"></span>
+              </div>
+              <div class="left">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span> <span class="dot4"></span>
+                <span class="dot5"></span>
+              </div>
+              <div class="right">
+                <span class="dot1"></span> <span class="dot2"></span>
+                <span class="dot3"></span> <span class="dot4"></span>
+                <span class="dot5"></span> <span class="dot6"></span>
+              </div>
+            </div>
+            <button>RZUC KOSTKA</button>
+          </div>
+        </div>
+        <div class="board__outland-container">
+          <div id="Helfire" class="17">Helfire Peninsula</div i>
+          <div id="Zangramash" class="18">Zangramash</div>
+          <div id="Shattrah" class="19">Shattrah City</div>
+          <div id="CardOfAlliance" class="20">Karta</div>
+          <div id="Nagrand" class="21">NAGRAND</div>
+          <div id="Netherstorm" class="22">Netherstorm</div>
+          <div id="Shadowmoon" class="23">Shadowmoon Valley</div>
+        </div>
+      </div>
+      <!--CENTER CONTAINER-->
+      <div class="board__northrend-container">
+        <div id="start" class="0">
+          <p>START</p>
+        </div>
+        <div id="Icecrown" class="31">Icecrown</div>
+        <div id="Storm_Peaks" class="30">Storm Peaks</div>
+        <div id="Zul_Drak" class="29">Zul Drak</div>
+        <div id="Card_Of_Demons" class="28">KARTA</div>
+        <div id="Grizzly" class="27">Grizzly Hills</div>
+        <div id="Borean" class="26">Borean Tundra</div>
+        <div id="Dalaran" class="25">Dalaran</div>
+        <div id="Teleport" class="24">TELEPORT OD MAGA</div>
+      </div>
+    </div>
+    <!--BOARD-->
+    <div class="container-choose-element">
+      <div class="back-element">❌</div>
+      <div class="string-element">Czy chesz kupic to miasto ?</div>
+      <div class="container-buttons">
+        <div class="box-button"><button class="button Yes-button">Tak</button></div>
+        <div class="box-button"><button class="button No-button">Nie</button></div>
+      </div>
+    </div>
+    <div class="container-if-field-is-buyed">
+      <button>Czy chcesz odkupic</button>
+    </div>
+  </div>
+
+</body>
+
+</html>
