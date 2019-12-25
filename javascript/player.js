@@ -3,7 +3,7 @@ class Player {
         this.nameOfPlayer = nameOfPlayer;
         this.field = 0;
         this.amountOfMoves = 0;
-        this.image = "../images/player" + position + ".jpg";
+        this.image = "images/player" + position + ".jpg";
         this.queue = position;
         this.cities = [];
         this.money = 3000;
