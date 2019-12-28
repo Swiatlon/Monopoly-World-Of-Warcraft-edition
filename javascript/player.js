@@ -3,13 +3,14 @@ class Player {
         this.nameOfPlayer = nameOfPlayer;
         this.field = 0;
         this.amountOfMoves = 0;
-        this.image = "images/player" + position + ".jpg";
+        this.id = position;
+        this.image = "images/player" + position + ".png";
         this.queue = position;
         this.cities = [];
         this.money = 3000;
         this.img = document.createElement("img");
-        this.img.width = 50;
-        this.img.height = 50;
+        this.img.width = 70;
+        this.img.height = 70;
         this.img.src = this.image;
     }
 
@@ -31,6 +32,7 @@ class Player {
             } else {
                 clearInterval(playerAnimationOfMove);
                 game.EconomicSytem(this);
+                
             }
         }, 300);
     }
@@ -47,6 +49,7 @@ class Player {
             console.log('[You dont have enough money  !');
         }
     }
+   
 }
 
 const listPlayers = [];
@@ -55,12 +58,6 @@ function createPlayer(name) {
     let position = listPlayers.length + 1;
     const newPlayer = new Player(name, position);
     listPlayers.push(newPlayer);
-}
-
-const playersName = ['Czikus', 'Michas', 'Mateusz', 'Wojtini']
-for (let i = 0; i < playersName.length; i++) {
-    createPlayer(playersName[i]);
-
 }
 
 function whoIsFirst() {
@@ -100,6 +97,5 @@ function whoIsFirst() {
     setPositonsOfPlayers();
 }
 
-whoIsFirst()
 
 const arrayOfDisabledBuyedFields = [0, 8, 12, 16, 20, 24, 28]

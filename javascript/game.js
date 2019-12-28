@@ -1,9 +1,16 @@
 let playerQueue = 0;
 class Game {
 
+  initiatePlayers() {
+    const playersName = [ 'Czikus','Michas', 'Mateusz', 'Wojtini']
+    for (let i = 0; i < playersName.length; i++) {
+      createPlayer(playersName[i]);
+      map.enteringTheNamesOfThePlayers(listPlayers[i]);
+    }
+   
+  }
   sequenceOfMove() {
     listPlayers[playerQueue].move();
-
     playerQueue++;
   }
 
@@ -13,6 +20,7 @@ class Game {
 
     if (Cities[thisPlayer.field].ownerOfField == 0 && arrayOfDisabledBuyedFields.includes(thisPlayer.field) === false) { // jesli pole nie jest przejete przez nikogo 
       map.showChooseOption();
+
 
     } else if (Cities[thisPlayer.field].ownerOfField.nameOfPlayer == thisPlayer.nameOfPlayer) { // pole ktore juz jest gracza
       console.log('[to pole jest twoje]'); // tutaj musi byc funkcja na budowanie domkow pojawia sie div ile domkow chce zbudowac
@@ -31,15 +39,28 @@ class Game {
       console.log('[PO ZAPLACIE]', Cities[thisPlayer.field].ownerOfField.money + "HAJS GRACZA" + Cities[thisPlayer.field].ownerOfField.nameOfPlayer);
       console.log('[HAJS PLACACEGO PO ZAPLACIE]', thisPlayer.money + " GRACZ PLACACY " + thisPlayer.nameOfPlayer);
       btn.disabled = false;
+      map.visualAmountOfMoney(thisPlayer);
+      map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
     } else {
       console.log('[jestem w elsie]', );
       btn.disabled = false;
 
     }
-  }
-}
 
+
+    
+  }
+
+
+}
 const game = new Game();
+game.initiatePlayers();
+whoIsFirst()
+map.sortAllLands();
+map.draw();
+for(let i = 0 ; i < 15; i ++){
+  Cities[i].ownerOfField = listPlayers[0];
+}
 
 // RUCH GRACZA +++ (EW PROMISES)
 // KOLEJNOSC GRACZY +-+
