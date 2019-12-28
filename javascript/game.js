@@ -58,9 +58,7 @@ game.initiatePlayers();
 whoIsFirst()
 map.sortAllLands();
 map.draw();
-for(let i = 0 ; i < 15; i ++){
-  Cities[i].ownerOfField = listPlayers[0];
-}
+
 
 // RUCH GRACZA +++ (EW PROMISES)
 // KOLEJNOSC GRACZY +-+
