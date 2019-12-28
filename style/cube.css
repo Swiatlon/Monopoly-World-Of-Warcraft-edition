@@ -7,7 +7,7 @@
 .cube {
     margin-top: 200px;
     position: absolute;
-    margin-left: 300px;
+    margin-left: 350px;
     transition: transform 1s;
     transform: rotate3d(100, 100, -400, -0.8turn);
     width: 100px;

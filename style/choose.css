@@ -13,6 +13,7 @@
     background-repeat: no-repeat;
     color: white;
     display: none;
+  
 }
 
 .container-if-field-is-buyed {
@@ -52,6 +53,10 @@
     height: 60px;
     align-self: center;
     justify-self: center;
+    
+}
+.box-button button{
+    margin-left: 0px;
 }
 
 .button {
