@@ -9,6 +9,7 @@ const arrayOfPlayersMoney = [
   playerThirdOnMapMoney = document.querySelector('.money-third'),
   playerFourthOnMapMoney = document.querySelector('.money-fourth'),
 ]
+
 const arraysOfPlayersName = [
   playerFirstName = document.querySelector('.player-first-name'),
   playerSecondName = document.querySelector('.player-second-name'),
@@ -24,7 +25,6 @@ class Map {
       ...document.querySelectorAll(".board__outland-container div"),
       ...document.querySelectorAll(".board__northrend-container div")
     ];
-
   }
 
   sortAllLands() {
@@ -55,7 +55,6 @@ class Map {
     arrayOfPlayersMoney[thisPlayer.id-1].textContent ="Money: " + thisPlayer.money;   
     // console.log('[TUTAJ]',arrayOfPlayersMoney[thisPlayer.id-1].textContent );    
   }
-
 }
 const map = new Map();
 
@@ -66,6 +65,4 @@ chooseBoxYesBtn.addEventListener("click",function() {
 
   listPlayers[playerQueue - 1].buyACity(); // Tutaj musze zmienic zeby nie odejmowac od playerQueque -1 bo to jest blad
   map.visualAmountOfMoney(listPlayers[playerQueue-1]);
-
-
 });

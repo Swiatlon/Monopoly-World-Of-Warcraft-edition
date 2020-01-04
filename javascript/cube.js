@@ -1,10 +1,10 @@
 
-class Cube {
+class Cube
+{
   constructor() {
     this.lastThrows = [];
     this.cubes = this.getCubes();
   }
-
 
   getNumberRandom(max,min){
     let firstThrown = Math.floor(Math.random() * (7 - 1) + 1); //7 -max  1 -min
@@ -17,7 +17,7 @@ class Cube {
     if (this.lastThrows[0] !== firstThrown) {
       this.animationOfCube(firstThrown, this.cubes[0]);
       console.log('[lastThrown]',this.lastThrows );
-      
+
     } else {
       this.animationOfCube(10, this.cubes[0]);
       setTimeout(()=> {
@@ -41,13 +41,8 @@ class Cube {
       playerQueue = 0;
   }
 
-   
-  
     listPlayers[playerQueue].amountOfMoves = firstThrown + secondThrown;
-    
-    
     // console.log('[first]',listPlayers[0].pole );
-    
   }
 
   animationOfCube(number, cube) {
@@ -84,12 +79,7 @@ const cube = new Cube();
 const btn = document.querySelector("button");
 
 btn.addEventListener("click", () => {
-    
-  
   cube.getNumberRandom();
-  game.sequenceOfMove();  
-  
-
-
+  game.sequenceOfMove();
 });
 

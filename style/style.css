@@ -36,8 +36,6 @@ body {
   margin-top: -100px;
   box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.952);
   transform: rotate3d(900, 600, -800, -0.8turn);
-
-  
 }
 
 
@@ -357,8 +355,6 @@ display: grid;
   font-size: 26px;
   padding: 15px;
 }
-
-
 
 
 @media(max-width:1300px) {

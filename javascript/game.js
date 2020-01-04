@@ -1,13 +1,12 @@
 let playerQueue = 0;
-class Game {
 
+class Game {
   initiatePlayers() {
     const playersName = [ 'Czikus','Michas', 'Mateusz', 'Wojtini']
     for (let i = 0; i < playersName.length; i++) {
       createPlayer(playersName[i]);
       map.enteringTheNamesOfThePlayers(listPlayers[i]);
     }
-   
   }
   sequenceOfMove() {
     listPlayers[playerQueue].move();
@@ -21,15 +20,14 @@ class Game {
     if (Cities[thisPlayer.field].ownerOfField == 0 && arrayOfDisabledBuyedFields.includes(thisPlayer.field) === false) { // jesli pole nie jest przejete przez nikogo 
       map.showChooseOption();
 
-
     } else if (Cities[thisPlayer.field].ownerOfField.nameOfPlayer == thisPlayer.nameOfPlayer) { // pole ktore juz jest gracza
       console.log('[to pole jest twoje]'); // tutaj musi byc funkcja na budowanie domkow pojawia sie div ile domkow chce zbudowac
 
       btn.disabled = false;
     } else if (Cities[thisPlayer.field].ownerOfField !== thisPlayer.nameOfPlayer && Cities[thisPlayer.field].ownerOfField !== 0) { // pole jest kogos innego
       console.log('[to pole jest kogos innego]') // tutaj musi byc funkcja ktora bedzie oddawala komus pieniadze za jego domek
-      // 
-      //Przelwam pieniadze(Cities[thisPlayer.pole].tribute) z thisPlayer(odejmuje od jego pieniedzy haracz)  do  Cities[thisPlayer.pole].player.money
+
+      //Przelewam pieniadze(Cities[thisPlayer.pole].tribute) z thisPlayer(odejmuje od jego pieniedzy haracz)  do  Cities[thisPlayer.pole].player.money
       console.log('[Wykonuuje ruch]', thisPlayer);
       console.log('[Kogo to jest pole]', Cities[thisPlayer.field].ownerOfField);
       console.log('[HAJS PLACACEGO PRZED ZAPLATA]', thisPlayer.money + " GRACZ PLACACY " + thisPlayer.nameOfPlayer);
@@ -44,15 +42,10 @@ class Game {
     } else {
       console.log('[jestem w elsie]', );
       btn.disabled = false;
-
     }
-
-
-    
   }
-
-
 }
+
 const game = new Game();
 game.initiatePlayers();
 whoIsFirst()
@@ -76,3 +69,4 @@ for(let i = 0 ; i < 15; i ++){
 // NAZEWNICTWO(POPRAWNE) ZMIENNYCH/FUNKCJI +++
 // POPRAWNOSC KODU +-+
 // POPRAWIENIE PLANSZY  +-+
+// Moze obramowania/czarny kontur wokol pionkow zeby lepiej bylo widac je na planszy?

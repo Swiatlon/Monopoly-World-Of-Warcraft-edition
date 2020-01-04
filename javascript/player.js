@@ -49,7 +49,7 @@ class Player {
             console.log('[You dont have enough money  !');
         }
     }
-   
+
 }
 
 const listPlayers = [];
@@ -80,7 +80,6 @@ function whoIsFirst() {
                 genNumber = randomNumber.indexOf(number);
                 if (genNumber === -1) {
                     randomNumber.push(number);
-
                 }
             }
         }
@@ -96,6 +95,5 @@ function whoIsFirst() {
     }
     setPositonsOfPlayers();
 }
-
 
 const arrayOfDisabledBuyedFields = [0, 8, 12, 16, 20, 24, 28]
