@@ -2,7 +2,10 @@ const chooseBox = document.querySelector('.container-choose-element');
 const chooseBoxYesBtn = document.querySelector('.Yes-button');
 const chooseBoxNoBtn = document.querySelector('.No-button');
 const ifBuyedField = document.querySelector('.containerIfFieldIsBuyed');
-
+const Jail = document.querySelector('.jail');
+const imageOfPlayerWhoHasMovement = document.querySelector('.image-of-player-who-has-movement');
+const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue-center p');
+const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
 const arrayOfPlayersMoney = [
   playerFirstOnMapMoney = document.querySelector('.money-first'),
   playerSecondOnMapMoney = document.querySelector('.money-second'),
@@ -34,9 +37,9 @@ class Map {
   }
 
   draw() {
-    for (let i = 0; i < listPlayers.length; i++) {
+    for (let i = 0; i < game.players.length; i++) {
 
-      this.allLands[listPlayers[i].field].appendChild(listPlayers[i].img);
+      this.allLands[game.players[i].field].appendChild(game.players[i].img);
     }
 
   }
@@ -48,12 +51,33 @@ class Map {
   showChooseOption() {
     chooseBox.style.display = "block";
   }
-  enteringTheNamesOfThePlayers(thisPlayer){
-  arraysOfPlayersName[thisPlayer.id-1].textContent = thisPlayer.nameOfPlayer;
+  enteringTheNamesOfThePlayers(thisPlayer) {
+    arraysOfPlayersName[thisPlayer.id - 1].textContent = thisPlayer.nameOfPlayer;
   }
-  visualAmountOfMoney(thisPlayer){
-    arrayOfPlayersMoney[thisPlayer.id-1].textContent ="Money: " + thisPlayer.money;   
+  visualAmountOfMoney(thisPlayer) {
+    arrayOfPlayersMoney[thisPlayer.id - 1].textContent = "Money: " + thisPlayer.money;
     // console.log('[TUTAJ]',arrayOfPlayersMoney[thisPlayer.id-1].textContent );    
+  }
+  showingTheDivOfWhoHasMovement() {
+    let positionOfPlayers = playerQueue;
+    if (playerQueue == 4) {
+      positionOfPlayers = 0;
+    }
+    setTimeout(function () {
+      nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers].nameOfPlayer;
+      imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers].image;
+
+      containerOfPlayerWhoHasMovement.style.opacity = 1;
+      containerOfPlayerWhoHasMovement.style.visibility = "visible";
+
+      setTimeout(function () {
+
+        containerOfPlayerWhoHasMovement.style.opacity = 0;
+        containerOfPlayerWhoHasMovement.style.visibility = "hidden";
+
+      }, 2000);
+    }, 0)
+
   }
 
 }
@@ -61,11 +85,16 @@ const map = new Map();
 
 chooseBoxNoBtn.addEventListener("click", () => {
   map.hideChooseOption();
+  map.showingTheDivOfWhoHasMovement();
 });
-chooseBoxYesBtn.addEventListener("click",function() {
+chooseBoxYesBtn.addEventListener("click", function () {
 
-  listPlayers[playerQueue - 1].buyACity(); // Tutaj musze zmienic zeby nie odejmowac od playerQueque -1 bo to jest blad
-  map.visualAmountOfMoney(listPlayers[playerQueue-1]);
+  game.players[playerQueue - 1].buyACity(); // Tutaj musze zmienic zeby nie odejmowac od playerQueque -1 bo to jest blad dzieje sie tak poniewaz przez asynchronicznosc
+  map.visualAmountOfMoney(game.players[playerQueue - 1]);
+  map.showingTheDivOfWhoHasMovement();
 
 
 });
+
+const jail = 8;
+const arrayOfDisabledBuyedFields = [0, 8, 12, 16, 20, 24, 28];

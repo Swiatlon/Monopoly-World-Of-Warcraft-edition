@@ -8,9 +8,10 @@ class Player {
         this.queue = position;
         this.cities = [];
         this.money = 3000;
+        this.jail = false;
         this.img = document.createElement("img");
-        this.img.width = 70;
-        this.img.height = 70;
+        this.img.width = 60;
+        this.img.height = 60;
         this.img.src = this.image;
     }
 
@@ -29,13 +30,20 @@ class Player {
                     this.amountOfMoves = this.amountOfMoves - x - 1;
                 }
                 map.allLands[this.field].appendChild(this.img);
+
             } else {
                 clearInterval(playerAnimationOfMove);
-                game.EconomicSytem(this);
-                
+                if (this.field == jail) {
+                    this.jail = true;
+                }
+
+
+                this.endOfMoveAnimation();
+
             }
         }, 300);
     }
+
     buyACity() {
         if (this.money - Cities[this.field].costOfTheField > -1) {
             this.money = this.money - Cities[this.field].costOfTheField;
@@ -49,53 +57,10 @@ class Player {
             console.log('[You dont have enough money  !');
         }
     }
-   
-}
 
-const listPlayers = [];
+    endOfMoveAnimation() {
 
-function createPlayer(name) {
-    let position = listPlayers.length + 1;
-    const newPlayer = new Player(name, position);
-    listPlayers.push(newPlayer);
-}
-
-function whoIsFirst() {
-
-    function randomNum() {
-        let number = Math.floor(Math.random() * (5 - 1) + 1);
-        return number;
+        game.gameMechanism(this);
     }
 
-    let randomNumber = [];
-
-    for (let i = 0; i < listPlayers.length; i++) {
-        let number = randomNum();
-        let genNumber = randomNumber.indexOf(number);
-        if (genNumber === -1) {
-            randomNumber.push(number);
-        } else {
-            while (genNumber !== -1) {
-                number = randomNum();
-                genNumber = randomNumber.indexOf(number);
-                if (genNumber === -1) {
-                    randomNumber.push(number);
-
-                }
-            }
-        }
-    }
-
-    function setPositonsOfPlayers() {
-        for (let i = 0; i < listPlayers.length; i++) {
-            listPlayers[i].queue = randomNumber[i];
-        }
-        listPlayers.sort(function (a, b) {
-            return a.queue - b.queue
-        })
-    }
-    setPositonsOfPlayers();
 }
-
-
-const arrayOfDisabledBuyedFields = [0, 8, 12, 16, 20, 24, 28]
