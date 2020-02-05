@@ -2,140 +2,120 @@
     position: absolute;
     width: 700px;
     height: 700px;
-}
-
-.cube {
-    margin-top: 200px;
+  }
+  
+  .cube {
+    margin-top: 300px;
     position: absolute;
-    margin-left: 350px;
+    margin-left: 450px;
     transition: transform 1s;
     transform: rotate3d(100, 100, -400, -0.8turn);
     width: 100px;
     height: 140px;
     transform-style: preserve-3d;
-}
-
-.secondCube {
-    margin-top: 350px;
-}
-
-.cube div {
+  }
+  
+  .secondCube {
+    margin-top: 500px;
+  }
+  
+  .cube div {
     width: 88px;
     height: 88px;
     position: absolute;
     float: left;
-}
-
-.front {
+  }
+  
+  .front {
     background: white;
     border: 2px solid black;
     transform: rotatex(90deg) translateZ(45px);
-}
-
-.back {
+  }
+  
+  .back {
     background: white;
     border: 2px solid black;
     transform: rotateY(-90deg) translateZ(45px);
-}
-
-.bottom {
+  }
+  
+  .bottom {
     background: white;
     border: 2px solid black;
     transform: translateX(0px) translateY(0px) translateZ(45px);
-}
-
-.top {
+  }
+  
+  .top {
     background: white;
     border: 2px solid black;
     transform: rotateY(90deg) translateZ(45px);
-}
-
-.left {
+  }
+  
+  .left {
     background: white;
     border: 2px solid black;
     transform: rotateY(180deg) translateZ(45px);
-}
-
-.right {
+  }
+  
+  .right {
     background: white;
     border: 2px solid black;
     transform: rotateX(-90deg) translateZ(45px);
-}
-
-span {
+  }
+  
+  .cube span {
     width: 15px;
     height: 15px;
     border: 1px solid black;
     background: black;
     position: absolute;
     border-radius: 45px;
-}
-
-.dot1 {
+  }
+  
+  .dot1 {
     top: 40%;
     left: 40%;
-}
-
-.dot2 {
+  }
+  
+  .dot2 {
     left: 20%;
     top: 60%;
-}
-
-.dot3 {
+  }
+  
+  .dot3 {
     left: 60%;
     top: 15%;
-}
-
-.dot4 {
+  }
+  
+  .dot4 {
     left: 20%;
     top: 15%;
-}
-
-.dot5 {
+  }
+  
+  .dot5 {
     left: 60%;
     top: 60%;
-}
-
-.dot6 {
+  }
+  
+  .dot6 {
     left: 60%;
     top: 40%;
-}
-
-.back .dot1 {
+  }
+  
+  .back .dot1 {
     top: 60%;
     left: 60%;
-}
-
-.back .dot2 {
+  }
+  
+  .back .dot2 {
     top: 20%;
     left: 20%;
-}
-
-.bottom .dot1 {
+  }
+  
+  .bottom .dot1 {
     left: 60%;
     top: 60%;
-}
-
-.right .dot1 {
+  }
+  
+  .right .dot1 {
     left: 20%;
-}
-
-@media(max-width:1300px) {
-    .container_cube_button {
-        position: absolute;
-        width: 500px;
-        height: 500px;
-    }
-
-    .cube {
-        margin-left: 200px;
-    }
-
-    .firstCube {
-        margin-top: 130px;
-    }
-
-    .secondCube {
-        margin-top: 250px;
-    }
-}
+  }
