@@ -69,10 +69,3 @@
     margin-top: 0px;
 }
 
-button:hover {
-    border: none;
-}
-
-button:target {
-    border: none;
-}
