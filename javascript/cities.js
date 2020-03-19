@@ -6,6 +6,7 @@ class City
         this.tribute = tribute; // haracz za staniecie na polu
         this.ownerOfField = 0;
         this.field = field;
+        this.houses = 0 ;
 
     }
 }
