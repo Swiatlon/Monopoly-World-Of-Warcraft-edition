@@ -1,5 +1,5 @@
 class Player {
-    constructor(nameOfPlayer, position) {
+    constructor(nameOfPlayer, position,color) {
         this.nameOfPlayer = nameOfPlayer;
         this.field = 0;
         this.amountOfMoves = 0;
@@ -8,11 +8,14 @@ class Player {
         this.queue = position;
         this.cities = [];
         this.money = 3000;
+        this.color = color;
         this.jail = false;
         this.img = document.createElement("img");
         this.img.width = 60;
         this.img.height = 60;
         this.img.src = this.image;
+        this.img.style.zIndex ='1';
+        this.img.style.position = "Relative";
     }
 
     move() {
@@ -51,9 +54,9 @@ class Player {
             Cities[this.field].ownerOfField = this;
             console.log('[Kupiles Miasto]', Cities[this.field]);
             console.log('[Twoj stan pieniezny]' + this.nameOfPlayer + " " + this.money);
-            map.hideChooseOption();
+            map.hidingDivs(chooseBox);
         } else {
-            map.hideChooseOption();
+            map.hidingDivs(chooseBox);
             console.log('[You dont have enough money  !');
         }
     }
