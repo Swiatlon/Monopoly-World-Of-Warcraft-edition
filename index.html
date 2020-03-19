@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="style/style.css" />
   <link rel="stylesheet" href="style/cube.css" />
   <link rel="stylesheet" href="style/choose.css" />
+  <link rel="stylesheet" href="style/templates.css" />
   <script defer src="javascript/cities.js"></script>
   <script defer src="javascript/cube.js"></script>
   <script defer src="javascript/player.js"></script>
@@ -20,34 +21,132 @@
 <body>
   <div class="wrapper">
     <div class="information-about-players-container">
-      <div class="player-first-box"><img src="images/PNG FULL.png"><div><p class="player-first-name">Player First  </p> <p class="money-first">Money: 3000</p></div>  </div>
-      <div class="player-second-box"><div><p class="player-second-name">Player Second</p> <p class="money-second">Money: 3000</p> </div><img src="images/FullPng2.png"> </div>
-      <div class="player-third-box"><img src="images/FullPng3.png"><div><p class="player-third-name">Player Third  </p> <p class="money-third">Money: 3000</p></div>  </div>
-      <div class="player-fourth-box"><div><p class="player-fourth-name">Player Fourth</p> <p class="money-fourth">Money: 3000</p> </div> <img src="images/FullPng4.png"> </div>
+      <div class="player-first-box"><img src="images/PNG FULL.png">
+        <div>
+          <p class="player-first-name">Player First </p>
+          <p class="money-first">Money: 3000</p>
+        </div>
+      </div>
+      <div class="player-second-box">
+        <div>
+          <p class="player-second-name">Player Second</p>
+          <p class="money-second">Money: 3000</p>
+        </div><img src="images/FullPng2.png">
+      </div>
+      <div class="player-third-box"><img src="images/FullPng3.png">
+        <div>
+          <p class="player-third-name">Player Third </p>
+          <p class="money-third">Money: 3000</p>
+        </div>
+      </div>
+      <div class="player-fourth-box">
+        <div>
+          <p class="player-fourth-name">Player Fourth</p>
+          <p class="money-fourth">Money: 3000</p>
+        </div> <img src="images/FullPng4.png">
+      </div>
     </div>
     <div class="board">
       <!--BOARD-->
       <div class="board__kalimdor-container">
-        <div id="jail" class="8"><p>WIEZENIE</p></div>
-        <div id="Durotar" class="9"><span class="tribute"><p>250</p></span><p>Durotar</p></div>
-        <div id="Barrens" class="10"><span class="tribute"><p>300</p></span><p>The Barrens</p></div>
-        <div id="Thousand_Needles" class="11"><span class="tribute"><p>350</p></span><p>Thousand Needles</p></div>
-        <div id="Card_Of_Horde" class="12"></span><p>KARTA</p></div>
-        <div id="Tanaris" class="13"><span class="tribute"><p>400</p></span><p>Tanaris</p></div>
-        <div id="Orgrimmar" class="14"><span class="tribute"><p>200</p></span><p>Orgrimmar</p></div>
-        <div id="Un_Goro" class="15"><span class="tribute"><p>500</p></span><p>Un Goro</p></div>
-        <div id="Event" class="16"></span><p>EVENT</p></div>
+        <div id="jail" class="8">
+          <p>WIEZENIE</p>
+        </div>
+        <div id="Durotar" class="9"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>250</p>
+          </span>
+          <p>Durotar</p>
+        </div>
+        <div id="Barrens" class="10"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>300</p>
+          </span>
+          <p>The Barrens</p>
+        </div>
+        <div id="Thousand_Needles" class="11"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>350</p>
+          </span>
+          <p>Thousand Needles</p>
+        </div>
+        <div id="Card_Of_Horde" class="12"></span>
+          <p>KARTA</p>
+        </div>
+        <div id="Tanaris" class="13"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>400</p>
+          </span>
+          <p>Tanaris</p>
+        </div>
+        <div id="Orgrimmar" class="14"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>200</p>
+          </span>
+          <p>Orgrimmar</p>
+        </div>
+        <div id="Un_Goro" class="15"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>500</p>
+          </span>
+          <p>Un Goro</p>
+        </div>
+        <div id="Event" class="16"></span>
+          <p>EVENT</p>
+        </div>
       </div>
-      <div class="board__center-container"> 
+      <div class="board__center-container">
         <!--CENTER CONTAINER-->
         <div class="board__eastern-kingdom-container">
-          <div id="Burning_Steppes" class="7"><span class="tribute"><p>200</p></span><p>Burning Steppes</p></div>
-          <div id="Hinterlands" class="6"><span class="tribute"><p>175</p></span><p>The Hinterlands</p></div>
-          <div id="Stranglethorn" class="5"><span class="tribute"><p>150</p></span><p>Northern Stranglethorn</p></div>
-          <div id="Stormwind" class="4"><span class="tribute"><p>200</p></span><p>Stormwind City</p></div>
-          <div id="Hilsbrad" class="3"><span class="tribute"><p>75</p></span><p>Hilsbrad Foothils</p></div>
-          <div id="Westfall" class="2"><span class="tribute"><p>50</p></span><p>Westfall</p></div>
-          <div id="Elwynn" class="1"><span class="tribute"><p>25</p></span><p>Elwynn Forest</p></div>
+          <div id="Burning_Steppes" class="7"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>200</p>
+            </span>
+            <p>Burning Steppes</p>
+
+          </div>
+          <div id="Hinterlands" class="6"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>175</p>
+            </span>
+            <p>The Hinterlands</p>
+
+          </div>
+          <div id="Stranglethorn" class="5"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>150</p>
+            </span>
+            <p>Northern Stranglethorn</p>
+
+          </div>
+          <div id="Stormwind" class="4"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>200</p>
+            </span>
+            <p>Stormwind City</p>
+
+          </div>
+          <div id="Hilsbrad" class="3"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>75</p>
+            </span>
+            <p>Hilsbrad Foothils</p>
+
+          </div>
+          <div id="Westfall" class="2"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>50</p>
+            </span>
+            <p>Westfall</p>
+          </div>
+          <div id="Elwynn" class="1"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>25</p>
+            </span>
+            <p>Elwynn Forest</p>
+
+
+          </div>
         </div>
         <div class="board__content-container">
           <div class="string_Eastern_Kingdom">Eastern Kingdom</div>
@@ -104,17 +203,49 @@
                 <span class="dot5"></span> <span class="dot6"></span>
               </div>
             </div>
-            <button>RZUC KOSTKA</button>
+            <button class="buttonStart">RZUC KOSTKA</button>
           </div>
         </div>
         <div class="board__outland-container">
-          <div id="Helfire" class="17"><span class="tribute"><p>650</p></span><p>Helfire Peninsula</p></div>
-          <div id="Zangramash" class="18"><span class="tribute"><p>700</p></span><p>Zangramash</p></div>
-          <div id="Shattrah" class="19"><span class="tribute"><p>200</p></span><p>Shattrah City</p></div>
-          <div id="CardOfAlliance" class="20"><p>Karta</p></div>
-          <div id="Nagrand" class="21"><span class="tribute"><p>750</p></span><p>NAGRAND</p></div>
-          <div id="Netherstorm" class="22"><span class="tribute"><p>800</p></span><p>Netherstorm</p></div>
-          <div id="Shadowmoon" class="23"><span class="tribute"><p>850</p></span><p>Shadowmoon Valley</p></div>
+          <div id="Helfire" class="17"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>650</p>
+            </span>
+            <p>Helfire Peninsula</p>
+          </div>
+          <div id="Zangramash" class="18"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>700</p>
+            </span>
+            <p>Zangramash</p>
+          </div>
+          <div id="Shattrah" class="19"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>200</p>
+            </span>
+            <p>Shattrah City</p>
+          </div>
+          <div id="CardOfAlliance" class="20">
+            <p>Karta</p>
+          </div>
+          <div id="Nagrand" class="21"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>750</p>
+            </span>
+            <p>NAGRAND</p>
+          </div>
+          <div id="Netherstorm" class="22"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>800</p>
+            </span>
+            <p>Netherstorm</p>
+          </div>
+          <div id="Shadowmoon" class="23"><span class="tribute">
+              <img class="plat" src="data:," alt>
+              <p>850</p>
+            </span>
+            <p>Shadowmoon Valley</p>
+          </div>
         </div>
       </div>
       <!--CENTER CONTAINER-->
@@ -122,17 +253,52 @@
         <div id="start" class="0">
           <p>START</p>
         </div>
-        <div id="Icecrown" class="31"><span class="tribute"><p>1200</p></span><p>Icecrown</p></div>
-        <div id="Storm_Peaks" class="30"><span class="tribute"><p>1100</p></span><p>Storm Peaks</p></div>
-        <div id="Zul_Drak" class="29"><span class="tribute"><p>1050</p></span><p>Zul Drak</p></div>
-        <div id="Card_Of_Demons" class="28"><p>KARTA</p></div>
-        <div id="Grizzly" class="27"><span class="tribute"><p>1000</p></span><p>Grizzly Hills</p></div>
-        <div id="Borean" class="26"><span class="tribute"><p>950</p></span><p>Borean Tundra</p></div>
-        <div id="Dalaran" class="25"><span class="tribute"><p>200</p></span><p>Dalaran</p></div>
-        <div id="Teleport" class="24"><p>TELEPORT OD MAGA</p></div>
-      </div>      
+        <div id="Icecrown" class="31"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>1200</p>
+          </span>
+          <p>Icecrown</p>
+
+        </div>
+        <div id="Storm_Peaks" class="30"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>1100</p>
+          </span>
+          <p>Storm Peaks</p>
+        </div>
+        <div id="Zul_Drak" class="29"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>1050</p>
+          </span>
+          <p>Zul Drak</p>
+        </div>
+        <div id="Card_Of_Demons" class="28">
+          <p>KARTA</p>
+        </div>
+        <div id="Grizzly" class="27"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>1000</p>
+          </span>
+          <p>Grizzly Hills</p>
+        </div>
+        <div id="Borean" class="26"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>950</p>
+          </span>
+          <p>Borean Tundra</p>
+        </div>
+        <div id="Dalaran" class="25"><span class="tribute">
+            <img class="plat" src="data:," alt>
+            <p>200</p>
+          </span>
+          <p>Dalaran</p>
+        </div>
+        <div id="Teleport" class="24">
+          <p>TELEPORT OD MAGA</p>
+        </div>
+      </div>
     </div>
-   <!-- BOARD -->
+    <!-- BOARD -->
     <div class="container-choose-element">
       <div class="back-element">❌</div>
       <div class="string-element">Czy chesz kupic to miasto ?</div>
@@ -159,7 +325,32 @@
         <img class="image-of-player-who-has-movement">
       </div>
     </div>
-    
+
+    <div class="container-of-buying-houses">
+      <div class="container-of-buying-houses-center">
+        <div>
+          <p>1 Domek</p>
+          <input class="checkbox" id="1" type="radio" name="Checkbox">
+        </div>
+        <div>
+          <p>2 Domki</p>
+          <input class="checkbox" id="2" type="radio" name="Checkbox">
+        </div>
+        <div>
+          <p>3 Domki</p>
+          <input class="checkbox" id="3" type="radio" name="Checkbox">
+        </div>
+        <div>
+          <p>4 Domki</p>
+          <input class="checkbox" id="4" type="radio" name="Checkbox">
+        </div>
+        <div>
+          <button class="buyingButton">Kupuje !</button>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 
 
