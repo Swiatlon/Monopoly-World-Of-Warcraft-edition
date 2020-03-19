@@ -6,6 +6,8 @@ const Jail = document.querySelector('.jail');
 const imageOfPlayerWhoHasMovement = document.querySelector('.image-of-player-who-has-movement');
 const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue-center p');
 const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
+const buyingButton =  document.querySelector('.buyingButton');
+const containerOfBuyingHouses = document.querySelector('.container-of-buying-houses')
 const arrayOfPlayersMoney = [
   playerFirstOnMapMoney = document.querySelector('.money-first'),
   playerSecondOnMapMoney = document.querySelector('.money-second'),
@@ -18,6 +20,7 @@ const arraysOfPlayersName = [
   playerThirdName = document.querySelector('.player-third-name'),
   playerFourthName = document.querySelector('.player-fourth-name'),
 ]
+const arrayOfCheckboxes= [...document.querySelectorAll('.checkbox')];
 
 class Map {
   constructor() {
@@ -44,12 +47,57 @@ class Map {
 
   }
 
-  hideChooseOption() {
-    chooseBox.style.display = "none";
-    btn.disabled = false;
+  // hideChooseOption() {
+  //   chooseBox.style.display = "none";
+  //   btn.disabled = false;
+  // }
+  // showChooseOption() {
+  //   chooseBox.style.display = "block";
+  // }
+  hidingDivs(Div){
+    Div.style.display = "none";
+    // if(Div == chooseBox){
+    //   btn.disabled = false;
+    // }
+    switch(Div){
+      case chooseBox:
+        btn.disabled = false;
+        break;
+      default:
+    }
+
   }
-  showChooseOption() {
-    chooseBox.style.display = "block";
+  showingDivs(Div){
+   
+    switch(Div){
+      case  containerOfPlayerWhoHasMovement:
+        let positionOfPlayers = playerQueue;
+        if (playerQueue == 4) {
+          positionOfPlayers = 0;
+        }
+        setTimeout(function () {
+          nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers].nameOfPlayer;
+          imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers].image;
+    
+          containerOfPlayerWhoHasMovement.style.opacity = 1;
+          containerOfPlayerWhoHasMovement.style.visibility = "visible";
+    
+          setTimeout(function () {
+    
+            containerOfPlayerWhoHasMovement.style.opacity = 0;
+            containerOfPlayerWhoHasMovement.style.visibility = "hidden";
+    
+          }, 2000);
+        }, 0)
+        break;
+        case containerOfBuyingHouses:
+          Div.style.display = "grid";
+        break;
+        case chooseBox:
+          Div.style.display = "block";
+        default:
+         
+    }
   }
   enteringTheNamesOfThePlayers(thisPlayer) {
     arraysOfPlayersName[thisPlayer.id - 1].textContent = thisPlayer.nameOfPlayer;
@@ -58,40 +106,20 @@ class Map {
     arrayOfPlayersMoney[thisPlayer.id - 1].textContent = "Money: " + thisPlayer.money;
     // console.log('[TUTAJ]',arrayOfPlayersMoney[thisPlayer.id-1].textContent );    
   }
-  showingTheDivOfWhoHasMovement() {
-    let positionOfPlayers = playerQueue;
-    if (playerQueue == 4) {
-      positionOfPlayers = 0;
-    }
-    setTimeout(function () {
-      nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers].nameOfPlayer;
-      imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers].image;
 
-      containerOfPlayerWhoHasMovement.style.opacity = 1;
-      containerOfPlayerWhoHasMovement.style.visibility = "visible";
-
-      setTimeout(function () {
-
-        containerOfPlayerWhoHasMovement.style.opacity = 0;
-        containerOfPlayerWhoHasMovement.style.visibility = "hidden";
-
-      }, 2000);
-    }, 0)
-
-  }
 
 }
 const map = new Map();
 
 chooseBoxNoBtn.addEventListener("click", () => {
-  map.hideChooseOption();
-  map.showingTheDivOfWhoHasMovement();
+  map.hidingDivs(chooseBox);
+  map.showingDivs(containerOfPlayerWhoHasMovement)
 });
 chooseBoxYesBtn.addEventListener("click", function () {
 
-  game.players[playerQueue - 1].buyACity(); // Tutaj musze zmienic zeby nie odejmowac od playerQueque -1 bo to jest blad dzieje sie tak poniewaz przez asynchronicznosc
+  game.players[playerQueue - 1].buyACity(); 
   map.visualAmountOfMoney(game.players[playerQueue - 1]);
-  map.showingTheDivOfWhoHasMovement();
+  map.showingDivs(containerOfPlayerWhoHasMovement);
 
 
 });
