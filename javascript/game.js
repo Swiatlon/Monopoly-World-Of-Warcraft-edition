@@ -1,13 +1,15 @@
 let playerQueue = 0;
+let playerPick;
 class Game {
   constructor() {
     this.players = [];
   }
 
   initiatePlayers() {
-    const playersName = ["Wiercik", "Mateusz", "Michas", "Wojtini"]
+    const playersName = ["Wiercik", "Mateusz", "Michas", "Wojtini"];
+    const playersColors= ["Red", "Blue", "Green", "Yellow"];
     for (let i = 0; i < playersName.length; i++) {
-      createPlayer(playersName[i]);
+      createPlayer(playersName[i],playersColors[i]);  // dodawanie graczy  i ustawienie ich kolorów
       map.enteringTheNamesOfThePlayers(game.players[i]);
     }
   }
@@ -19,14 +21,28 @@ class Game {
   gameMechanism(thisPlayer) {
     console.log('[this]', Cities[thisPlayer.field].ownerOfField);
     if (Cities[thisPlayer.field].ownerOfField == 0 && arrayOfDisabledBuyedFields.includes(thisPlayer.field) === false) { // jesli pole nie jest przejete przez nikogo 
-      map.showChooseOption();
+      map.showingDivs(chooseBox);
     } else if (Cities[thisPlayer.field].ownerOfField.nameOfPlayer == thisPlayer.nameOfPlayer) { // pole ktore juz jest gracza
       console.log('[to pole jest twoje]'); // tutaj musi byc funkcja na budowanie domkow pojawia sie div ile domkow chce zbudowac
+      console.log('tthisPlayers',thisPlayer);
+      // wyskakuje okno ile chcesz kupic domkow
+      map.showingDivs(containerOfBuyingHouses);
+      // w zaleznosci ktora opcje wybierzemy to tyle domkow kupuje i konczy ruch
+      // buyingButton.addEventListener("click",this.buyingHouses());
+     
+
+    
+
+
+  this.listenerHowMuchHouses();
+      buyingButton.addEventListener("click", () => {
+        this.buyingHouses(thisPlayer);
+      });
       btn.disabled = false;
     } else if (Cities[thisPlayer.field].ownerOfField !== thisPlayer.nameOfPlayer && Cities[thisPlayer.field].ownerOfField !== 0) { // pole jest kogos innego
       console.log('[to pole jest kogos innego]') // tutaj musi byc funkcja ktora bedzie oddawala komus pieniadze za jego domek
       // 
-      //Przelwam pieniadze(Cities[thisPlayer.pole].tribute) z thisPlayer(odejmuje od jego pieniedzy haracz)  do  Cities[thisPlayer.pole].player.money
+     
       console.log('[Wykonuuje ruch]', thisPlayer);
       console.log('[Kogo to jest pole]', Cities[thisPlayer.field].ownerOfField);
       console.log('[HAJS PLACACEGO PRZED ZAPLATA]', thisPlayer.money + " GRACZ PLACACY " + thisPlayer.nameOfPlayer);
@@ -43,6 +59,7 @@ class Game {
       // Jail.style.display = "block";
       if (thisPlayer.field != true) {
         thisPlayer.field = true;
+        playerQueue++;
       }
 
     } else {
@@ -92,7 +109,28 @@ class Game {
     })
   }
   // }
+  listenerHowMuchHouses(){
+  for(let i = 0 ; i < arrayOfCheckboxes.length; i ++){
+    arrayOfCheckboxes[i].addEventListener('click',function(){
+      playerPick = arrayOfCheckboxes[i];
+      playerPick = Number(playerPick.id);
+    })
+  }
+  return playerPick
+}
+  buyingHouses(thisPlayer){
+console.log('Dzialam');
+   let playerPick = this.listenerHowMuchHouses();
+    Cities[thisPlayer.field].houses = playerPick;
+    if(playerPick === 1){
+      map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}House.png`;
+    }else{
+      map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
+    }
+    map.hidingDivs(containerOfBuyingHouses);
+    map.showingDivs(containerOfPlayerWhoHasMovement);
 
+}
 }
 
 function createPlayer(name, color) {
@@ -108,9 +146,11 @@ game.initiatePlayers();
 game.whoIsFirst()
 map.sortAllLands();
 map.draw();
-map.showingTheDivOfWhoHasMovement();
-// for(let i = 0 ; i < 10 ; i ++){
-//   Cities[i].ownerOfField = listPlayers[0];
+// map.showingDivs(containerOfPlayerWhoHasMovement);
+map.showingDivs(containerOfPlayerWhoHasMovement);
+// game.buyingHouses();
+// for(let i = 0 ; i < 5 ; i ++){
+//   Cities[i].ownerOfField = game.players[0];
 // }
 btn.addEventListener("click", () => {
 
@@ -118,19 +158,6 @@ btn.addEventListener("click", () => {
   cube.getNumberRandom();
   game.sequenceOfMove();
 
-
-
-  // console.log('ReturnGameMechanism',game.gameMechanism);
-
-  // let firstPromise = new Promise((resolve,reject) => {
-  //   resolve('Succes')
-  //   console.log('[siema]' );
-
-  // });
-  // firstPromise.then(() => {
-
-  //   console.log("Yay!") 
-  // });
 });
 
 console.log(game)
@@ -149,4 +176,23 @@ console.log(game)
 // NAZEWNICTWO(POPRAWNE) ZMIENNYCH/FUNKCJI +++
 // POPRAWNOSC KODU +-+
 // POPRAWIENIE PLANSZY  +-+
-// 
+// WIDOCZNOSC KTO MA POLE ---
+//
+
+
+
+
+
+
+
+  // console.log('ReturnGameMechanism',game.gameMechanism);
+
+  // let firstPromise = new Promise((resolve,reject) => {
+  //   resolve('Succes')
+  //   console.log('[siema]' );
+
+  // });
+  // firstPromise.then(() => {
+
+  //   console.log("Yay!") 
+  // });
