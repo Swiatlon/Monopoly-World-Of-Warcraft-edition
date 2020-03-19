@@ -11,7 +11,9 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-image: url('../images/640378.jpg');
+  background-image: url("../images/640378.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   display: grid;
   font-size: 20px;
   text-align: center;
@@ -24,274 +26,280 @@ body {
 }
 
 .board {
-  width: 1000px;
-  height: 1000px;
-  background-image: url('../images/5.jpg');
+  background-image: url("../images/5.jpg");
   background-position: 65%;
   background-size: cover;
   background-repeat: no-repeat;
   justify-self: center;
   align-self: center;
   border: 1px solid black;
-  margin-top: -100px;
+  margin-top: -150px;
   box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.952);
   transform: rotate3d(900, 600, -800, -0.8turn);
-
-  
+ 
 }
-
 
 .board__kalimdor-container,
 .board__northrend-container {
   display: grid;
-  width: 100%;
-  height: 150px;
-  grid-template-columns: 150px 100px 100px 100px 100px 100px 100px 100px 150px;
+  height: 160px;
+  grid-template-columns: 130px 130px 130px 130px 130px 130px 130px 130px 130px;
 }
 
 .board__center-container {
   display: grid;
-  grid-template-columns: 150px 700px 150px;
+  width: 100%;
+  grid-template-columns: 130px auto 130px;
 }
 
-.board__eastern-kingdom-container {
+.board__content-container {
+  width: 100%;
+  height: 100%;
   display: grid;
-  grid-template-rows: 100px 100px 100px 100px 100px 100px 100px;
-  width: 150px;
+  grid-template-columns: 20% auto 10%;
 }
 
+.board__eastern-kingdom-container,
 .board__outland-container {
   display: grid;
-  grid-template-rows: 100px 100px 100px 100px 100px 100px 100px;
-  width: 150px;
+  grid-template-rows: 130px 130px 130px 130px 130px 130px 130px;
+  width: 130px;
 }
 
 .board__kalimdor-container div,
 .board__eastern-kingdom-container div,
 .board__northrend-container div,
 .board__outland-container div {
-
   border: 1px solid black;
+  position: relative;
+}
+
+.board__kalimdor-container p,
+.board__eastern-kingdom-container p,
+.board__northrend-container p,
+.board__outland-container p {
+  max-width: 130px;
+  text-shadow: 2px 2px 10px #000000;
+  font-weight: 500;
 }
 
 #Elwynn {
-  background-image: url('../images/Elwyn.jpg');
+  background-image: url("../images/Elwyn.jpg");
   background-position: center;
   background-size: cover;
+
 }
 
 #Westfall {
-  background-image: url('../images/Westfall.jpg');
+  background-image: url("../images/Westfall.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Hilsbrad {
-  background-image: url('../images/hillsbrad.jpg');
+  background-image: url("../images/hillsbrad.jpg");
   background-position: bottom;
   background-size: cover;
 }
 
 #Stormwind {
-  background-image: url('../images/Stormwind.jpg');
+  background-image: url("../images/Stormwind.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Stranglethorn {
-  background-image: url('../images/Stranglethorn.jpg');
+  background-image: url("../images/Stranglethorn.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Hinterlands {
-  background-image: url('../images/Hinterlands.jpg');
+  background-image: url("../images/Hinterlands.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Burning_Steppes {
-  background-image: url('../images/Burning\ Steppes.jpg');
+  background-image: url("../images/Burning\ Steppes.jpg");
   background-position: top;
   background-size: cover;
 }
 
 #jail {
-  background-image: url('../images/Jail.jpg');
+  background-image: url("../images/Jail.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Durotar {
-  background-image: url('../images/durotar.jpg');
+  background-image: url("../images/durotar.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Barrens {
-  background-image: url('../images/Barrens.jpg');
+  background-image: url("../images/Barrens.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Thousand_Needles {
-  background-image: url('../images/Thousand\ Needles.jpg');
+  background-image: url("../images/Thousand\ Needles.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Card_Of_Horde {
-  background-image: url('../images/cardOfHorde.jpg');
+  background-image: url("../images/cardOfHorde.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Tanaris {
-  background-image: url('../images/Tanaris.jpg');
+  background-image: url("../images/Tanaris.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Orgrimmar {
-  background-image: url('../images/Orgrimmar.jpg');
+  background-image: url("../images/Orgrimmar.jpg");
   background-position: center;
   background-size: cover;
 }
 
 #Un_Goro {
-  background-image: url('../images/Un\ Goro.jpg');
+  background-image: url("../images/Un\ Goro.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Event {
-  background-image: url('../images/Event2.jpg');
+  background-image: url("../images/Event2.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Helfire {
-  background-image: url('../images/Helfire\ Peninsula.jfif');
+  background-image: url("../images/Helfire\ Peninsula.jfif");
   background-position: right;
   background-size: cover;
 }
+
 #Zangramash {
-  background-image: url('../images/zangramash.jpg');
+  background-image: url("../images/zangramash.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Shattrah {
-  background-image: url('../images/Shattrah.jpg');
+  background-image: url("../images/Shattrah.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #CardOfAlliance {
-  background-image: url('../images/Alliance.png');
+  background-image: url("../images/Alliance.png");
   background-position: right;
   background-size: cover;
 }
 
 #Nagrand {
-  background-image: url('../images/Nagrand.jpg');
+  background-image: url("../images/Nagrand.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Netherstorm {
-  background-image: url('../images/Netherstorm.jpg');
+  background-image: url("../images/Netherstorm.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Shadowmoon {
-  background-image: url('../images/Shadowmoon.jpg');
+  background-image: url("../images/Shadowmoon.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Teleport {
-  background-image: url('../images/teleport1.jpg');
+  background-image: url("../images/teleport1.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Dalaran {
-  background-image: url('../images/Dalaran.jfif');
+  background-image: url("../images/Dalaran.jfif");
   background-position: right;
   background-size: cover;
 }
 
 #Borean {
-  background-image: url('../images/Borean.jpg');
+  background-image: url("../images/Borean.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Grizzly {
-  background-image: url('../images/Grizzly.jpg');
+  background-image: url("../images/Grizzly.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Card_Of_Demons {
-  background-image: url('../images/cardOFDe.jpg');
+  background-image: url("../images/cardOFDe.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Zul_Drak {
-  background-image: url('../images/ZulDrak.jpg');
+  background-image: url("../images/ZulDrak.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Storm_Peaks {
-  background-image: url('../images/StormPeaks.jpg');
+  background-image: url("../images/StormPeaks.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #Icecrown {
-  background-image: url('../images/Icecrown.jpg');
+  background-image: url("../images/Icecrown.jpg");
   background-position: right;
   background-size: cover;
 }
 
 #start {
-  background-image: url('../images/Event.png');
+  background-image: url("../images/Event.png");
   background-position: right;
   background-size: cover;
-}
-
-.board__content-container {
-  width: 700px;
-  height: 700px;
-  display: grid;
-  grid-template-columns: 20% auto 10%;
 }
 
 .string_Northrend {
   align-self: flex-end;
   margin-bottom: 50px;
+  justify-self: center;
 }
 
 .string_Outland {
   font-size: 32px;
   align-self: center;
+  justify-self: center;
   transform: rotate(90deg);
 }
 
 .string_Eastern_Kingdom {
   font-size: 32px;
   align-self: center;
+  justify-self: center;
   transform: rotate(90deg);
 }
 
 .stringKalimdor {
   font-size: 32px;
   display: grid;
+  justify-self: center;
   margin-top: 30px;
 }
 
@@ -299,103 +307,97 @@ body {
   display: block;
 }
 
-button {
-  width: 120px;
+.buttonStart {
+  width: 130px;
   height: 55.5px;
-  margin-top: 100px;
-  margin-left: 50px;
+  margin-top: 200px;
+  margin-left: 300px;
 }
-.information-about-players-container{
+
+.information-about-players-container {
   width: 100%;
   height: 100%;
   display: grid;
   position: absolute;
-  grid-template-columns: repeat(2,1fr);
-  
+  grid-template-columns: repeat(2, 1fr);
 }
+
 .player-first-box,
 .player-second-box,
 .player-third-box,
-.player-fourth-box{
+.player-fourth-box {
   padding-bottom: 15px;
   height: 180px;
   margin-top: 20px;
   margin-bottom: 50px;
   margin-right: 50px;
   margin-left: 50px;
-  border:1px solid  rgba(255, 167, 5, 0.075);
+  border: 1px solid rgba(255, 167, 5, 0.075);
   border-radius: 15px;
-  font-family: 'Cinzel', serif;
-
+  font-family: "Cinzel", serif;
 }
-.information-about-players-container img{
+
+.information-about-players-container img {
   width: 200px;
   height: 200px;
   padding-left: 15px;
   padding-right: 15px;
-  
 }
+
 .player-first-box,
-.player-third-box{
+.player-third-box {
   margin-right: auto;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   display: grid;
 }
+
 .player-second-box,
-.player-fourth-box{
-margin-left: auto;
-grid-template-columns:repeat(2,1fr);
-display: grid;
+.player-fourth-box {
+  margin-left: auto;
+  grid-template-columns: repeat(2, 1fr);
+  display: grid;
 }
+
 .player-third-box,
-.player-fourth-box{
+.player-fourth-box {
   align-self: flex-end;
-  
 }
+
 .player-first-box p,
-.player-second-box p{
+.player-second-box p {
   font-size: 26px;
   padding: 15px;
 }
 
-
-
-
-@media(max-width:1300px) {
-  .board {
-    width: 750px;
-    height: 700px;
-  }
-
-  .board__kalimdor-container,
-  .board__northrend-container {
-    display: grid;
-    width: 100%;
-    height: 100px;
-    grid-template-columns: 110px 76px 76px 76px 76px 76px 76px 76px 110px;
-  }
-
-  .board__center-container {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 150px 490px 150px;
-    height: 500px;
-  }
-
-  .board__eastern-kingdom-container {
-    display: grid;
-    grid-template-rows: 72px 72px 72px 72px 72px 72px 72px;
-    width: 55px;
-  }
-
-  .board__content-container {
-    width: 500px;
-    height: 500px;
-  }
-
-  .board__outland-container {
-    display: grid;
-    grid-template-rows: 72px 72px 72px 72px 72px 72px 72px;
-    width: 55px;
-  }
+.tribute {
+  position: absolute;
+  border: none !important;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
+
+.tribute p {
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.tribute img {
+  align-self: center;
+  margin-top: 40px;
+  justify-self: right;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  display: block;
+  z-index: 0;
+  border:none;
+}
+.plat{
+  width: 80px;
+  height: 80px;
+ justify-self: right;
+}
+
+
