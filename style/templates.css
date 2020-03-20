@@ -15,7 +15,7 @@
   border-radius: 15px;
   align-self: center;
   justify-self: center;
-  background-image: url("/images/Races.jpg");
+  background-image: url("../images/Races.jpg");
   background-position: center;
   background-size: cover;
 }
@@ -30,7 +30,7 @@
   justify-content: center;
 }
 .container-of-buying-houses-center{
-  background-image:url(/images/backgroundHousesToBuy.jpg);
+  background-image:url('../images/backgroundHousesToBuy.jpg');
 }
 .container-of-buying-houses{
   display: none;
