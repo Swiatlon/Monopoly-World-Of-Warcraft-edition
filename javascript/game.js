@@ -1,5 +1,6 @@
 let playerQueue = 0;
 let playerPick;
+
 class Game {
   constructor() {
     this.players = [];
@@ -7,9 +8,9 @@ class Game {
 
   initiatePlayers() {
     const playersName = ["Wiercik", "Mateusz", "Michas", "Wojtini"];
-    const playersColors= ["Red", "Blue", "Green", "Yellow"];
+    const playersColors = ["Red", "Blue", "Green", "Yellow"];
     for (let i = 0; i < playersName.length; i++) {
-      createPlayer(playersName[i],playersColors[i]);  // dodawanie graczy  i ustawienie ich kolorów
+      createPlayer(playersName[i], playersColors[i]); // dodawanie graczy  i ustawienie ich kolorów
       map.enteringTheNamesOfThePlayers(game.players[i]);
     }
   }
@@ -19,38 +20,55 @@ class Game {
   }
 
   gameMechanism(thisPlayer) {
-    console.log('[this]', Cities[thisPlayer.field].ownerOfField);
-    if (Cities[thisPlayer.field].ownerOfField == 0 && arrayOfDisabledBuyedFields.includes(thisPlayer.field) === false) { // jesli pole nie jest przejete przez nikogo 
-      map.showingDivs(chooseBox);
-    } else if (Cities[thisPlayer.field].ownerOfField.nameOfPlayer == thisPlayer.nameOfPlayer) { // pole ktore juz jest gracza
-      console.log('[to pole jest twoje]'); // tutaj musi byc funkcja na budowanie domkow pojawia sie div ile domkow chce zbudowac
-      console.log('tthisPlayers',thisPlayer);
-      // wyskakuje okno ile chcesz kupic domkow
+    console.log('GRACZ -->', thisPlayer);
+    console.log()
+    if ((Cities[thisPlayer.field].ownerOfField === undefined || Cities[thisPlayer.field].ownerOfField.nameOfPlayer === thisPlayer.nameOfPlayer) && Cities[thisPlayer.field].specialField !== true) {
+
+
       map.showingDivs(containerOfBuyingHouses);
-      // w zaleznosci ktora opcje wybierzemy to tyle domkow kupuje i konczy ruch
-      // buyingButton.addEventListener("click",this.buyingHouses());
-     
+      // console.log("TYLE RAZY SIE WYKONALEM -- >");
+      for (let i = 0; i < Cities[thisPlayer.field].houses + 1; i++) { // FUNKCJA OD BLOKOWANIA ILOSCI KUPIONCYCH WCZESNIEJ DOMKOW
+        checkboxes[i].checked = true;
+      }
+      this.listenerHowMuchHouses(thisPlayer);
 
-    
 
 
-  this.listenerHowMuchHouses();
-      buyingButton.addEventListener("click", () => {
-        this.buyingHouses(thisPlayer);
-      });
       btn.disabled = false;
-    } else if (Cities[thisPlayer.field].ownerOfField !== thisPlayer.nameOfPlayer && Cities[thisPlayer.field].ownerOfField !== 0) { // pole jest kogos innego
-      console.log('[to pole jest kogos innego]') // tutaj musi byc funkcja ktora bedzie oddawala komus pieniadze za jego domek
-      // 
-     
-      console.log('[Wykonuuje ruch]', thisPlayer);
-      console.log('[Kogo to jest pole]', Cities[thisPlayer.field].ownerOfField);
-      console.log('[HAJS PLACACEGO PRZED ZAPLATA]', thisPlayer.money + " GRACZ PLACACY " + thisPlayer.nameOfPlayer);
-      thisPlayer.money -= Cities[thisPlayer.field].tribute;
-      console.log('[PRZED ZAPLATA]', Cities[thisPlayer.field].ownerOfField.money + " HAJS GRACZA" + Cities[thisPlayer.field].ownerOfField.nameOfPlayer);
-      Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute;
-      console.log('[PO ZAPLACIE]', Cities[thisPlayer.field].ownerOfField.money + "HAJS GRACZA" + Cities[thisPlayer.field].ownerOfField.nameOfPlayer);
-      console.log('[HAJS PLACACEGO PO ZAPLACIE]', thisPlayer.money + " GRACZ PLACACY " + thisPlayer.nameOfPlayer);
+    } else if (Cities[thisPlayer.field].ownerOfField !== thisPlayer.nameOfPlayer && Cities[thisPlayer.field].ownerOfField !== 0 && Cities[thisPlayer.field].specialField !== true) { // pole jest kogos innego
+      let multiplierMoney;
+      console.log('[ILOSC DOMKOW NA POLU]', Cities[thisPlayer.field].houses);
+
+      switch (Cities[thisPlayer.field].houses) {
+
+        case -1:
+          multiplierMoney = 1;
+          break;
+        case 0:
+          multiplierMoney = 1;
+          break;
+        case 1:
+          multiplierMoney = 1.25;
+          break;
+        case 2:
+          multiplierMoney = 1.5;
+          break;
+        case 3:
+          multiplierMoney = 1.75;
+          break;
+        case 4:
+          multiplierMoney = 2;
+          break;
+        case 5:
+          multiplierMoney = 2.25;
+          break;
+        default:
+      }
+      thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
+      console.log('[MULTIPLIER]', Cities[thisPlayer.field].tribute * multiplierMoney);
+
+      Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
+
       btn.disabled = false;
       map.visualAmountOfMoney(thisPlayer);
       map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
@@ -64,11 +82,12 @@ class Game {
 
     } else {
       console.log('[jestem w elsie]', );
-      btn.disabled = false;
+
 
     }
 
     playerQueue++
+
     // if(!(Cities[thisPlayer.field].ownerOfField == 0 && arrayOfDisabledBuyedFields.includes(thisPlayer.field) === false)){
     //   map.showingTheDivOfWhoHasMovement();
     // }
@@ -109,28 +128,44 @@ class Game {
     })
   }
   // }
-  listenerHowMuchHouses(){
-  for(let i = 0 ; i < arrayOfCheckboxes.length; i ++){
-    arrayOfCheckboxes[i].addEventListener('click',function(){
-      playerPick = arrayOfCheckboxes[i];
-      playerPick = Number(playerPick.id);
-    })
-  }
-  return playerPick
-}
-  buyingHouses(thisPlayer){
-console.log('Dzialam');
-   let playerPick = this.listenerHowMuchHouses();
-    Cities[thisPlayer.field].houses = playerPick;
-    if(playerPick === 1){
-      map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}House.png`;
-    }else{
-      map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
-    }
-    map.hidingDivs(containerOfBuyingHouses);
-    map.showingDivs(containerOfPlayerWhoHasMovement);
+  listenerHowMuchHouses(thisPlayer) {
 
-}
+
+    let amountOfHouses = Cities[thisPlayer.field].houses + 1;
+    for (let i = amountOfHouses; i < checkboxes.length; i++) {
+      checkboxes[i].addEventListener('click', function () {
+        for (let i = amountOfHouses; i < checkboxes.length; i++) {
+          checkboxes[i].checked = false;
+
+        }
+        playerPick = checkboxes[i];
+        playerPick.checked = true;
+        playerPick = Number(playerPick.id);
+        buyingHouseImage.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
+
+        return playerPick;
+      })
+    }
+
+    // OPCJA Z ILOSCIA DOMKOW KUPIONYCH JEST ZABLOKOWANA
+    return playerPick
+  }
+  buyingHouses(thisPlayer) {
+
+    if (playerPick == 0) {
+      thisPlayer.money -= Cities[thisPlayer.field].costOfTheField;
+    } else {
+      thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
+    }
+    map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
+
+    map.visualAmountOfMoney(thisPlayer);
+    Cities[thisPlayer.field].houses = playerPick;
+    Cities[thisPlayer.field].ownerOfField = thisPlayer;
+    map.hidingDivs(containerOfBuyingHouses);
+
+  }
+
 }
 
 function createPlayer(name, color) {
@@ -148,10 +183,9 @@ map.sortAllLands();
 map.draw();
 // map.showingDivs(containerOfPlayerWhoHasMovement);
 map.showingDivs(containerOfPlayerWhoHasMovement);
+// map.showingDivs(containerOfBuyingHouses);
 // game.buyingHouses();
-// for(let i = 0 ; i < 5 ; i ++){
-//   Cities[i].ownerOfField = game.players[0];
-// }
+
 btn.addEventListener("click", () => {
 
 
@@ -159,15 +193,15 @@ btn.addEventListener("click", () => {
   game.sequenceOfMove();
 
 });
+buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue - 1]));
 
-console.log(game)
 // RUCH GRACZA +++ (EW PROMISES)
-// DIV Z INFORMACJA KTO WYKONUJE RUCH +-+
+// DIV Z INFORMACJA KTO WYKONUJE RUCH +++
 // KOLEJNOSC GRACZY +++
 // WIEZIENIE I KARTY I EVENT ---
 // DUBLET ---
 // PLACENIE GRACZOM +++
-// POSTAWIANIE DOMKOW ---
+// POSTAWIANIE DOMKOW +++
 // MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW ---
 // KICKOWANIE GRACZA JESLI NIE MA PIENIEDZY ---
 // INTERFEJS GRACZY I KTO ILE MA PIENIEDZY +++
@@ -175,8 +209,8 @@ console.log(game)
 // LADNY WYGLAD +++ 
 // NAZEWNICTWO(POPRAWNE) ZMIENNYCH/FUNKCJI +++
 // POPRAWNOSC KODU +-+
-// POPRAWIENIE PLANSZY  +-+
-// WIDOCZNOSC KTO MA POLE ---
+// POPRAWIENIE PLANSZY  +++
+// WIDOCZNOSC KTO MA POLE +++
 //
 
 
@@ -185,14 +219,3 @@ console.log(game)
 
 
 
-  // console.log('ReturnGameMechanism',game.gameMechanism);
-
-  // let firstPromise = new Promise((resolve,reject) => {
-  //   resolve('Succes')
-  //   console.log('[siema]' );
-
-  // });
-  // firstPromise.then(() => {
-
-  //   console.log("Yay!") 
-  // });
