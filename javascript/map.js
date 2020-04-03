@@ -3,11 +3,15 @@ const chooseBoxYesBtn = document.querySelector('.Yes-button');
 const chooseBoxNoBtn = document.querySelector('.No-button');
 const ifBuyedField = document.querySelector('.containerIfFieldIsBuyed');
 const Jail = document.querySelector('.jail');
+const buyingHouseImage = document.getElementById('house');
 const imageOfPlayerWhoHasMovement = document.querySelector('.image-of-player-who-has-movement');
 const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue-center p');
 const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
-const buyingButton =  document.querySelector('.buyingButton');
-const containerOfBuyingHouses = document.querySelector('.container-of-buying-houses')
+const buyingButton =  document.querySelector('.buying-button');
+const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
+const checkboxes = [...document.querySelectorAll('.checkboxes')];
+const eventsBox= document.querySelector('.container-of-events');
+const box = document.querySelector('.container-of-events--center');
 const arrayOfPlayersMoney = [
   playerFirstOnMapMoney = document.querySelector('.money-first'),
   playerSecondOnMapMoney = document.querySelector('.money-second'),
@@ -20,7 +24,7 @@ const arraysOfPlayersName = [
   playerThirdName = document.querySelector('.player-third-name'),
   playerFourthName = document.querySelector('.player-fourth-name'),
 ]
-const arrayOfCheckboxes= [...document.querySelectorAll('.checkbox')];
+
 
 class Map {
   constructor() {
@@ -55,55 +59,67 @@ class Map {
   //   chooseBox.style.display = "block";
   // }
   hidingDivs(Div){
+    eventsBox.style.display = "none";
     Div.style.display = "none";
     // if(Div == chooseBox){
     //   btn.disabled = false;
     // }
-    switch(Div){
-      case chooseBox:
-        btn.disabled = false;
-        break;
-      default:
-    }
 
   }
   showingDivs(Div){
    
-    switch(Div){
-      case  containerOfPlayerWhoHasMovement:
-        let positionOfPlayers = playerQueue;
+
+
+  Div.style.display = "grid";
+  switch(Div){
+    case containerOfBuyingHouses:
+      eventsBox.style.display = "grid";
+      
+      break;
+      case containerOfPlayerWhoHasMovement:     //-----> Ruch gracza
+        let positionOfPlayers = playerQueue; 
         if (playerQueue == 4) {
           positionOfPlayers = 0;
+          
         }
-        setTimeout(function () {
+        setTimeout(function () { // Poczatek animacji
+          
           nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers].nameOfPlayer;
           imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers].image;
+          eventsBox.style.opacity = 1;
+          eventsBox.style.display = "grid";
     
-          containerOfPlayerWhoHasMovement.style.opacity = 1;
-          containerOfPlayerWhoHasMovement.style.visibility = "visible";
+          setTimeout(function () {    // 2sekundy animacji
     
-          setTimeout(function () {
-    
-            containerOfPlayerWhoHasMovement.style.opacity = 0;
-            containerOfPlayerWhoHasMovement.style.visibility = "hidden";
-    
+            eventsBox.style.opacity = 0;
+            
+      
+            setTimeout(function(){    // Koniec animacji 
+              eventsBox.style.opacity = 1;
+             
+              eventsBox.style.display = "none";
+              Div.style.display = "none";
+            },500)
           }, 2000);
+          
         }, 0)
         break;
-        case containerOfBuyingHouses:
-          Div.style.display = "grid";
-        break;
-        case chooseBox:
-          Div.style.display = "block";
         default:
-         
-    }
+          
+
+  }
+  
+   
+    
+    
+    
   }
   enteringTheNamesOfThePlayers(thisPlayer) {
     arraysOfPlayersName[thisPlayer.id - 1].textContent = thisPlayer.nameOfPlayer;
   }
   visualAmountOfMoney(thisPlayer) {
-    arrayOfPlayersMoney[thisPlayer.id - 1].textContent = "Money: " + thisPlayer.money;
+
+    arrayOfPlayersMoney[thisPlayer.id - 1].textContent = "Money: " + thisPlayer.money;    // od 0 sie zacyznaja id a tablica od 1  dlatego --
     // console.log('[TUTAJ]',arrayOfPlayersMoney[thisPlayer.id-1].textContent );    
   }
 
