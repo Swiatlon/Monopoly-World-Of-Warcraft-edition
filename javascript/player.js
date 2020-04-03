@@ -47,19 +47,6 @@ class Player {
         }, 300);
     }
 
-    buyACity() {
-        if (this.money - Cities[this.field].costOfTheField > -1) {
-            this.money = this.money - Cities[this.field].costOfTheField;
-            this.cities.push(Cities[this.field]);
-            Cities[this.field].ownerOfField = this;
-            console.log('[Kupiles Miasto]', Cities[this.field]);
-            console.log('[Twoj stan pieniezny]' + this.nameOfPlayer + " " + this.money);
-            map.hidingDivs(chooseBox);
-        } else {
-            map.hidingDivs(chooseBox);
-            console.log('[You dont have enough money  !');
-        }
-    }
 
     endOfMoveAnimation() {
 
