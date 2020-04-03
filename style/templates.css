@@ -21,7 +21,7 @@
 
 .box-of-buying-houses{
   height: 100%;
-  background-image: url('/images/backgroundHousesToBuy.jpg');
+  background-image: url('../images/backgroundHousesToBuy.jpg');
   background-position: center;
   background-size: cover;
   grid-template-columns: repeat(2,1fr);
