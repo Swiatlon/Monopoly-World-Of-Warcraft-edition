@@ -18,10 +18,10 @@
 
   
 }
-
+/* ------------------------------------------*/
 .box-of-buying-houses{
   height: 100%;
-  background-image: url('/images/backgroundHousesToBuy.jpg');
+  background-image: url('../images/backgroundHousesToBuy.jpg');
   background-position: center;
   background-size: cover;
   grid-template-columns: repeat(2,1fr);
@@ -96,7 +96,7 @@
 
 
 
-
+/* ------------------------------------------*/
 
 .container-of-player-queue-center{
   height: 100%;
@@ -123,7 +123,23 @@
   height: 160px;
   -webkit-animation: rotation 2s infinite linear;
 }
+/* ------------------------------------------*/
+.container-of-doublet{
+  height: 100%;
+  background-image: url('../images/dubletBackground.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: none;
+}
+.container-of-events h1{
+ text-align: center;
+ align-self: center;
+}
+.container-of-events img{
+  justify-self: center;
 
+}
 @-webkit-keyframes rotation {
   0% { transform:perspective(300px) rotateY(0); }
   100% { transform:perspective(300px) rotateY(360deg); }
