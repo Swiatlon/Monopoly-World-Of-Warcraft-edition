@@ -9,6 +9,7 @@ const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-
 const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
 const buyingButton =  document.querySelector('.buying-button');
 const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
+const containerOfDoublet = document.querySelector('.container-of-doublet')
 const checkboxes = [...document.querySelectorAll('.checkboxes')];
 const eventsBox= document.querySelector('.container-of-events');
 const box = document.querySelector('.container-of-events--center');
@@ -51,19 +52,12 @@ class Map {
 
   }
 
-  // hideChooseOption() {
-  //   chooseBox.style.display = "none";
-  //   btn.disabled = false;
-  // }
-  // showChooseOption() {
-  //   chooseBox.style.display = "block";
-  // }
+
   hidingDivs(Div){
     eventsBox.style.display = "none";
     Div.style.display = "none";
-    // if(Div == chooseBox){
-    //   btn.disabled = false;
-    // }
+
+
 
   }
   showingDivs(Div){
@@ -72,9 +66,32 @@ class Map {
 
   Div.style.display = "grid";
   switch(Div){
+    
     case containerOfBuyingHouses:
       eventsBox.style.display = "grid";
       
+      break;
+      case containerOfDoublet:     //-----> Doublet
+
+      setTimeout(function () { // Poczatek animacji
+  
+        eventsBox.style.opacity = 1;
+        eventsBox.style.display = "grid";
+  
+        setTimeout(function () {    // 2sekundy animacji
+  
+          eventsBox.style.opacity = 0;
+          
+    
+          setTimeout(function(){    // Koniec animacji 
+            eventsBox.style.opacity = 1;
+           
+            eventsBox.style.display = "none";
+            Div.style.display = "none";
+          },500)
+        }, 1000);
+        
+      }, 0)
       break;
       case containerOfPlayerWhoHasMovement:     //-----> Ruch gracza
         let positionOfPlayers = playerQueue; 
@@ -84,8 +101,8 @@ class Map {
         }
         setTimeout(function () { // Poczatek animacji
           
-          nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers].nameOfPlayer;
-          imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers].image;
+          nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers+1].nameOfPlayer;
+          imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers+1].image;
           eventsBox.style.opacity = 1;
           eventsBox.style.display = "grid";
     
@@ -115,30 +132,20 @@ class Map {
     
   }
   enteringTheNamesOfThePlayers(thisPlayer) {
-    arraysOfPlayersName[thisPlayer.id - 1].textContent = thisPlayer.nameOfPlayer;
+    
+    arraysOfPlayersName[thisPlayer.id - 1].textContent = thisPlayer.nameOfPlayer;   
   }
   visualAmountOfMoney(thisPlayer) {
 
     arrayOfPlayersMoney[thisPlayer.id - 1].textContent = "Money: " + thisPlayer.money;    // od 0 sie zacyznaja id a tablica od 1  dlatego --
-    // console.log('[TUTAJ]',arrayOfPlayersMoney[thisPlayer.id-1].textContent );    
+     
   }
 
 
 }
 const map = new Map();
 
-chooseBoxNoBtn.addEventListener("click", () => {
-  map.hidingDivs(chooseBox);
-  map.showingDivs(containerOfPlayerWhoHasMovement)
-});
-chooseBoxYesBtn.addEventListener("click", function () {
 
-  game.players[playerQueue - 1].buyACity(); 
-  map.visualAmountOfMoney(game.players[playerQueue - 1]);
-  map.showingDivs(containerOfPlayerWhoHasMovement);
-
-
-});
 
 const jail = 8;
 const arrayOfDisabledBuyedFields = [0, 8, 12, 16, 20, 24, 28];

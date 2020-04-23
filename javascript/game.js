@@ -1,5 +1,8 @@
-let playerQueue = 0;
+let playerQueue = -1;
 let playerPick;
+let doublet = null;
+let flag = true;
+
 
 class Game {
   constructor() {
@@ -16,12 +19,16 @@ class Game {
   }
 
   sequenceOfMove() {
+  
     game.players[playerQueue].move();
   }
 
   gameMechanism(thisPlayer) {
     console.log('GRACZ -->', thisPlayer);
-    console.log()
+
+
+
+    
     if ((Cities[thisPlayer.field].ownerOfField === undefined || Cities[thisPlayer.field].ownerOfField.nameOfPlayer === thisPlayer.nameOfPlayer) && Cities[thisPlayer.field].specialField !== true) {
 
 
@@ -73,12 +80,8 @@ class Game {
       map.visualAmountOfMoney(thisPlayer);
       map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
     } else if (thisPlayer.field == jail) {
-      console.log('[jestem w  wiezieniu]', );
-      // Jail.style.display = "block";
-      if (thisPlayer.field != true) {
-        thisPlayer.field = true;
-        playerQueue++;
-      }
+     console.log('WIEZIENIE'); 
+    
 
     } else {
       console.log('[jestem w elsie]', );
@@ -86,7 +89,8 @@ class Game {
 
     }
 
-    playerQueue++
+    // playerQueue++
+
 
     // if(!(Cities[thisPlayer.field].ownerOfField == 0 && arrayOfDisabledBuyedFields.includes(thisPlayer.field) === false)){
     //   map.showingTheDivOfWhoHasMovement();
@@ -181,28 +185,56 @@ game.initiatePlayers();
 game.whoIsFirst()
 map.sortAllLands();
 map.draw();
-// map.showingDivs(containerOfPlayerWhoHasMovement);
+for (let i = 0; i < 4; i++){
+  console.log('GRACZ:',game.players[i]);
+}
+const animated = cube.getCubes()[0];
+
+
+
+
+  animated.addEventListener('transitionend', function() {
+    if(flag === true){    // cube.js  26 -linia  flaga zeby tylko raz wykonywala sie  funkcja od animacji
+    if(doublet == true ){
+      setTimeout(function(){
+        map.showingDivs(containerOfDoublet);  
+       setTimeout(function(){
+          game.sequenceOfMove();
+       },500) // set timeout of  start animation when  div hide away.
+      },700);     // set timeout for 0.5 sec for user look on cubes  and know he have a doublet.  
+    }
+    else{
+      game.sequenceOfMove();
+    }
+  }
+  });
+
+
+
+
+
 map.showingDivs(containerOfPlayerWhoHasMovement);
-// map.showingDivs(containerOfBuyingHouses);
-// game.buyingHouses();
+
+
 
 btn.addEventListener("click", () => {
+  btn.disabled = true;
+playerQueue++
+cube.getNumberRandom();
 
 
-  cube.getNumberRandom();
-  game.sequenceOfMove();
-
+// game.sequenceOfMove();
 });
-buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue - 1]));
+buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue ]));
 
 // RUCH GRACZA +++ (EW PROMISES)
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++
 // KOLEJNOSC GRACZY +++
 // WIEZIENIE I KARTY I EVENT ---
-// DUBLET ---
+
 // PLACENIE GRACZOM +++
 // POSTAWIANIE DOMKOW +++
-// MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW ---
+// MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +-+
 // KICKOWANIE GRACZA JESLI NIE MA PIENIEDZY ---
 // INTERFEJS GRACZY I KTO ILE MA PIENIEDZY +++
 // UJEMNY BILANS PIENIEDZY ---
@@ -211,10 +243,10 @@ buyingButton.addEventListener('click', () => game.buyingHouses(game.players[play
 // POPRAWNOSC KODU +-+
 // POPRAWIENIE PLANSZY  +++
 // WIDOCZNOSC KTO MA POLE +++
-//
 
 
-
+// KOSZT - Interface
+// DUBLET ---
 
 
 
