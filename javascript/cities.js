@@ -1,7 +1,7 @@
 class City 
     {
-    constructor(playerName, costOfTheField, field, tribute,costOfOneHouse,specialField) {
-        this.playerName = playerName;
+    constructor(fieldName, costOfTheField, field, tribute,costOfOneHouse,specialField) {
+        this.fieldName = fieldName;
         this.costOfTheField = costOfTheField;
         this.tribute = tribute; // haracz za staniecie na polu
         this.ownerOfField = undefined;
