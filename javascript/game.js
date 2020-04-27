@@ -1,6 +1,6 @@
-let playerQueue = -1;
+let playerQueue = 0;
 let playerPick;
-let doublet = null;
+let doublet = true;
 let flag = true;
 
 
@@ -79,6 +79,7 @@ class Game {
       btn.disabled = false;
       map.visualAmountOfMoney(thisPlayer);
       map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
+      map.showingDivs(containerOfPlayerWhoHasMovement);
     } else if (thisPlayer.field == jail) {
      console.log('WIEZIENIE'); 
     
@@ -156,18 +157,40 @@ class Game {
   }
   buyingHouses(thisPlayer) {
 
-    if (playerPick == 0) {
-      thisPlayer.money -= Cities[thisPlayer.field].costOfTheField;
-    } else {
+    // if (playerPick == 0) {
+    //   thisPlayer.money -= Cities[thisPlayer.field].costOfTheField;
+    // } else if(Cities[thisPlayer.field].houses > -1  && playerPick > 0){
+    //   thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - Cities[thisPlayer.field].costOfTheField);
+    //   } 
+    // else {
+    //   thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
+    // }
+    if(Cities[thisPlayer.field].houses === -1){ // Pole jest puste
+      console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]',thisPlayer.money );
+      console.log('[KOSZT POLA]', Cities[thisPlayer.field].costOfTheField);
+      console.log('[KOSZT DOMKU]',Cities[thisPlayer.field].costOfOneHouse );
+      console.log('[ILOSC DOMKOW]',playerPick );
+      console.log('[MATEMATYKA]',((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse *playerPick)) );
+        thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse *playerPick)); 
+        console.log('[PIENIADZE GRACZA PO MATEMATYCE]',thisPlayer.money );
+    }
+    else if(Cities[thisPlayer.field].houses > -1){
+      console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]',thisPlayer.money );
+      console.log('[KOSZT DOMKU]',Cities[thisPlayer.field].costOfOneHouse );
+      console.log('[ILOSC DOMKOW JUZ NA POLU]',Cities[thisPlayer.field].houses );
+      console.log('[ILOSC DOMKOW KTORE KUPUJESZ]',playerPick );
       thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
+      console.log('[PIENIADZE GRACZA PO MATEMATYCE]',thisPlayer.money );
     }
     map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
 
     map.visualAmountOfMoney(thisPlayer);
     Cities[thisPlayer.field].houses = playerPick;
     Cities[thisPlayer.field].ownerOfField = thisPlayer;
+    thisPlayer.cities += Cities[thisPlayer.field].fieldName;
+    console.log(thisPlayer.cities);
     map.hidingDivs(containerOfBuyingHouses);
-
+    map.showingDivs(containerOfPlayerWhoHasMovement);
   }
 
 }
@@ -213,20 +236,27 @@ const animated = cube.getCubes()[0];
 
 
 
+
+
+
 map.showingDivs(containerOfPlayerWhoHasMovement);
-
-
-
 btn.addEventListener("click", () => {
+  
+
   btn.disabled = true;
-playerQueue++
+  if(doublet == false){
+    playerQueue++;
+  }
+ 
 cube.getNumberRandom();
 
 
 // game.sequenceOfMove();
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue ]));
-
+for(let i = 0 ; i <12 ;i++){
+  Cities[i].houses = 2;
+}
 // RUCH GRACZA +++ (EW PROMISES)
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++
 // KOLEJNOSC GRACZY +++
@@ -246,7 +276,7 @@ buyingButton.addEventListener('click', () => game.buyingHouses(game.players[play
 
 
 // KOSZT - Interface
-// DUBLET ---
+// DUBLET +++
 
 
 
