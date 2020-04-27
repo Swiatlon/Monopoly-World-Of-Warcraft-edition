@@ -101,8 +101,8 @@ class Map {
         }
         setTimeout(function () { // Poczatek animacji
           
-          nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers+1].nameOfPlayer;
-          imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers+1].image;
+          nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers].nameOfPlayer;
+          imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers].image;
           eventsBox.style.opacity = 1;
           eventsBox.style.display = "grid";
     
