@@ -6,13 +6,14 @@ const Jail = document.querySelector('.jail');
 const buyingHouseImage = document.getElementById('house');
 const imageOfPlayerWhoHasMovement = document.querySelector('.image-of-player-who-has-movement');
 const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue-center p');
-const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
+const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue-center');
 const buyingButton =  document.querySelector('.buying-button');
 const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
 const containerOfDoublet = document.querySelector('.container-of-doublet')
 const checkboxes = [...document.querySelectorAll('.checkboxes')];
 const eventsBox= document.querySelector('.container-of-events');
 const box = document.querySelector('.container-of-events--center');
+const jailBox = document.querySelector('.container-of-jail')
 const arrayOfPlayersMoney = [
   playerFirstOnMapMoney = document.querySelector('.money-first'),
   playerSecondOnMapMoney = document.querySelector('.money-second'),
@@ -25,7 +26,6 @@ const arraysOfPlayersName = [
   playerThirdName = document.querySelector('.player-third-name'),
   playerFourthName = document.querySelector('.player-fourth-name'),
 ]
-
 
 class Map {
   constructor() {
@@ -94,15 +94,14 @@ class Map {
       }, 0)
       break;
       case containerOfPlayerWhoHasMovement:     //-----> Ruch gracza
-        let positionOfPlayers = playerQueue; 
-        if (playerQueue == 4) {
-          positionOfPlayers = 0;
+        
+        if (NumberOfShowingQueue == 4) {
+          NumberOfShowingQueue = 0;
           
         }
         setTimeout(function () { // Poczatek animacji
-          
-          nameOfPlayerWhoHasMovement.textContent = game.players[positionOfPlayers].nameOfPlayer;
-          imageOfPlayerWhoHasMovement.src = game.players[positionOfPlayers].image;
+          nameOfPlayerWhoHasMovement.textContent = game.players[NumberOfShowingQueue].nameOfPlayer;
+          imageOfPlayerWhoHasMovement.src = game.players[NumberOfShowingQueue].image;
           eventsBox.style.opacity = 1;
           eventsBox.style.display = "grid";
     
@@ -120,6 +119,27 @@ class Map {
           }, 2000);
           
         }, 0)
+        break;
+        case jailBox:
+          setTimeout(function () { // Poczatek animacji
+  
+            eventsBox.style.opacity = 1;
+            eventsBox.style.display = "grid";
+      
+            setTimeout(function () {    // 2sekundy animacji
+      
+              eventsBox.style.opacity = 0;
+              
+        
+              setTimeout(function(){    // Koniec animacji 
+                eventsBox.style.opacity = 1;
+               
+                eventsBox.style.display = "none";
+                Div.style.display = "none";
+              },500)
+            }, 1000);
+            
+          }, 0)
         break;
         default:
           
