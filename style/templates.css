@@ -14,9 +14,6 @@
   justify-self: center;
   display: grid;
 
-  
-
-  
 }
 /* ------------------------------------------*/
 .box-of-buying-houses{
@@ -140,6 +137,22 @@
   justify-self: center;
 
 }
+/*---------------------------------------------------------------------*/
+.container-of-jail{
+  background-image: url('../images/JailBackground.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: none;
+
+}
+.container-of-jail p{
+  font-size: 32px;
+  text-align: center;
+  align-self: center;
+  
+}
+/*--------------------------------------------------------------------------*/
 @-webkit-keyframes rotation {
   0% { transform:perspective(300px) rotateY(0); }
   100% { transform:perspective(300px) rotateY(360deg); }
