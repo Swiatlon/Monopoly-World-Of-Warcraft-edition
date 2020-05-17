@@ -2,6 +2,8 @@ let playerQueue = 0;
 let playerPick;
 let doublet = true;
 let flag = true;
+let NumberOfShowingQueue = 0;
+
 
 
 class Game {
@@ -26,9 +28,6 @@ class Game {
   gameMechanism(thisPlayer) {
     console.log('GRACZ -->', thisPlayer);
 
-
-
-    
     if ((Cities[thisPlayer.field].ownerOfField === undefined || Cities[thisPlayer.field].ownerOfField.nameOfPlayer === thisPlayer.nameOfPlayer) && Cities[thisPlayer.field].specialField !== true) {
 
 
@@ -38,8 +37,6 @@ class Game {
         checkboxes[i].checked = true;
       }
       this.listenerHowMuchHouses(thisPlayer);
-
-
 
       btn.disabled = false;
     } else if (Cities[thisPlayer.field].ownerOfField !== thisPlayer.nameOfPlayer && Cities[thisPlayer.field].ownerOfField !== 0 && Cities[thisPlayer.field].specialField !== true) { // pole jest kogos innego
@@ -86,7 +83,7 @@ class Game {
 
     } else {
       console.log('[jestem w elsie]', );
-
+      map.showingDivs(jailBox);
 
     }
 
@@ -213,11 +210,10 @@ for (let i = 0; i < 4; i++){
 }
 const animated = cube.getCubes()[0];
 
-
-
-
   animated.addEventListener('transitionend', function() {
     if(flag === true){    // cube.js  26 -linia  flaga zeby tylko raz wykonywala sie  funkcja od animacji
+      NumberOfShowingQueue = playerQueue;
+     
     if(doublet == true ){
       setTimeout(function(){
         map.showingDivs(containerOfDoublet);  
@@ -227,6 +223,7 @@ const animated = cube.getCubes()[0];
       },700);     // set timeout for 0.5 sec for user look on cubes  and know he have a doublet.  
     }
     else{
+      NumberOfShowingQueue++
       game.sequenceOfMove();
     }
   }
@@ -234,12 +231,7 @@ const animated = cube.getCubes()[0];
 
 
 
-
-
-
-
-
-map.showingDivs(containerOfPlayerWhoHasMovement);
+  map.showingDivs(containerOfPlayerWhoHasMovement);
 btn.addEventListener("click", () => {
   
 
@@ -254,30 +246,21 @@ cube.getNumberRandom();
 // game.sequenceOfMove();
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue ]));
-for(let i = 0 ; i <12 ;i++){
-  Cities[i].houses = 2;
-}
-// RUCH GRACZA +++ (EW PROMISES)
-// DIV Z INFORMACJA KTO WYKONUJE RUCH +++
-// KOLEJNOSC GRACZY +++
+
+// RUCH GRACZA +++ 
+// DIV Z INFORMACJA KTO WYKONUJE RUCH +++ (Trzeba zrobic zeby wykonywalo sie zawsze na koncu ruchu ?)
+// KOLEJNOSC GRACZY +++ 
 // WIEZIENIE I KARTY I EVENT ---
 
 // PLACENIE GRACZOM +++
 // POSTAWIANIE DOMKOW +++
-// MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +-+
+// MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +++
 // KICKOWANIE GRACZA JESLI NIE MA PIENIEDZY ---
 // INTERFEJS GRACZY I KTO ILE MA PIENIEDZY +++
 // UJEMNY BILANS PIENIEDZY ---
 // LADNY WYGLAD +++ 
 // NAZEWNICTWO(POPRAWNE) ZMIENNYCH/FUNKCJI +++
-// POPRAWNOSC KODU +-+
-// POPRAWIENIE PLANSZY  +++
+// POPRAWNOSC KODU +++(Pewnie się mylę ;)
 // WIDOCZNOSC KTO MA POLE +++
-
-
-// KOSZT - Interface
 // DUBLET +++
-
-
-
 
