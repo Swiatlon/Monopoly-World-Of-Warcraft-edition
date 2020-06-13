@@ -5,25 +5,21 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
-    
     let firstThrown = Math.floor(Math.random() * (7 - 1) + 1); //7 -max  1 -min
     let secondThrown = Math.floor(Math.random() * (7 - 1) + 1);
     if (firstThrown == secondThrown) {
-      // console.log('[dublet]');
-     doublet = true;
-
-    } else{
+      doublet = true;
+    } else {
       doublet = false;
     }
- 
     if (this.lastThrows[0] !== firstThrown) {
-        // flaga do animacji kostki zeby nie powtarzalo funkcji na koncu animacji
-      this.animationOfCube(firstThrown, this.cubes[0]); 
+      // flaga do animacji kostki zeby nie powtarzalo funkcji na koncu animacji
+      this.animationOfCube(firstThrown, this.cubes[0]);
     } else {
-      flag = false;   // Animacja resetujaca nie wywoluje funkcji 
+      flag = false; // Animacja resetujaca nie wywoluje funkcji 
       this.animationOfCube(10, this.cubes[0]);
       setTimeout(() => {
-        flag = true;    // Animacja  kiedy  juz  jest numer ktory powinien byc.Kostka sie juz nie kreci
+        flag = true; // Animacja  kiedy  juz  jest numer ktory powinien byc.Kostka sie juz nie kreci
         this.animationOfCube(firstThrown, this.cubes[0]);
       }, 1005);
     }
@@ -43,10 +39,7 @@ class Cube {
     if (playerQueue > game.players.length - 1) {
       playerQueue = 0;
     }
-    
-    
     game.players[playerQueue].amountOfMoves = firstThrown + secondThrown;
-    
   }
 
   animationOfCube(number, cube) {
@@ -71,11 +64,7 @@ class Cube {
         break;
       default:
         cube.style.webkitTransform = "rotateX(-250deg) rotateY(1500deg)";
-       
     }
-   
-    
-    
   }
 
   getCubes() {

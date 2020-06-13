@@ -11,11 +11,9 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../images/640378.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url(../images/640378.jpg) no-repeat  ;
+  background-size: cover; 
   display: grid;
-  font-size: 20px;
   text-align: center;
 }
 
@@ -26,17 +24,15 @@ body {
 }
 
 .board {
-  background-image: url("../images/5.jpg");
-  background-position: 65%;
+  background: url("../images/5.jpg") no-repeat 65%;
   background-size: cover;
-  background-repeat: no-repeat;
   justify-self: center;
   align-self: center;
   border: 1px solid black;
   margin-top: -150px;
   box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.952);
-  transform: rotate3d(900, 600, -800, -0.8turn);
- 
+  transform: rotate3d(900, 600, -800, -0.8turn); 
+  font-size: 20px;
 }
 
 .board__kalimdor-container,
@@ -49,14 +45,15 @@ body {
 .board__center-container {
   display: grid;
   width: 100%;
-  grid-template-columns: 130px auto 130px;
+  grid-template-columns: 130px auto 130px; 
 }
 
 .board__content-container {
   width: 100%;
-  height: 100%;
+  height: 100%; 
+  position: relative;
   display: grid;
-  grid-template-columns: 20% auto 10%;
+  font-size: 32px; 
 }
 
 .board__eastern-kingdom-container,
@@ -66,12 +63,51 @@ body {
   width: 130px;
 }
 
+.vertical-container{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display:grid;
+  grid-template-rows: repeat(2,1fr);
+}
+
+.horizontal-container{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
+.string-kalimdor{
+  margin-top: 25px;
+}
+
+.string-northrend{
+  align-self: flex-end;
+  margin-bottom: 25px;
+}
+
+.string-eastern-kingdom{
+  transform: rotate(90deg) translateY(30px);
+  justify-self: left;
+  align-self: center;  
+}
+
+.string-outland{
+  transform: rotate(90deg) translateY(10px);
+  justify-self: right;
+  align-self: center;
+}
+
 .board__kalimdor-container div,
 .board__eastern-kingdom-container div,
 .board__northrend-container div,
 .board__outland-container div {
   border: 1px solid black;
   position: relative;
+  background-position: center;
+  background-size: cover;
 }
 
 .board__kalimdor-container p,
@@ -84,234 +120,142 @@ body {
 }
 
 #Elwynn {
-  background-image: url("../images/Elwyn.jpg");
-  background-position: center;
-  background-size: cover;
-
+  background-image: url("../images/Elwynn\ Forest.jpg"); 
 }
 
 #Westfall {
   background-image: url("../images/Westfall.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Hilsbrad {
-  background-image: url("../images/hillsbrad.jpg");
-  background-position: bottom;
-  background-size: cover;
+  background-image: url("../images/Hilsbrad\ Foothils.jpg");
 }
 
 #Stormwind {
-  background-image: url("../images/Stormwind.jpg");
-  background-position: center;
-  background-size: cover;
+  background-image: url("../images/Stomwind.jpg");
 }
 
 #Stranglethorn {
   background-image: url("../images/Stranglethorn.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Hinterlands {
   background-image: url("../images/Hinterlands.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Burning_Steppes {
-  background-image: url("../images/Burning\ Steppes.jpg");
-  background-position: top;
-  background-size: cover;
+  background-image: url("../images/Burnning\ Steppes.jpg");
 }
 
 #jail {
   background-image: url("../images/Jail.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Durotar {
   background-image: url("../images/durotar.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Barrens {
   background-image: url("../images/Barrens.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Thousand_Needles {
   background-image: url("../images/Thousand\ Needles.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Card_Of_Horde {
   background-image: url("../images/cardOfHorde.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Tanaris {
   background-image: url("../images/Tanaris.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Orgrimmar {
   background-image: url("../images/Orgrimmar.jpg");
-  background-position: center;
-  background-size: cover;
 }
 
 #Un_Goro {
   background-image: url("../images/Un\ Goro.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Event {
   background-image: url("../images/Event2.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Helfire {
-  background-image: url("../images/Helfire\ Peninsula.jfif");
-  background-position: right;
-  background-size: cover;
+  background-image: url("../images/Helfire\ Peninsula.jpg");
 }
 
 #Zangramash {
   background-image: url("../images/zangramash.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Shattrah {
   background-image: url("../images/Shattrah.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #CardOfAlliance {
   background-image: url("../images/Alliance.png");
-  background-position: right;
-  background-size: cover;
 }
 
 #Nagrand {
   background-image: url("../images/Nagrand.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Netherstorm {
   background-image: url("../images/Netherstorm.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Shadowmoon {
   background-image: url("../images/Shadowmoon.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Teleport {
   background-image: url("../images/teleport1.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Dalaran {
-  background-image: url("../images/Dalaran.jfif");
-  background-position: right;
-  background-size: cover;
+  background-image: url("../images/Dalaran.jpg");
 }
 
 #Borean {
   background-image: url("../images/Borean.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Grizzly {
   background-image: url("../images/Grizzly.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Card_Of_Demons {
   background-image: url("../images/cardOFDe.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Zul_Drak {
   background-image: url("../images/ZulDrak.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Storm_Peaks {
   background-image: url("../images/StormPeaks.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #Icecrown {
   background-image: url("../images/Icecrown.jpg");
-  background-position: right;
-  background-size: cover;
 }
 
 #start {
   background-image: url("../images/Event.png");
-  background-position: right;
-  background-size: cover;
 }
 
-.string_Northrend {
-  align-self: flex-end;
-  margin-bottom: 50px;
-  justify-self: center;
-}
-
-.string_Outland {
-  font-size: 32px;
-  align-self: center;
-  justify-self: center;
-  transform: rotate(90deg);
-}
-
-.string_Eastern_Kingdom {
-  font-size: 32px;
-  align-self: center;
-  justify-self: center;
-  transform: rotate(90deg);
-}
-
-.stringKalimdor {
-  font-size: 32px;
-  display: grid;
-  justify-self: center;
-  margin-top: 30px;
-}
-
-.first p {
-  display: block;
-}
-
-.buttonStart {
+.roll-dice-button {
   width: 130px;
   height: 55.5px;
-  margin-top: 200px;
-  margin-left: 300px;
+  justify-self: center;
+  align-self: center;
+  margin-bottom: 50px;
+  background: #df9a05a6;
+  border: none;
+  font-size: 32px;
 }
 
 .information-about-players-container {
@@ -320,6 +264,7 @@ body {
   display: grid;
   position: absolute;
   grid-template-columns: repeat(2, 1fr);
+  font-size: 26px;
 }
 
 .player-first-box,
@@ -364,9 +309,10 @@ body {
 }
 
 .player-first-box p,
-.player-second-box p {
-  font-size: 26px;
-  padding: 15px;
+.player-second-box p,
+.player-third-box p,
+.player-fourth-box p { 
+  padding: 10px;
 }
 
 .tribute {
@@ -394,10 +340,9 @@ body {
   z-index: 0;
   border:none;
 }
-.plat{
+
+.place-for-houses{
   width: 80px;
   height: 80px;
  justify-self: right;
 }
-
-

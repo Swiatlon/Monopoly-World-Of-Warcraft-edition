@@ -1,11 +1,11 @@
 class Player {
-    constructor(nameOfPlayer, position,color) {
+    constructor(nameOfPlayer, position, color) {
         this.nameOfPlayer = nameOfPlayer;
         this.field = 0;
         this.amountOfMoves = 0;
         this.id = position;
         this.image = "images/player" + position + ".png";
-        this.queue = position;
+        this.positionInQueue = position;
         this.cities = [];
         this.money = 3000;
         this.color = color;
@@ -14,7 +14,7 @@ class Player {
         this.img.width = 60;
         this.img.height = 60;
         this.img.src = this.image;
-        this.img.style.zIndex ='1';
+        this.img.style.zIndex = '1';
         this.img.style.position = "Relative";
     }
 
@@ -33,23 +33,17 @@ class Player {
                     this.amountOfMoves = this.amountOfMoves - x - 1;
                 }
                 map.allLands[this.field].appendChild(this.img);
-
             } else {
                 clearInterval(playerAnimationOfMove);
                 if (this.field == jail) {
                     this.jail = true;
                 }
-
-
                 this.endOfMoveAnimation();
-
             }
         }, 300);
     }
 
-
     endOfMoveAnimation() {
-
         game.gameMechanism(this);
     }
 

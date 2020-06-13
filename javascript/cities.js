@@ -9,7 +9,6 @@ class City
         this.houses = -1 ;
         this.costOfOneHouse = costOfOneHouse;
         this.specialField = specialField;
-
     }
 }
 const Cities = [

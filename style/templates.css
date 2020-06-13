@@ -1,11 +1,12 @@
-.container-of-events{
+.container-of-events {
   position: absolute;
   width: 100%;
   height: 100%;
   transition: opacity 1s;
   display: none;
 }
-.container-of-events--center{
+
+.container-of-events--center {
   width: 600px;
   height: 450px;
   border: 1px solid rgba(255, 168, 5, 0.212);
@@ -13,22 +14,23 @@
   align-self: center;
   justify-self: center;
   display: grid;
-
 }
-/* ------------------------------------------*/
-.box-of-buying-houses{
+
+.box-of-buying-houses {
   height: 100%;
   background-image: url('../images/backgroundHousesToBuy.jpg');
   background-position: center;
   background-size: cover;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   display: none;
 }
-.box-of-buying-houses-left-side-container{
-    display: grid;
-    grid-template-rows: repeat(2,1fr);
+
+.box-of-buying-houses-left-side-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
 }
-.left-side-container-houses-box{
+
+.left-side-container-houses-box {
   width: 164px;
   height: 164px;
   display: grid;
@@ -36,23 +38,22 @@
   align-self: flex-end;
   padding-bottom: 20px;
 }
-.left-side-container-image{
+
+.left-side-container-image {
   width: 160px;
   height: 160px;
   border: 1px solid black;
   border-radius: 90px;
   background: rgba(4, 146, 228, 0.445);
-  
 }
 
-.left-side-container-button{
+.left-side-container-button {
   display: grid;
   align-self: center;
   justify-self: center;
-  
-
 }
-.left-side-container-button button{
+
+.buying-button {
   width: 120px;
   height: 70px;
   background: rgba(4, 146, 228, 0.445);
@@ -63,51 +64,47 @@
   font-size: 18px;
   text-align: center;
   cursor: pointer;
-
 }
 
-
-.box-of-buying-houses-right-side-container{
-    display: grid;
-    height: 85%;
-    grid-template-rows: repeat(7,1fr);
-    font-size: 22px;
-    align-items: center;
+.box-of-buying-houses-right-side-container {
+  display: grid;
+  height: 85%;
+  grid-template-rows: repeat(7, 1fr);
+  font-size: 22px;
+  align-items: center;
 }
-.right-side-first-div-information{
+
+.right-side-first-div-information {
   display: grid;
   padding-top: 30px;
   grid-template-columns: 15% 50% auto;
   text-align: left;
 }
-.right-side-build-and-price-divs{
+
+.right-side-build-and-price-divs {
   display: grid;
   grid-template-columns: 15% 50% auto;
   text-align: left;
 }
-.right-side-build-and-price-divs input{
+
+.right-side-build-and-price-divs input {
   width: 25px;
   height: 25px;
 }
 
-
-
-
-/* ------------------------------------------*/
-
-.container-of-player-queue-center{
+.container-of-player-queue {
   height: 100%;
   background-image: url("../images/Races.jpg");
   background-position: center;
   background-size: cover;
   display: grid;
- grid-template-rows: 10% 20% 50%;
- align-items: center;
- justify-items: center;
- transition: opacity 1s, visibility 1.5s;
-
+  grid-template-rows: 10% 20% 50%;
+  align-items: center;
+  justify-items: center;
+  transition: opacity 1s, visibility 1.5s;
 }
-.container-of-player-queue-center h1{
+
+.container-of-player-queue h1 {
   padding-top: 50px;
 }
 
@@ -115,13 +112,14 @@
   width: 150px;
   height: 170px;
 }
-#house{
+
+.house {
   width: 160px;
   height: 160px;
   -webkit-animation: rotation 2s infinite linear;
 }
-/* ------------------------------------------*/
-.container-of-doublet{
+
+.container-of-doublet {
   height: 100%;
   background-image: url('../images/dubletBackground.jpg');
   background-size: cover;
@@ -129,31 +127,36 @@
   background-repeat: no-repeat;
   display: none;
 }
-.container-of-events h1{
- text-align: center;
- align-self: center;
-}
-.container-of-events img{
-  justify-self: center;
 
+.container-of-events h1 {
+  text-align: center;
+  align-self: center;
 }
-/*---------------------------------------------------------------------*/
-.container-of-jail{
+
+.container-of-events img {
+  justify-self: center;
+}
+
+.container-of-jail {
   background-image: url('../images/JailBackground.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: none;
-
 }
-.container-of-jail p{
+
+.container-of-jail p {
   font-size: 32px;
   text-align: center;
   align-self: center;
-  
 }
-/*--------------------------------------------------------------------------*/
+
 @-webkit-keyframes rotation {
-  0% { transform:perspective(300px) rotateY(0); }
-  100% { transform:perspective(300px) rotateY(360deg); }
+  0% {
+    transform: perspective(300px) rotateY(0);
+  }
+
+  100% {
+    transform: perspective(300px) rotateY(360deg);
+  }
 }

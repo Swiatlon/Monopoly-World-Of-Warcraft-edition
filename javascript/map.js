@@ -3,10 +3,10 @@ const chooseBoxYesBtn = document.querySelector('.Yes-button');
 const chooseBoxNoBtn = document.querySelector('.No-button');
 const ifBuyedField = document.querySelector('.containerIfFieldIsBuyed');
 const Jail = document.querySelector('.jail');
-const buyingHouseImage = document.getElementById('house');
+const buyingHouseImage = document.querySelector('.house');
 const imageOfPlayerWhoHasMovement = document.querySelector('.image-of-player-who-has-movement');
-const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue-center p');
-const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue-center');
+const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue p');
+const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
 const buyingButton =  document.querySelector('.buying-button');
 const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
 const containerOfDoublet = document.querySelector('.container-of-doublet')
@@ -15,10 +15,10 @@ const eventsBox= document.querySelector('.container-of-events');
 const box = document.querySelector('.container-of-events--center');
 const jailBox = document.querySelector('.container-of-jail')
 const arrayOfPlayersMoney = [
-  playerFirstOnMapMoney = document.querySelector('.money-first'),
-  playerSecondOnMapMoney = document.querySelector('.money-second'),
-  playerThirdOnMapMoney = document.querySelector('.money-third'),
-  playerFourthOnMapMoney = document.querySelector('.money-fourth'),
+  playerFirstOnMapMoney = document.querySelector('.player-first-money'),
+  playerSecondOnMapMoney = document.querySelector('.player-second-money'),
+  playerThirdOnMapMoney = document.querySelector('.player-third-money'),
+  playerFourthOnMapMoney = document.querySelector('.player-fourth-money'),
 ]
 const arraysOfPlayersName = [
   playerFirstName = document.querySelector('.player-first-name'),
@@ -95,13 +95,13 @@ class Map {
       break;
       case containerOfPlayerWhoHasMovement:     //-----> Ruch gracza
         
-        if (NumberOfShowingQueue == 4) {
-          NumberOfShowingQueue = 0;
+        if (NumberOfShowingPlayerQueue == 4) {
+          NumberOfShowingPlayerQueue = 0;
           
         }
         setTimeout(function () { // Poczatek animacji
-          nameOfPlayerWhoHasMovement.textContent = game.players[NumberOfShowingQueue].nameOfPlayer;
-          imageOfPlayerWhoHasMovement.src = game.players[NumberOfShowingQueue].image;
+          nameOfPlayerWhoHasMovement.textContent = game.players[NumberOfShowingPlayerQueue].nameOfPlayer;
+          imageOfPlayerWhoHasMovement.src = game.players[NumberOfShowingPlayerQueue].image;
           eventsBox.style.opacity = 1;
           eventsBox.style.display = "grid";
     

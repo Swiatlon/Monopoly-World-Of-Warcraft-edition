@@ -1,22 +1,18 @@
-.container_cube_button {
+  .container-cube-button {
     position: absolute;
-    width: 700px;
-    height: 700px;
+    align-self: center;
+    justify-self: center;
+    display: grid;
   }
   
   .cube {
-    margin-top: 300px;
-    position: absolute;
-    margin-left: 450px;
+    align-self: center;
+    justify-self: center;
     transition: transform 0.7s;
     transform: rotate3d(100, 100, -400, -0.8turn);
     width: 100px;
     height: 140px;
     transform-style: preserve-3d;
-  }
-  
-  .secondCube {
-    margin-top: 500px;
   }
   
   .cube div {
@@ -26,43 +22,43 @@
     float: left;
   }
   
-  .front {
+  .front-cube-wall {
     background: white;
     border: 2px solid black;
     transform: rotatex(90deg) translateZ(45px);
   }
   
-  .back {
+  .back-cube-wall {
     background: white;
     border: 2px solid black;
     transform: rotateY(-90deg) translateZ(45px);
   }
   
-  .bottom {
+  .bottom-cube-wall {
     background: white;
     border: 2px solid black;
     transform: translateX(0px) translateY(0px) translateZ(45px);
   }
   
-  .top {
+  .top-cube-wall {
     background: white;
     border: 2px solid black;
     transform: rotateY(90deg) translateZ(45px);
   }
   
-  .left {
+  .left-cube-wall {
     background: white;
     border: 2px solid black;
     transform: rotateY(180deg) translateZ(45px);
   }
   
-  .right {
+  .right-cube-wall {
     background: white;
     border: 2px solid black;
     transform: rotateX(-90deg) translateZ(45px);
   }
   
-  .cube span {
+  .dot {
     width: 15px;
     height: 15px;
     border: 1px solid black;
@@ -100,22 +96,22 @@
     left: 60%;
     top: 40%;
   }
-  
-  .back .dot1 {
+                                              /* I need there some change with position because of differences in cube layouts */
+  .back-cube-wall .dot1 {
     top: 60%;
     left: 60%;
   }
   
-  .back .dot2 {
+  .back-cube-wall .dot2 {
     top: 20%;
     left: 20%;
   }
   
-  .bottom .dot1 {
+  .bottom-cube-wall .dot1 {
     left: 60%;
     top: 60%;
   }
   
-  .right .dot1 {
+  .right-cube-wall .dot1 {
     left: 20%;
   }

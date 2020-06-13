@@ -2,9 +2,7 @@ let playerQueue = 0;
 let playerPick;
 let doublet = true;
 let flag = true;
-let NumberOfShowingQueue = 0;
-
-
+let NumberOfShowingPlayerQueue = 0;
 
 class Game {
   constructor() {
@@ -21,7 +19,6 @@ class Game {
   }
 
   sequenceOfMove() {
-  
     game.players[playerQueue].move();
   }
 
@@ -37,7 +34,6 @@ class Game {
         checkboxes[i].checked = true;
       }
       this.listenerHowMuchHouses(thisPlayer);
-
       btn.disabled = false;
     } else if (Cities[thisPlayer.field].ownerOfField !== thisPlayer.nameOfPlayer && Cities[thisPlayer.field].ownerOfField !== 0 && Cities[thisPlayer.field].specialField !== true) { // pole jest kogos innego
       let multiplierMoney;
@@ -70,30 +66,20 @@ class Game {
       }
       thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
       console.log('[MULTIPLIER]', Cities[thisPlayer.field].tribute * multiplierMoney);
-
       Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
-
       btn.disabled = false;
       map.visualAmountOfMoney(thisPlayer);
       map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
       map.showingDivs(containerOfPlayerWhoHasMovement);
     } else if (thisPlayer.field == jail) {
-     console.log('WIEZIENIE'); 
-    
+      console.log('WIEZIENIE');
+      map.showingDivs(jailBox);
 
     } else {
       console.log('[jestem w elsie]', );
-      map.showingDivs(jailBox);
+      btn.disabled = true;
 
     }
-
-    // playerQueue++
-
-
-    // if(!(Cities[thisPlayer.field].ownerOfField == 0 && arrayOfDisabledBuyedFields.includes(thisPlayer.field) === false)){
-    //   map.showingTheDivOfWhoHasMovement();
-    // }
-
   }
 
   randomNum() {
@@ -114,7 +100,6 @@ class Game {
           genNumber = randomNumber.indexOf(number);
           if (genNumber === -1) {
             randomNumber.push(number);
-
           }
         }
       }
@@ -131,56 +116,40 @@ class Game {
   }
   // }
   listenerHowMuchHouses(thisPlayer) {
-
-
     let amountOfHouses = Cities[thisPlayer.field].houses + 1;
     for (let i = amountOfHouses; i < checkboxes.length; i++) {
       checkboxes[i].addEventListener('click', function () {
         for (let i = amountOfHouses; i < checkboxes.length; i++) {
           checkboxes[i].checked = false;
-
         }
         playerPick = checkboxes[i];
         playerPick.checked = true;
         playerPick = Number(playerPick.id);
         buyingHouseImage.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
-
         return playerPick;
       })
     }
-
     // OPCJA Z ILOSCIA DOMKOW KUPIONYCH JEST ZABLOKOWANA
     return playerPick
   }
   buyingHouses(thisPlayer) {
-
-    // if (playerPick == 0) {
-    //   thisPlayer.money -= Cities[thisPlayer.field].costOfTheField;
-    // } else if(Cities[thisPlayer.field].houses > -1  && playerPick > 0){
-    //   thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - Cities[thisPlayer.field].costOfTheField);
-    //   } 
-    // else {
-    //   thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
-    // }
-    if(Cities[thisPlayer.field].houses === -1){ // Pole jest puste
-      console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]',thisPlayer.money );
+    if (Cities[thisPlayer.field].houses === -1) { // Pole jest puste
+      console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
       console.log('[KOSZT POLA]', Cities[thisPlayer.field].costOfTheField);
-      console.log('[KOSZT DOMKU]',Cities[thisPlayer.field].costOfOneHouse );
-      console.log('[ILOSC DOMKOW]',playerPick );
-      console.log('[MATEMATYKA]',((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse *playerPick)) );
-        thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse *playerPick)); 
-        console.log('[PIENIADZE GRACZA PO MATEMATYCE]',thisPlayer.money );
-    }
-    else if(Cities[thisPlayer.field].houses > -1){
-      console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]',thisPlayer.money );
-      console.log('[KOSZT DOMKU]',Cities[thisPlayer.field].costOfOneHouse );
-      console.log('[ILOSC DOMKOW JUZ NA POLU]',Cities[thisPlayer.field].houses );
-      console.log('[ILOSC DOMKOW KTORE KUPUJESZ]',playerPick );
+      console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
+      console.log('[ILOSC DOMKOW]', playerPick);
+      console.log('[MATEMATYKA]', ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick)));
+      thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick));
+      console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
+    } else if (Cities[thisPlayer.field].houses > -1) {
+      console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
+      console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
+      console.log('[ILOSC DOMKOW JUZ NA POLU]', Cities[thisPlayer.field].houses);
+      console.log('[ILOSC DOMKOW KTORE KUPUJESZ]', playerPick);
       thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
-      console.log('[PIENIADZE GRACZA PO MATEMATYCE]',thisPlayer.money );
+      console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
     }
     map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
-
     map.visualAmountOfMoney(thisPlayer);
     Cities[thisPlayer.field].houses = playerPick;
     Cities[thisPlayer.field].ownerOfField = thisPlayer;
@@ -189,69 +158,58 @@ class Game {
     map.hidingDivs(containerOfBuyingHouses);
     map.showingDivs(containerOfPlayerWhoHasMovement);
   }
-
 }
 
 function createPlayer(name, color) {
   let position = game.players.length + 1;
   const newPlayer = new Player(name, position, color);
   game.players.push(newPlayer);
-
 }
-
 
 const game = new Game();
 game.initiatePlayers();
 game.whoIsFirst()
 map.sortAllLands();
 map.draw();
-for (let i = 0; i < 4; i++){
-  console.log('GRACZ:',game.players[i]);
+for (let i = 0; i < 4; i++) {
+  console.log('GRACZ:', game.players[i]);
 }
 const animated = cube.getCubes()[0];
 
-  animated.addEventListener('transitionend', function() {
-    if(flag === true){    // cube.js  26 -linia  flaga zeby tylko raz wykonywala sie  funkcja od animacji
-      NumberOfShowingQueue = playerQueue;
-     
-    if(doublet == true ){
-      setTimeout(function(){
-        map.showingDivs(containerOfDoublet);  
-       setTimeout(function(){
+animated.addEventListener('transitionend', function () {
+  if (flag === true) { // cube.js  26 -linia  flaga zeby tylko raz wykonywala sie  funkcja od animacji
+    if (doublet == true) {
+      NumberOfShowingPlayerQueue = playerQueue;
+      setTimeout(function () {
+        map.showingDivs(containerOfDoublet);
+        setTimeout(function () {
           game.sequenceOfMove();
-       },500) // set timeout of  start animation when  div hide away.
-      },700);     // set timeout for 0.5 sec for user look on cubes  and know he have a doublet.  
-    }
-    else{
-      NumberOfShowingQueue++
+        }, 500) // set timeout of  start animation when  div hide away.
+      }, 700); // set timeout for 0.5 sec for user look on cubes  and know he have a doublet.  
+    } else {
+      NumberOfShowingPlayerQueue++
       game.sequenceOfMove();
+      btn.disabled = true;
     }
   }
-  });
+  // IF WIEZIENIE
+});
 
-
-
-  map.showingDivs(containerOfPlayerWhoHasMovement);
+map.showingDivs(containerOfPlayerWhoHasMovement);
 btn.addEventListener("click", () => {
-  
-
   btn.disabled = true;
-  if(doublet == false){
+  if (doublet == false) {
     playerQueue++;
   }
- 
-cube.getNumberRandom();
-
-
-// game.sequenceOfMove();
+  cube.getNumberRandom();
+  // game.sequenceOfMove();
 });
-buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue ]));
+buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
 
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ (Trzeba zrobic zeby wykonywalo sie zawsze na koncu ruchu ?)
 // KOLEJNOSC GRACZY +++ 
 // WIEZIENIE I KARTY I EVENT ---
-
 // PLACENIE GRACZOM +++
 // POSTAWIANIE DOMKOW +++
 // MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +++
@@ -263,4 +221,3 @@ buyingButton.addEventListener('click', () => game.buyingHouses(game.players[play
 // POPRAWNOSC KODU +++(Pewnie się mylę ;)
 // WIDOCZNOSC KTO MA POLE +++
 // DUBLET +++
-
