@@ -1,22 +1,22 @@
-class City 
-    {
+class City {
     constructor(fieldName, costOfTheField, field, tribute,costOfOneHouse,specialField) {
         this.fieldName = fieldName;
         this.costOfTheField = costOfTheField;
-        this.tribute = tribute; // haracz za staniecie na polu
+        this.tribute = tribute; 
         this.ownerOfField = undefined;
         this.field = field;
-        this.houses = -1 ;
+        this.houses = -1 ; // -1 --> none fields | 0 --> have field | 1+ --> amount of houses  
         this.costOfOneHouse = costOfOneHouse;
-        this.specialField = specialField;
+        this.specialField = specialField; // Like Event/Jail/Start etc..
     }
 }
+
 const Cities = [
     start                   = new City("Start", 0, 0, 0, undefined,true),
     elwynForest             = new City("Elwynn Forest", 25, 1, 25, 25,false),
     westfall                = new City("Westfall", 50, 2, 30, 25,false),
     hilsbradFoothils        = new City("Hilsbrad Foothils", 75, 3, 40, 25,false),
-    stormwind               = new City("Stormwind", 200, 4, 100, undefined,),
+    stormwind               = new City("Stormwind", 200, 4, 100, 0,undefined),
     northernStranglethorn   = new City("Northern Stranglethorn", 150, 5, 50, 60,false),
     theHinterlands          = new City("The Hinterlands", 175, 6, 90 , 60,false),
     burningSteppes          = new City("Burning Steppes", 200, 7, 100, 60,false),
@@ -26,18 +26,18 @@ const Cities = [
     thousandNeedles         = new City("Thousand Needles", 350, 11, 200, 100,false),
     cardOfHorde             = new City("CardOfHorde", 0, 12, 0, undefined,true),
     tanaris                 = new City("Tanaris", 400, 13, 250, 200,false),
-    Orgrimmar               = new City("Orgrimmar", 200, 14, 100, undefined),
+    Orgrimmar               = new City("Orgrimmar", 200, 14, 100, 0,undefined),
     unGoro                  = new City("unGoro", 500, 15, 300, 300,false),
     event                   = new City("Event", 0, 16, 0, undefined,true),
     helfirePeninsula        = new City("Helfire Peninsula", 650, 17, 400, 400,false),
     zangramash              = new City("Zangramash", 700, 18, 425, 400,false),
-    shattrahCity            = new City("Shattrah City", 200, 19, 100, undefined),
+    shattrahCity            = new City("Shattrah City", 200, 19, 100, 0,undefined),
     cardOfAlliance          = new City("CardOfAlliance", 0, 20, 0, undefined,true),
     nagrand                 = new City("Nagrand", 750, 21, 450, 400,false),
     netherstorm             = new City("Netherstorm", 800, 22, 500, 450,false),
     shadowmoonValley        = new City("Shadowmoon Valley", 850, 23, 525, 450,false),
     teleport                = new City("Teleport", 0, 24, 0, undefined,true),
-    dalaran                 = new City("Dalaran", 200, 25, 100, undefined),
+    dalaran                 = new City("Dalaran", 200, 25, 100, 1,undefined),
     boreanTundra            = new City("Borean Tundra", 950, 26, 600, 700,false),
     grizzlyHills            = new City("Grizzly Hills", 1000, 27, 650, 700,false),
     cardOfDemons            = new City("CardOfDemons", 0, 28, 0, undefined,true),

@@ -19,31 +19,33 @@ class Player {
     }
 
     move() {
-        let before = this.field;
-        let x = 31 - before;
-        btn.disabled = true;
+        let fieldBeforeAnimationOfMove = this.field;    
+        const lastField = 31;
+        const firstField = 0;
+        let mathAlgorithm = lastField - fieldBeforeAnimationOfMove;        // There is my algorithm to calculate how much fields we need to the last field 
+        btn.disabled = true;            
         let playerAnimationOfMove = setInterval(() => {
-            if (this.field !== before + this.amountOfMoves) {
+            if (this.field !== fieldBeforeAnimationOfMove + this.amountOfMoves) {       //  Moving player untill end of movement
                 this.field++;
-                if (this.field > 31) {
-                    this.field = 0;
+                if (this.field > lastField) {  // After last field (31) we go to the start (0)
+                    this.field = firstField;
                 }
-                if (this.field == 0) {
-                    before = 0;
-                    this.amountOfMoves = this.amountOfMoves - x - 1;
+                if (this.field == firstField) {
+                    fieldBeforeAnimationOfMove = firstField;
+                    this.amountOfMoves = this.amountOfMoves - mathAlgorithm - 1; 
                 }
                 map.allLands[this.field].appendChild(this.img);
-            } else {
+            } else {    
                 clearInterval(playerAnimationOfMove);
-                if (this.field == jail) {
-                    this.jail = true;
-                }
                 this.endOfMoveAnimation();
             }
         }, 300);
     }
 
     endOfMoveAnimation() {
+        if (this.field == jail) { 
+            this.jail = true;
+        }
         game.gameMechanism(this);
     }
 

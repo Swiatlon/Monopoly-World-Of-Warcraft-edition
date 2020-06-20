@@ -1,25 +1,24 @@
 class Cube {
   constructor() {
-    this.lastThrows = [];
+    this.lastThrows = []; //We need this variable to repeat the animation if throw = lastThrow
     this.cubes = this.getCubes();
   }
 
   getNumberRandom(max, min) {
-    let firstThrown = Math.floor(Math.random() * (7 - 1) + 1); //7 -max  1 -min
-    let secondThrown = Math.floor(Math.random() * (7 - 1) + 1);
+    let firstThrown = Math.floor(Math.random() * (max - min) + min); 
+    let secondThrown = Math.floor(Math.random() * (max - min) + min);
     if (firstThrown == secondThrown) {
       doublet = true;
     } else {
       doublet = false;
     }
     if (this.lastThrows[0] !== firstThrown) {
-      // flaga do animacji kostki zeby nie powtarzalo funkcji na koncu animacji
-      this.animationOfCube(firstThrown, this.cubes[0]);
+      this.animationOfCube(firstThrown, this.cubes[0]); 
     } else {
-      flag = false; // Animacja resetujaca nie wywoluje funkcji 
+      flag = false; // Reseting Animation if thrown = last thrown.
       this.animationOfCube(10, this.cubes[0]);
       setTimeout(() => {
-        flag = true; // Animacja  kiedy  juz  jest numer ktory powinien byc.Kostka sie juz nie kreci
+        flag = true; // Correct Animation after the reseting animation.
         this.animationOfCube(firstThrown, this.cubes[0]);
       }, 1005);
     }
@@ -33,7 +32,7 @@ class Cube {
     }
     this.lastThrows.push(firstThrown);
     this.lastThrows.push(secondThrown);
-    if (this.lastThrows.length > 2) {
+    if (this.lastThrows.length > 2) {  // Not more than 2 throws in array
       this.lastThrows.splice(0, 2);
     }
     if (playerQueue > game.players.length - 1) {
