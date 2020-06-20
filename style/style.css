@@ -248,14 +248,18 @@ body {
 }
 
 .roll-dice-button {
-  width: 130px;
-  height: 55.5px;
+  width: 200px;
+  height: 90px;
   justify-self: center;
   align-self: center;
   margin-bottom: 50px;
-  background: #df9a05a6;
-  border: none;
-  font-size: 32px;
+  background-image: linear-gradient(rgba(230, 188, 5, 0.918), orange);
+  border: 1px solid black;
+  border-radius: 28px;
+  text-align: center;
+  font-size: 28px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .information-about-players-container {
