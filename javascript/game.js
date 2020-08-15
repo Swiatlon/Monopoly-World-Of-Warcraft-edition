@@ -4,6 +4,7 @@ let doublet = true;
 let flag = true;
 let NumberOfShowingPlayerQueue = 0;
 
+
 class Game {
   constructor() {
     this.players = [];
@@ -24,10 +25,9 @@ class Game {
 
   gameMechanism(thisPlayer) {
     // console.log('GRACZ -->', thisPlayer);
-    const emptyFieldWithoutOwner = Cities[thisPlayer.field].ownerOfField === undefined && Cities[thisPlayer.field].specialField !== true ;
-    const playerField = Cities[thisPlayer.field].ownerOfField === thisPlayer && Cities[thisPlayer.field].specialField === false;
-    const otherPlayerField = Cities[thisPlayer.field].ownerOfField !== thisPlayer && Cities[thisPlayer.field].specialField !== true;
-    // const Event
+    let emptyFieldWithoutOwner = Cities[thisPlayer.field].ownerOfField === undefined && Cities[thisPlayer.field].specialField !== true ;
+    let playerField = Cities[thisPlayer.field].ownerOfField === thisPlayer && Cities[thisPlayer.field].specialField === false;
+    let otherPlayerField = Cities[thisPlayer.field].ownerOfField !== thisPlayer && Cities[thisPlayer.field].specialField !== true;
     switch(true) {
       case emptyFieldWithoutOwner:
         map.showingDivs(containerOfBuyingHouses);
@@ -36,7 +36,7 @@ class Game {
         }
         this.listenerHowMuchHouses(thisPlayer);
         break
-      case playerField:
+      case playerField: // my field
         map.showingDivs(containerOfBuyingHouses);
         for (let i = 0; i < Cities[thisPlayer.field].houses + 1; i++) { // Functions which disabled buying houses that we have
           checkboxesCounterOfHouses[i].checked = true;
@@ -45,7 +45,7 @@ class Game {
         break
       case otherPlayerField: 
         let multiplierMoney;
-        switch (Cities[thisPlayer.field].houses) {
+        switch (Cities[thisPlayer.field].houses) { // tribute * multiplierMoney 
           case -1:
             multiplierMoney = 1;
             break;
@@ -77,7 +77,30 @@ class Game {
       break
     case thisPlayer.field == jail:
       console.log('WIEZIENIE');
-      map.showingDivs(containerOfJailCommunicate);
+      console.log(thisPlayer.jail);
+      if(thisPlayer.jail == false){
+        map.showingDivs(containerOfJailCommunicate);
+        thisPlayer.counterOfStayingInJail = 3;
+        thisPlayer.jail = true;
+        setTimeout(function() {
+          map.showingDivs(jailChooseOptionBox);
+        },1900);
+      } else {
+          map.showingDivs(jailChooseOptionBox);   
+          thisPlayer.counterOfStayingInJail --;
+          if (thisPlayer.counterOfStayingInJail == 0){
+            thisPlayer.jail = false;
+          }
+      }
+      
+      console.log('[LICZNIK SIEDZENIA NA DUPIE GRACZA]',thisPlayer.counterOfStayingInJail );
+      
+     
+
+     
+      
+      //Wyswietla okienko ze trafiles do wiezienia chyba ze juz sie jest w wiezeniu
+      //Wyswietla okno z opcja wydania golda na wyjscie z wiezienia, uzycia karty , zrobienia doubletu
       break
     case Cities[thisPlayer.field].specialField === true :  
       console.log('Special Places')
@@ -85,6 +108,7 @@ class Game {
     default:
     }
     btn.disabled = false;
+    // gameStatus = false;
   }
 
   randomNum() {
@@ -162,8 +186,14 @@ class Game {
     thisPlayer.cities += Cities[thisPlayer.field].fieldName;
     console.log(thisPlayer.cities);
     map.hidingDivs(containerOfBuyingHouses);
+    movementStatus = false;
+    btn.disabled = false;
+    console.log('[end after buy]', movementStatus);
     map.showingDivs(containerOfPlayerWhoHasMovement);
   }
+
+  
+
 }
 
 function createPlayer(name, color) {
@@ -174,37 +204,69 @@ function createPlayer(name, color) {
 
 const animated = cube.getCubes()[0];
 
-animated.addEventListener('transitionend', function () {
+animated.addEventListener('transitionend', function  ()  {
   if (flag === true) { // cube.js  26 -linia  flaga zeby tylko raz wykonywala sie  funkcja od animacji
-    if (doublet == true) {
-      NumberOfShowingPlayerQueue = playerQueue;
-      setTimeout(function () {
-        map.showingDivs(containerOfDoublet);
+    if(game.players[playerQueue].jail === false){
+      game.players[playerQueue].amountOfMoves = cube.lastThrows[0] + cube.lastThrows[1];  // first cube + Second cube
+      if (doublet == true) {
+        NumberOfShowingPlayerQueue = playerQueue;
         setTimeout(function () {
-          game.sequenceOfMove();
-        }, 500) // set timeout of  start animation when  div hide away.
-      }, 700); // set timeout for 0.5 sec for user look on cubes  and know he have a doublet.  
-    } else {
-      NumberOfShowingPlayerQueue++
-      game.sequenceOfMove();
-      btn.disabled = true;
-    }
+          map.showingDivs(containerOfDoublet);
+          setTimeout(function () {
+            game.sequenceOfMove();
+          }, 500) // set timeout of  start animation when  div hide away.
+         }, 700); // set timeout for 0.5 sec for user look on cubes  and know he have a doublet.  
+      } else {
+        NumberOfShowingPlayerQueue++
+        game.sequenceOfMove();
+        btn.disabled = true;
+        }
+    } else {   
+      game.players[playerQueue].amountOfMoves = 0;
+      game.gameMechanism(game.players[playerQueue]);  // --> Get into game mechanism and go to switch jail option
+      }
   }
-  // IF WIEZIENIE
 });
-
+// setInterval(function(),czas)
 btn.addEventListener("click", () => {
   btn.disabled = true;
   if (doublet == false) {
     playerQueue++;
   }
+  // if (actualPlayer.jail === false){
+
+  // }
   cube.getNumberRandom(7, 1); //7 -max  1 -min
+  // console.log('[end in click]', movementStatus);
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
+doubletOption.addEventListener('click',function(){
+ console.log("ROBIE DUBLET !");
+});
+jailStayOption.addEventListener('click',function(){
+  console.log('ZOSTAJE W WIEZIENIU');
+  map.hidingDivs(jailChooseOptionBox);
+});
+paying300gOption.addEventListener('click',function(player){
+  if( game.players[playerQueue].money >= 300){
+    game.players[playerQueue].money -= 300;
+    game.players[playerQueue].jail  = false; 
+    game.players[playerQueue].counterOfStayingInJail = 0;
+    map.hidingDivs(jailChooseOptionBox);
+    map.visualAmountOfMoney(game.players[playerQueue]);
+    console.log('PLACE 300 G'); 
+  } else {
+    textShowingWhenPlayerDontHaveMoney.style = 'display:block !important';
+    console.log('Nie masz tyle pieniedzy');
+  }
+  //TRZEBA ZROBIC ZEBY USUWALO TEN NAPIS
+  
+});
 
 const game = new Game();
+
 game.initiatePlayers();
-game.whoIsFirst()
+game.whoIsFirst();
 map.sortAllLands();
 map.appendPlayersOnMap();
 map.showingDivs(containerOfPlayerWhoHasMovement);
@@ -218,7 +280,7 @@ for (let i = 0; i < 4; i++) {
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ (Trzeba zrobic zeby wykonywalo sie zawsze na koncu ruchu ?)
 // KOLEJNOSC GRACZY +++ 
-// WIEZIENIE I KARTY I EVENT ---
+// WIEZIENIE I KARTY I EVENT +---
 // PLACENIE GRACZOM +++
 // POSTAWIANIE DOMKOW +++
 // MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +++
