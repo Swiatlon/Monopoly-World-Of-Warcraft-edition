@@ -1,18 +1,28 @@
-.container-choose-element {
-    width: 500px;
-    height: 300px;
-    background-image: url("../images/world-of-warcraft-classic-raid-uhdpaper.com-4K-3.990-wp.thumbnail.jpg");
-    background-position: right;
-    opacity: 0.95;
-    transform-style: preserve-3d;
-    perspective: 100px;
-    position: absolute;
-    left: 35%;
-    top: 30%;
+.container-choose-option-jail {
+    height: 100%;
+    background-image: url("../images/Choose-option-jail.png");
+    background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
+    /* background-image: linear-gradient(141deg, #dd9208 0%, #f1cf0c 51%, #ecc309 75%); */
     color: white;
-    display: none;
+    grid-template-rows: 30% 25% 25%;
+    display: none;   
+    align-items: flex-end;
+}
+.container-choose-option-jail p{
+    display: inline;
+    font-size: 24px;
+}
+.text-showing-if-player-dont-have-money{
+    color: red;
+    display: none !important;
+    font-size: 18px;
+}
+.string-element{
+    text-shadow: 2px 2px 10px #000000; 
+    display: inline;
+    cursor: pointer;
+
 }
 
 .container-if-field-is-buyed {
@@ -37,6 +47,7 @@
     text-align: center;
     margin-top: 20px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .container-buttons {
