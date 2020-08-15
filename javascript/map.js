@@ -4,9 +4,16 @@ const containerOfEvents = document.querySelector('.container-of-events');
 // const chooseBoxNoBtn = document.querySelector('.No-button');                   
 // const ifBuyedField = document.querySelector('.containerIfFieldIsBuyed');
 // const jail = document.querySelector('.jail');
+const jailChooseOptionBox = document.querySelector('.container-choose-option-jail');
+const doubletOption = document.querySelector('#doublet-option');
+const jailStayOption = document.querySelector('#jail-stay-option');
+const paying300gOption = document.querySelector('#paying-300g-option');
+const textShowingWhenPlayerDontHaveMoney = document.querySelector('.text-showing-if-player-dont-have-money');
+
 const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
 const imageOfPlayerWhoHasMovement = document.querySelector('.image-of-player-who-has-movement');
 const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue p');
+
 const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
 const buyingHouseImage = document.querySelector('.house');
 const checkboxesCounterOfHouses = [...document.querySelectorAll('.checkboxes')];
@@ -56,10 +63,10 @@ class Map {
   showingDivs(div) {
     div.style.display = "grid";
     switch(div){
-      case containerOfBuyingHouses:
+      case containerOfBuyingHouses : case jailChooseOptionBox:
         containerOfEvents.style.display = "grid";
         break
-      case containerOfDoublet:     //-----> Doublet
+      case containerOfDoublet: case containerOfJailCommunicate:      //-----> Doublet
         setTimeout(function() { // Poczatek animacji
           containerOfEvents.style.opacity = 1;
           containerOfEvents.style.display = "grid";
@@ -90,20 +97,6 @@ class Map {
               div.style.display = "none";
             },500);
           }, 2000);
-        }, 0);
-        break;
-      case containerOfJailCommunicate:
-        setTimeout(function() { // Poczatek animacji
-        containerOfEvents.style.opacity = 1;
-        containerOfEvents.style.display = "grid";
-        setTimeout(function() {    // 2sekundy animacji
-          containerOfEvents.style.opacity = 0;
-          setTimeout(function() {    // Koniec animacji 
-            containerOfEvents.style.opacity = 1;
-            containerOfEvents.style.display = "none";
-            div.style.display = "none";
-            },500);
-          }, 1000);
         }, 0);
         break;
       default:
