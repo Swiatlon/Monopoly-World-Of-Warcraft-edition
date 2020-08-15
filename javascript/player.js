@@ -16,6 +16,7 @@ class Player {
         this.img.src = this.image;
         this.img.style.zIndex = '1';
         this.img.style.position = "Relative";
+        this.counterOfStayingInJail = 0;
     }
 
     move() {
@@ -43,9 +44,6 @@ class Player {
     }
 
     endOfMoveAnimation() {
-        if (this.field == jail) { 
-            this.jail = true;
-        }
         game.gameMechanism(this);
     }
 
