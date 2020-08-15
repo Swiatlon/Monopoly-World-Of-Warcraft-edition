@@ -5,8 +5,10 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
-    let firstThrown = Math.floor(Math.random() * (max - min) + min); 
-    let secondThrown = Math.floor(Math.random() * (max - min) + min);
+    // let firstThrown = Math.floor(Math.random() * (max - min) + min); 
+    // let secondThrown = Math.floor(Math.random() * (max - min) + min);
+    let firstThrown = 5;
+    let secondThrown = 3;
     if (firstThrown == secondThrown) {
       doublet = true;
     } else {
@@ -37,8 +39,7 @@ class Cube {
     }
     if (playerQueue > game.players.length - 1) {
       playerQueue = 0;
-    }
-    game.players[playerQueue].amountOfMoves = firstThrown + secondThrown;
+    }  
   }
 
   animationOfCube(number, cube) {
