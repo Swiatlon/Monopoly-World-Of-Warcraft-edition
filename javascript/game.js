@@ -77,20 +77,21 @@ class Game {
       break
     case thisPlayer.field == jail:
       console.log('WIEZIENIE');
-      console.log(thisPlayer.jail);
       if(thisPlayer.jail == false){
         map.showingDivs(containerOfJailCommunicate);
         thisPlayer.counterOfStayingInJail = 3;
         thisPlayer.jail = true;
         setTimeout(function() {
           map.showingDivs(jailChooseOptionBox);
-        },1900);
+        },1510);
       } else {
-          map.showingDivs(jailChooseOptionBox);   
-          thisPlayer.counterOfStayingInJail --;
           if (thisPlayer.counterOfStayingInJail == 0){
             thisPlayer.jail = false;
+          } else {
+            map.showingDivs(jailChooseOptionBox);   
+            thisPlayer.counterOfStayingInJail --;
           }
+         
       }
       
       console.log('[LICZNIK SIEDZENIA NA DUPIE GRACZA]',thisPlayer.counterOfStayingInJail );
@@ -186,9 +187,7 @@ class Game {
     thisPlayer.cities += Cities[thisPlayer.field].fieldName;
     console.log(thisPlayer.cities);
     map.hidingDivs(containerOfBuyingHouses);
-    movementStatus = false;
     btn.disabled = false;
-    console.log('[end after buy]', movementStatus);
     map.showingDivs(containerOfPlayerWhoHasMovement);
   }
 
@@ -221,27 +220,38 @@ animated.addEventListener('transitionend', function  ()  {
         game.sequenceOfMove();
         btn.disabled = true;
         }
-    } else {   
+        // <--------There is if's statements for jail----------->
+    } else if( game.players[playerQueue].jail === true && game.players[playerQueue].tryingDoublet === false) {   
       game.players[playerQueue].amountOfMoves = 0;
       game.gameMechanism(game.players[playerQueue]);  // --> Get into game mechanism and go to switch jail option
+      }
+      else if (game.players[playerQueue].jail === true && game.players[playerQueue].tryingDoublet === true){
+        console.log('[GRacz wykonuje dublet]',game.players[playerQueue]);
+        if(doublet == true){
+          game.players[playerQueue].counterOfStayingInJail = 0;
+          game.gameMechanism(game.players[playerQueue]);
+        }else {
+          btn.disabled = false; 
+        }
+        game.players[playerQueue].tryingDoublet = false;
       }
   }
 });
 // setInterval(function(),czas)
 btn.addEventListener("click", () => {
   btn.disabled = true;
-  if (doublet == false) {
+  if (doublet == false && game.players[playerQueue].tryingDoublet == false) {
     playerQueue++;
   }
-  // if (actualPlayer.jail === false){
 
-  // }
   cube.getNumberRandom(7, 1); //7 -max  1 -min
   // console.log('[end in click]', movementStatus);
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
 doubletOption.addEventListener('click',function(){
  console.log("ROBIE DUBLET !");
+ map.hidingDivs(jailChooseOptionBox);
+ game.players[playerQueue].tryingDoublet = true;
 });
 jailStayOption.addEventListener('click',function(){
   console.log('ZOSTAJE W WIEZIENIU');
@@ -250,7 +260,7 @@ jailStayOption.addEventListener('click',function(){
 paying300gOption.addEventListener('click',function(player){
   if( game.players[playerQueue].money >= 300){
     game.players[playerQueue].money -= 300;
-    game.players[playerQueue].jail  = false; 
+    game.players[playerQueue].jail = false; 
     game.players[playerQueue].counterOfStayingInJail = 0;
     map.hidingDivs(jailChooseOptionBox);
     map.visualAmountOfMoney(game.players[playerQueue]);
