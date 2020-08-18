@@ -17,6 +17,7 @@ class Player {
         this.img.style.zIndex = '1';
         this.img.style.position = "Relative";
         this.counterOfStayingInJail = 0;
+        this.tryingDoublet = false;
     }
 
     move() {
