@@ -31,10 +31,9 @@ class Game {
     switch(true) {
       case emptyFieldWithoutOwner:
         map.showingDivs(containerOfBuyingHouses);
-        for (let i = 1; i < 6; i++) { // Function which disabled buying houses before buyed a field 
-          checkboxesCounterOfHouses[i].disabled = true;
-        }
+        checkboxesCounterOfHouses[5].disabled = true; // Function which disabled buying hotel before buyed a field 
         this.listenerHowMuchHouses(thisPlayer);
+        map.enteringThePriceOfBuildings();
         break
       case playerField: // my field
         map.showingDivs(containerOfBuyingHouses);
@@ -42,6 +41,7 @@ class Game {
           checkboxesCounterOfHouses[i].checked = true;
         }
         this.listenerHowMuchHouses(thisPlayer);
+        map.enteringThePriceOfBuildings();
         break
       case otherPlayerField: 
         let multiplierMoney;
@@ -91,25 +91,16 @@ class Game {
             map.showingDivs(jailChooseOptionBox);   
             thisPlayer.counterOfStayingInJail --;
           }
-         
       }
-      
       console.log('[LICZNIK SIEDZENIA NA DUPIE GRACZA]',thisPlayer.counterOfStayingInJail );
-      
-     
-
-     
-      
-      //Wyswietla okienko ze trafiles do wiezienia chyba ze juz sie jest w wiezeniu
-      //Wyswietla okno z opcja wydania golda na wyjscie z wiezienia, uzycia karty , zrobienia doubletu
-      break
+  
+      break;
     case Cities[thisPlayer.field].specialField === true :  
       console.log('Special Places')
       break;
     default:
     }
     btn.disabled = false;
-    // gameStatus = false;
   }
 
   randomNum() {
@@ -164,15 +155,16 @@ class Game {
   }
 
   buyingHouses(thisPlayer) {
-    if (Cities[thisPlayer.field].houses === -1) { // Field is empty
-      console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
-      console.log('[KOSZT POLA]', Cities[thisPlayer.field].costOfTheField);
-      console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
-      console.log('[ILOSC DOMKOW]', playerPick);
-      console.log('[MATEMATYKA]', ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick)));
-      thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick));
-      console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
-    } else if (Cities[thisPlayer.field].houses > -1) {
+    if(playerPick !== undefined){
+      if (Cities[thisPlayer.field].houses === -1) { // Field is empty
+        console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
+        console.log('[KOSZT POLA]', Cities[thisPlayer.field].costOfTheField);
+        console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
+        console.log('[ILOSC DOMKOW]', playerPick);
+        console.log('[MATEMATYKA]', ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick)));
+        thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick));
+        console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
+      } else if (Cities[thisPlayer.field].houses > -1) {
         console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
         console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
         console.log('[ILOSC DOMKOW JUZ NA POLU]', Cities[thisPlayer.field].houses);
@@ -180,19 +172,22 @@ class Game {
         thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
         console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
     }
-    map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
-    map.visualAmountOfMoney(thisPlayer);
-    Cities[thisPlayer.field].houses = playerPick;
-    Cities[thisPlayer.field].ownerOfField = thisPlayer;
-    thisPlayer.cities += Cities[thisPlayer.field].fieldName;
-    console.log(thisPlayer.cities);
-    map.hidingDivs(containerOfBuyingHouses);
-    btn.disabled = false;
-    map.showingDivs(containerOfPlayerWhoHasMovement);
+      map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
+      map.visualAmountOfMoney(thisPlayer);
+      Cities[thisPlayer.field].houses = playerPick;
+      Cities[thisPlayer.field].ownerOfField = thisPlayer;
+      thisPlayer.cities += Cities[thisPlayer.field].fieldName;
+      console.log(thisPlayer.cities);
+      map.hidingDivs(containerOfBuyingHouses);
+      btn.disabled = false;
+      map.showingDivs(containerOfPlayerWhoHasMovement);
+    } else {
+      map.hidingDivs(containerOfBuyingHouses);
+      btn.disabled = false;
+      map.showingDivs(containerOfPlayerWhoHasMovement);
+    }
   }
-
   
-
 }
 
 function createPlayer(name, color) {
@@ -204,7 +199,7 @@ function createPlayer(name, color) {
 const animated = cube.getCubes()[0];
 
 animated.addEventListener('transitionend', function  ()  {
-  if (flag === true) { // cube.js  26 -linia  flaga zeby tylko raz wykonywala sie  funkcja od animacji
+  if (flag === true) { // cube.js  26th line  flage only one times execute
     if(game.players[playerQueue].jail === false){
       game.players[playerQueue].amountOfMoves = cube.lastThrows[0] + cube.lastThrows[1];  // first cube + Second cube
       if (doublet == true) {
@@ -280,6 +275,7 @@ game.whoIsFirst();
 map.sortAllLands();
 map.appendPlayersOnMap();
 map.showingDivs(containerOfPlayerWhoHasMovement);
+// map.showingDivs(containerOfBuyingHouses); 
 for (let i = 0; i < 4; i++) {
   console.log('GRACZ:', game.players[i]);
 }
