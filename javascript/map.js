@@ -1,9 +1,5 @@
 const containerOfEvents = document.querySelector('.container-of-events');
-// const chooseBox = document.querySelector('.container-choose-element');                 This Elements I will use in future
-// const chooseBoxYesBtn = document.querySelector('.Yes-button');
-// const chooseBoxNoBtn = document.querySelector('.No-button');                   
-// const ifBuyedField = document.querySelector('.containerIfFieldIsBuyed');
-// const jail = document.querySelector('.jail');
+
 const jailChooseOptionBox = document.querySelector('.container-choose-option-jail');
 const doubletOption = document.querySelector('#doublet-option');
 const jailStayOption = document.querySelector('#jail-stay-option');
@@ -16,8 +12,18 @@ const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-
 
 const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
 const buyingHouseImage = document.querySelector('.house');
+const arrayOfHousesCosts = [
+  costOf0house = document.querySelector('.cost-of-0house'),
+  costOf1house = document.querySelector('.cost-of-1house'),
+  costOf2house = document.querySelector('.cost-of-2house'),
+  costOf3house = document.querySelector('.cost-of-3house'),
+  costOf4house = document.querySelector('.cost-of-4house'),
+  costOf5house = document.querySelector('.cost-of-5house'),
+]
 const checkboxesCounterOfHouses = [...document.querySelectorAll('.checkboxes')];
 const buyingButton =  document.querySelector('.buying-button');
+const exit = document.querySelector('.exit') ;
+
 const containerOfDoublet = document.querySelector('.container-of-doublet');
 const containerOfJailCommunicate = document.querySelector('.container-of-jail')
 const arrayOfPlayersMoney = [
@@ -109,6 +115,16 @@ class Map {
 
   visualAmountOfMoney(thisPlayer) {
     arrayOfPlayersMoney[thisPlayer.id - 1].textContent = "Money: " + thisPlayer.money;    // od 0 sie zacyznaja id a tablica od 1  dlatego -1
+  }
+
+  enteringThePriceOfBuildings(){
+    for(let i = 0 ; i <= 5; i++){
+      if(Cities[game.players[playerQueue].field].houses  > -1){
+        arrayOfHousesCosts[i].textContent = Cities[game.players[playerQueue].field].costOfOneHouse *i;
+      } else {
+        arrayOfHousesCosts[i].textContent = Cities[game.players[playerQueue].field].costOfOneHouse *i + Cities[game.players[playerQueue].field].costOfTheField;
+      }
+    }
   }
 }
 
