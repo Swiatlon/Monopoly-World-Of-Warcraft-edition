@@ -53,32 +53,23 @@
   justify-self: center;
 }
 
-.buying-button {
-  width: 120px;
-  height: 70px;
-  background: rgba(4, 146, 228, 0.445);
-  border-radius: 10px;
-  border: 1px solid gray;
-  margin-bottom: 20px;
-  color: white;
-  font-size: 18px;
-  text-align: center;
-  cursor: pointer;
-}
-
 .box-of-buying-houses-right-side-container {
   display: grid;
   height: 85%;
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-rows: auto;
   font-size: 22px;
   align-items: center;
 }
 
 .right-side-first-div-information {
   display: grid;
-  padding-top: 30px;
   grid-template-columns: 15% 50% auto;
   text-align: left;
+}
+.exit{
+  justify-self: end;
+  padding-right: 20px;
+  cursor: pointer;
 }
 
 .right-side-build-and-price-divs {
@@ -90,6 +81,19 @@
 .right-side-build-and-price-divs input {
   width: 25px;
   height: 25px;
+}
+
+.buying-button {
+  width: 120px;
+  height: 70px;
+  background: rgba(4, 146, 228, 0.445);
+  border-radius: 10px;
+  border: 1px solid gray;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .container-of-player-queue {
