@@ -1,5 +1,6 @@
 const containerOfEvents = document.querySelector('.container-of-events');
 
+const containerOfJailCommunicate = document.querySelector('.container-of-jail');
 const jailChooseOptionBox = document.querySelector('.container-choose-option-jail');
 const doubletOption = document.querySelector('#doublet-option');
 const jailStayOption = document.querySelector('#jail-stay-option');
@@ -12,20 +13,15 @@ const nameOfPlayerWhoHasMovement = document.querySelector('.container-of-player-
 
 const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
 const buyingHouseImage = document.querySelector('.house');
-const arrayOfHousesCosts = [
-  costOf0house = document.querySelector('.cost-of-0house'),
-  costOf1house = document.querySelector('.cost-of-1house'),
-  costOf2house = document.querySelector('.cost-of-2house'),
-  costOf3house = document.querySelector('.cost-of-3house'),
-  costOf4house = document.querySelector('.cost-of-4house'),
-  costOf5house = document.querySelector('.cost-of-5house'),
-]
+const arrayOfHousesCosts = [...document.querySelectorAll('.cost-of-house')];
 const checkboxesCounterOfHouses = [...document.querySelectorAll('.checkboxes')];
 const buyingButton =  document.querySelector('.buying-button');
 const exit = document.querySelector('.exit') ;
 
 const containerOfDoublet = document.querySelector('.container-of-doublet');
-const containerOfJailCommunicate = document.querySelector('.container-of-jail')
+
+const arrayOfTributeFields = [...document.querySelectorAll('.javascript-sort-variable')];
+
 const arrayOfPlayersMoney = [
   playerFirstOnMapMoney = document.querySelector('.player-first-money'),
   playerSecondOnMapMoney = document.querySelector('.player-second-money'),
@@ -49,9 +45,26 @@ class Map {
     ];
   }
 
-  sortAllLands() {
-    this.allLands.sort(function(a, b) {
-      return a.className - b.className;
+  sortElements(element) {
+    let result;
+    element.sort(function(a, b) {
+      if (element == arrayOfTributeFields) {
+        if(a.parentElement.className == "tribute"){
+          a = a.parentElement.parentElement.className
+        } else {
+          a = a.parentElement.className
+        }
+
+        if(b.parentElement.className == "tribute"){
+          b = b.parentElement.parentElement.className
+        } else {
+          b = b.parentElement.className
+        }
+        result =  a - b ;
+      } else {
+        result = a.className - b.className;
+      }
+    return result ;
     });
   }
 
@@ -109,20 +122,25 @@ class Map {
     }
   }
 
-  enteringTheNamesOfThePlayers(thisPlayer) {
-    arraysOfPlayersName[thisPlayer.id - 1].textContent = thisPlayer.nameOfPlayer;   
+  showTheActualTributeOfField(actualPlayer){
+    console.log('this',actualPlayer);
+    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute + Cities[actualPlayer.field].costOfOneHouse  *  Cities[actualPlayer.field].houses ;
   }
 
-  visualAmountOfMoney(thisPlayer) {
-    arrayOfPlayersMoney[thisPlayer.id - 1].textContent = "Money: " + thisPlayer.money;    // od 0 sie zacyznaja id a tablica od 1  dlatego -1
+  enteringTheNamesOfThePlayers(player) {
+    arraysOfPlayersName[player.id - 1].textContent = player.nameOfPlayer;   
   }
 
-  enteringThePriceOfBuildings(){
+  visualAmountOfMoney(player) {
+    arrayOfPlayersMoney[player.id - 1].textContent = "Money: " + player.money;    // od 0 sie zacyznaja id a tablica od 1  dlatego -1
+  }
+
+  enteringThePriceOfBuildings(actualPlayer){
     for(let i = 0 ; i <= 5; i++){
-      if(Cities[game.players[playerQueue].field].houses  > -1){
-        arrayOfHousesCosts[i].textContent = Cities[game.players[playerQueue].field].costOfOneHouse *i;
+      if(Cities[actualPlayer.field].houses  > -1){
+        arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse *i;
       } else {
-        arrayOfHousesCosts[i].textContent = Cities[game.players[playerQueue].field].costOfOneHouse *i + Cities[game.players[playerQueue].field].costOfTheField;
+        arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse *i + Cities[actualPlayer.field].costOfTheField;
       }
     }
   }
@@ -130,3 +148,4 @@ class Map {
 
 const map = new Map();
 const jail = 8;
+
