@@ -14,7 +14,7 @@ class Game {
     const playersName = ["Wiercik", "Mateusz", "Michas", "Wojtini"];
     const playersColors = ["Red", "Blue", "Green", "Yellow"];
     for (let i = 0; i < playersName.length; i++) {
-      createPlayer(playersName[i], playersColors[i]); // dodawanie graczy  i ustawienie ich kolorów
+      createPlayer(playersName[i], playersColors[i]); // adding players and giving colors
       map.enteringTheNamesOfThePlayers(game.players[i]);
     }
   }
@@ -28,21 +28,25 @@ class Game {
     let emptyFieldWithoutOwner = Cities[thisPlayer.field].ownerOfField === undefined && Cities[thisPlayer.field].specialField !== true ;
     let playerField = Cities[thisPlayer.field].ownerOfField === thisPlayer && Cities[thisPlayer.field].specialField === false;
     let otherPlayerField = Cities[thisPlayer.field].ownerOfField !== thisPlayer && Cities[thisPlayer.field].specialField !== true;
+    let harbors = Cities[thisPlayer.field].specialField === undefined; // Orgrimar,Stormwind etc.
     switch(true) {
       case emptyFieldWithoutOwner:
         map.showingDivs(containerOfBuyingHouses);
         checkboxesCounterOfHouses[5].disabled = true; // Function which disabled buying hotel before buyed a field 
         this.listenerHowMuchHouses(thisPlayer);
-        map.enteringThePriceOfBuildings();
-        break
+        if(harbors){
+          for(let i = 1; i < checkboxesCounterOfHouses.length; i ++){
+            checkboxesCounterOfHouses[i].disabled = true;
+          }
+        }
+        break;
       case playerField: // my field
         map.showingDivs(containerOfBuyingHouses);
         for (let i = 0; i < Cities[thisPlayer.field].houses + 1; i++) { // Functions which disabled buying houses that we have
           checkboxesCounterOfHouses[i].checked = true;
         }
         this.listenerHowMuchHouses(thisPlayer);
-        map.enteringThePriceOfBuildings();
-        break
+        break;
       case otherPlayerField: 
         let multiplierMoney;
         switch (Cities[thisPlayer.field].houses) { // tribute * multiplierMoney 
@@ -83,17 +87,16 @@ class Game {
         thisPlayer.jail = true;
         setTimeout(function() {
           map.showingDivs(jailChooseOptionBox);
-        },1510);
+        }, 1510);
       } else {
-          if (thisPlayer.counterOfStayingInJail == 0){
+        if (thisPlayer.counterOfStayingInJail == 0){
             thisPlayer.jail = false;
-          } else {
-            map.showingDivs(jailChooseOptionBox);   
-            thisPlayer.counterOfStayingInJail --;
-          }
+        } else {
+          map.showingDivs(jailChooseOptionBox);   
+          thisPlayer.counterOfStayingInJail --;
+        }
       }
-      console.log('[LICZNIK SIEDZENIA NA DUPIE GRACZA]',thisPlayer.counterOfStayingInJail );
-  
+      console.log('[LICZNIK SIEDZENIA W WIEZIENIU GRACZA]',thisPlayer.counterOfStayingInJail );
       break;
     case Cities[thisPlayer.field].specialField === true :  
       console.log('Special Places')
@@ -138,6 +141,7 @@ class Game {
   }
   
   listenerHowMuchHouses(thisPlayer) {
+    map.enteringThePriceOfBuildings(thisPlayer);
     let amountOfHouses = Cities[thisPlayer.field].houses + 1;
     for (let i = amountOfHouses; i < checkboxesCounterOfHouses.length; i++) {
       checkboxesCounterOfHouses[i].addEventListener('click', function () {
@@ -186,6 +190,7 @@ class Game {
       btn.disabled = false;
       map.showingDivs(containerOfPlayerWhoHasMovement);
     }
+    map.showTheActualTributeOfField(thisPlayer);
   }
   
 }
@@ -225,7 +230,7 @@ animated.addEventListener('transitionend', function  ()  {
         if(doublet == true){
           game.players[playerQueue].counterOfStayingInJail = 0;
           game.gameMechanism(game.players[playerQueue]);
-        }else {
+        } else {
           btn.disabled = false; 
         }
         game.players[playerQueue].tryingDoublet = false;
@@ -272,19 +277,22 @@ const game = new Game();
 
 game.initiatePlayers();
 game.whoIsFirst();
-map.sortAllLands();
+map.sortElements(map.allLands);
+map.sortElements(arrayOfTributeFields);
 map.appendPlayersOnMap();
 map.showingDivs(containerOfPlayerWhoHasMovement);
 // map.showingDivs(containerOfBuyingHouses); 
+
 for (let i = 0; i < 4; i++) {
   console.log('GRACZ:', game.players[i]);
 }
+// console.log(arrayOfTributeFields[2].parentElement.parentElement);
 // for(let i = 0 ; i <12 ;i++){
 //   Cities[i].ownerOfField = game.players[0];
-//   Cities[i].houses = 0;
+//   // Cities[i].houses = 0;
 // }
 // RUCH GRACZA +++ 
-// DIV Z INFORMACJA KTO WYKONUJE RUCH +++ (Trzeba zrobic zeby wykonywalo sie zawsze na koncu ruchu ?)
+// DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
 // KOLEJNOSC GRACZY +++ 
 // WIEZIENIE I KARTY I EVENT +---
 // PLACENIE GRACZOM +++
