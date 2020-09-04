@@ -17,6 +17,10 @@ const arrayOfHousesCosts = [...document.querySelectorAll('.cost-of-house')];
 const checkboxesCounterOfHouses = [...document.querySelectorAll('.checkboxes')];
 const buyingButton =  document.querySelector('.buying-button');
 const exit = document.querySelector('.exit') ;
+const containerIfDontHaveMoney = document.querySelector('.container-choose-option-if-do-not-have-money');
+const sellingBuildings = document.querySelector('.selling-buildings');
+const surrenderString = document.querySelector('.surrender-string');
+const arrayOfSellingFieldsCosts = [...document.querySelectorAll('.javascript-sort-second-variable')];
 
 const containerOfDoublet = document.querySelector('.container-of-doublet');
 
@@ -38,31 +42,19 @@ const arraysOfPlayersName = [
 class Map {
   constructor() {
     this.allLands = [
-      ...document.querySelectorAll(".board__eastern-kingdom-container div"),
-      ...document.querySelectorAll(".board__kalimdor-container div"),
-      ...document.querySelectorAll(".board__outland-container div"),
-      ...document.querySelectorAll(".board__northrend-container div")
+      ...document.querySelectorAll(".field"),
     ];
   }
 
   sortElements(element) {
     let result;
     element.sort(function(a, b) {
-      if (element == arrayOfTributeFields) {
-        if(a.parentElement.className == "tribute"){
-          a = a.parentElement.parentElement.className
-        } else {
-          a = a.parentElement.className
-        }
-
-        if(b.parentElement.className == "tribute"){
-          b = b.parentElement.parentElement.className
-        } else {
-          b = b.parentElement.className
-        }
-        result =  a - b ;
+      if (element == map.allLands) {
+        result = a.classList[0] - b.classList[0];
       } else {
-        result = a.className - b.className;
+        a = a.offsetParent;
+        b = b.offsetParent;
+        result = a.classList[0] - b.classList[0];
       }
     return result ;
     });
@@ -70,7 +62,7 @@ class Map {
 
   appendPlayersOnMap() {
     for (let i = 0; i < game.players.length; i++) {
-      this.allLands[game.players[i].field].appendChild(game.players[i].img);
+      this.allLands[game.players[i].field].children[0].appendChild(game.players[i].img);
     }
   }
 
@@ -82,7 +74,7 @@ class Map {
   showingDivs(div) {
     div.style.display = "grid";
     switch(div){
-      case containerOfBuyingHouses : case jailChooseOptionBox:
+      case containerOfBuyingHouses : case jailChooseOptionBox : case containerIfDontHaveMoney : 
         containerOfEvents.style.display = "grid";
         break
       case containerOfDoublet: case containerOfJailCommunicate:      //-----> Doublet
@@ -100,7 +92,7 @@ class Map {
         }, 0);
         break
       case containerOfPlayerWhoHasMovement:     //-----> Ruch gracza
-        if (NumberOfShowingPlayerQueue == 4) {
+        if (NumberOfShowingPlayerQueue == game.players.length) {
           NumberOfShowingPlayerQueue = 0;
         }
         setTimeout(function() { // Poczatek animacji
@@ -128,7 +120,7 @@ class Map {
   }
 
   enteringTheNamesOfThePlayers(player) {
-    arraysOfPlayersName[player.id - 1].textContent = player.nameOfPlayer;   
+    arraysOfPlayersName[player.id - 1].textContent = player.nameOfPlayer ;   
   }
 
   visualAmountOfMoney(player) {
@@ -145,7 +137,6 @@ class Map {
     }
   }
 }
-
 const map = new Map();
 const jail = 8;
 
