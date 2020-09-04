@@ -28,17 +28,21 @@ class Game {
     let emptyFieldWithoutOwner = Cities[thisPlayer.field].ownerOfField === undefined && Cities[thisPlayer.field].specialField !== true ;
     let playerField = Cities[thisPlayer.field].ownerOfField === thisPlayer && Cities[thisPlayer.field].specialField === false;
     let otherPlayerField = Cities[thisPlayer.field].ownerOfField !== thisPlayer && Cities[thisPlayer.field].specialField !== true;
-    let harbors = Cities[thisPlayer.field].specialField === undefined; // Orgrimar,Stormwind etc.
+    let capital = Cities[thisPlayer.field].specialField === undefined; // Orgrimar,Stormwind etc.
     switch(true) {
       case emptyFieldWithoutOwner:
-        map.showingDivs(containerOfBuyingHouses);
-        checkboxesCounterOfHouses[5].disabled = true; // Function which disabled buying hotel before buyed a field 
-        this.listenerHowMuchHouses(thisPlayer);
-        if(harbors){
+        checkboxesCounterOfHouses[5].disabled = true;// Function which disabled buying hotel before buyed a field 
+        if(capital){
           for(let i = 1; i < checkboxesCounterOfHouses.length; i ++){
             checkboxesCounterOfHouses[i].disabled = true;
           }
+        }else{
+          for(let i = 0; i < checkboxesCounterOfHouses.length-1; i ++){
+            checkboxesCounterOfHouses[i].disabled = false;
+          }
         }
+        map.showingDivs(containerOfBuyingHouses);
+        this.listenerHowMuchHouses(thisPlayer);
         break;
       case playerField: // my field
         map.showingDivs(containerOfBuyingHouses);
@@ -73,11 +77,17 @@ class Game {
             break;
           default:    
       }
-      thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
-      Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
-      map.visualAmountOfMoney(thisPlayer);
-      map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
-      map.showingDivs(containerOfPlayerWhoHasMovement);   
+      if(thisPlayer.money < Cities[thisPlayer.field].tribute * multiplierMoney ){
+        console.log('[Masz za malo pieniedzy zeby zaplacic]' );
+        map.showingDivs(containerIfDontHaveMoney);
+        
+      } else{
+        thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
+        Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
+        map.visualAmountOfMoney(thisPlayer);
+        map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
+        map.showingDivs(containerOfPlayerWhoHasMovement); 
+      }  
       break
     case thisPlayer.field == jail:
       console.log('WIEZIENIE');
@@ -151,7 +161,9 @@ class Game {
         playerPick = checkboxesCounterOfHouses[i];
         playerPick.checked = true;
         playerPick = Number(playerPick.id);
-        buyingHouseImage.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
+        if(playerPick != 0){
+          buyingHouseImage.src = `images/${thisPlayer.color}${playerPick}HOUSES.png`;
+        }
         return playerPick;
       })
     }
@@ -160,40 +172,72 @@ class Game {
 
   buyingHouses(thisPlayer) {
     if(playerPick !== undefined){
-      if (Cities[thisPlayer.field].houses === -1) { // Field is empty
-        console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
-        console.log('[KOSZT POLA]', Cities[thisPlayer.field].costOfTheField);
-        console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
-        console.log('[ILOSC DOMKOW]', playerPick);
-        console.log('[MATEMATYKA]', ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick)));
-        thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick));
-        console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
-      } else if (Cities[thisPlayer.field].houses > -1) {
-        console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
-        console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
-        console.log('[ILOSC DOMKOW JUZ NA POLU]', Cities[thisPlayer.field].houses);
-        console.log('[ILOSC DOMKOW KTORE KUPUJESZ]', playerPick);
-        thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
-        console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
-    }
-      map.allLands[thisPlayer.field].firstElementChild.firstElementChild.src = `images/(${thisPlayer.color})${playerPick}Houses.png`;
-      map.visualAmountOfMoney(thisPlayer);
-      Cities[thisPlayer.field].houses = playerPick;
-      Cities[thisPlayer.field].ownerOfField = thisPlayer;
-      thisPlayer.cities += Cities[thisPlayer.field].fieldName;
-      console.log(thisPlayer.cities);
-      map.hidingDivs(containerOfBuyingHouses);
-      btn.disabled = false;
-      map.showingDivs(containerOfPlayerWhoHasMovement);
+      let requirement;
+      if(Cities[thisPlayer.field].ownerOfField !== thisPlayer){
+        requirement = ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick));   // checking if player had this field to add cost of the field 
+      } else {
+        requirement =  (Cities[thisPlayer.field].costOfOneHouse * playerPick);
+      }
+      if(thisPlayer.money >= requirement ){
+        if (Cities[thisPlayer.field].houses === -1) { // Field is empty
+          console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
+          console.log('[KOSZT POLA]', Cities[thisPlayer.field].costOfTheField);
+          console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
+          console.log('[ILOSC DOMKOW]', playerPick);
+          console.log('[MATEMATYKA]', ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick)));
+          thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick));
+          console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
+        } else if (Cities[thisPlayer.field].houses > -1) {
+          console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
+          console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
+          console.log('[ILOSC DOMKOW JUZ NA POLU]', Cities[thisPlayer.field].houses);
+          console.log('[ILOSC DOMKOW KTORE KUPUJESZ]', playerPick);
+          thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
+          console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
+         }
+         if(playerPick === 0){
+          map.allLands[thisPlayer.field].style.border = `2px solid ${thisPlayer.color}`
+         } else {
+          map.allLands[thisPlayer.field].children[1].firstElementChild.firstElementChild.src = `images/${thisPlayer.color}${playerPick}Houses.png`;
+          map.allLands[thisPlayer.field].children[1].firstElementChild.firstElementChild.style.display = "initial";
+          map.allLands[thisPlayer.field].style.border = `2px solid ${thisPlayer.color}`
+         }
+        map.visualAmountOfMoney(thisPlayer);
+        Cities[thisPlayer.field].houses = playerPick;
+        Cities[thisPlayer.field].ownerOfField = thisPlayer;
+        thisPlayer.cities += Cities[thisPlayer.field].fieldName;
+        console.log(thisPlayer.cities);
+        map.hidingDivs(containerOfBuyingHouses);
+        btn.disabled = false;
+        map.showingDivs(containerOfPlayerWhoHasMovement);
+        map.showTheActualTributeOfField(thisPlayer);
+        textShowingWhenPlayerDontHaveMoney.style = 'display:none !important';//  Setting starting value at the end of buying
+        checkboxesCounterOfHouses[playerPick].checked = false;
+        playerPick = undefined;              // --||--
+      } else {
+        textShowingWhenPlayerDontHaveMoney.style = 'display:block !important';
+        console.log('MASZ ZA MALO PIENIEDZY');
+      }
     } else {
       map.hidingDivs(containerOfBuyingHouses);
       btn.disabled = false;
       map.showingDivs(containerOfPlayerWhoHasMovement);
     }
-    map.showTheActualTributeOfField(thisPlayer);
+  }
+
+  surrenderOption(thisPlayer){ 
+    for(let i = 0 ; i < Cities.length; i ++){
+      if(Cities[i].ownerOfField === thisPlayer){
+        map.allLands[i].style.border = 'solid blue 3px';
+        arrayOfSellingFieldsCosts[i].style.display = 'grid';  
+        arrayOfSellingFieldsCosts[i].textContent = (Cities[i].costOfTheField + Cities[i].costOfOneHouse* Cities[i].houses)/2;
+      }
+    }
+    map.hidingDivs(containerIfDontHaveMoney);
+    }
+   
   }
   
-}
 
 function createPlayer(name, color) {
   let position = game.players.length + 1;
@@ -248,6 +292,7 @@ btn.addEventListener("click", () => {
   // console.log('[end in click]', movementStatus);
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
+surrenderString.addEventListener('click', () => game.surrenderOption(game.players[playerQueue]));
 doubletOption.addEventListener('click',function(){
  console.log("ROBIE DUBLET !");
  map.hidingDivs(jailChooseOptionBox);
@@ -269,27 +314,37 @@ paying300gOption.addEventListener('click',function(player){
     textShowingWhenPlayerDontHaveMoney.style = 'display:block !important';
     console.log('Nie masz tyle pieniedzy');
   }
-  //TRZEBA ZROBIC ZEBY USUWALO TEN NAPIS
   
 });
+
 
 const game = new Game();
 
 game.initiatePlayers();
 game.whoIsFirst();
 map.sortElements(map.allLands);
-map.sortElements(arrayOfTributeFields);
+// map.sortElements(arrayOfSellingFieldsCosts);
 map.appendPlayersOnMap();
 map.showingDivs(containerOfPlayerWhoHasMovement);
+// map.showingDivs(containerOfPlayerWhoHasMovement)
+// map.showingDivs(containerIfDontHaveMoney);
 // map.showingDivs(containerOfBuyingHouses); 
-
+map.sortElements(arrayOfTributeFields);
+// console.log(arrayOfTributeFields);
+// console.log(arrayOfTributeFields[0].offsetParent);
 for (let i = 0; i < 4; i++) {
   console.log('GRACZ:', game.players[i]);
 }
 // console.log(arrayOfTributeFields[2].parentElement.parentElement);
 // for(let i = 0 ; i <12 ;i++){
 //   Cities[i].ownerOfField = game.players[0];
-//   // Cities[i].houses = 0;
+//   Cities[i].houses = 4;
+//   game.players[0].cities.push( Cities[i].fieldName); 
+// }
+// for(let i = 13 ; i < 16 ;i++){
+//   Cities[i].ownerOfField = game.players[1];
+//   Cities[i].houses = 4;
+//   game.players[1].cities.push( Cities[i].fieldName); 
 // }
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
