@@ -11,11 +11,15 @@ class Player {
         this.color = color;
         this.jail = false;
         this.img = document.createElement("img");
-        this.img.width = 60;
+        this.img.width =60;
         this.img.height = 60;
         this.img.src = this.image;
+        this.img.style.marginLeft = "auto";
+        this.img.style.marginRight = "auto";
         this.img.style.zIndex = '1';
         this.img.style.position = "Relative";
+        this.img.style.transform =  " rotate3d(0, 1, 0.5, 0.4rad)";
+        // this.img.style.opacity = "0.7";
         this.counterOfStayingInJail = 0;
         this.tryingDoublet = false;
     }
@@ -36,7 +40,7 @@ class Player {
                     fieldBeforeAnimationOfMove = firstField;
                     this.amountOfMoves = this.amountOfMoves - mathAlgorithm - 1; 
                 }
-                map.allLands[this.field].appendChild(this.img);
+                map.allLands[this.field].children[0].appendChild(this.img);
             } else {    
                 clearInterval(playerAnimationOfMove);
                 this.endOfMoveAnimation();
