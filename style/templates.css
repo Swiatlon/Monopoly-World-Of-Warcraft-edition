@@ -101,7 +101,7 @@
   background-image: url("../images/Races.jpg");
   background-position: center;
   background-size: cover;
-  display: grid;
+  display: none;
   grid-template-rows: 10% 20% 50%;
   align-items: center;
   justify-items: center;
@@ -153,6 +153,27 @@
   font-size: 32px;
   text-align: center;
   align-self: center;
+}
+
+.container-choose-option-if-do-not-have-money{
+  height: 100%;
+  background: rgb(51, 49, 49);
+  display: none; 
+  grid-template-rows: 2,1fr;
+  align-items: center;
+}
+.selling-field-value{
+  height: 100%;
+  position: absolute;
+  display: none;
+  justify-self: center;
+  align-items: center;
+  font-size: 32px;
+  color: lightblue
+}
+.container-choose-option-if-do-not-have-money p{
+  font-size: 24px;
+  cursor: pointer;
 }
 
 @-webkit-keyframes rotation {
