@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="style/cube.css" />
   <link rel="stylesheet" href="style/choose.css" />
   <link rel="stylesheet" href="style/templates.css" />
+  <link rel="stylesheet" href="style/board.css">
   <script defer src="javascript/cities.js"></script>
   <script defer src="javascript/cube.js"></script>
   <script defer src="javascript/player.js"></script>
@@ -59,126 +60,140 @@
     <div class="board"> 
       <div class="board__kalimdor-container">
 
-        <div id="jail" class="8">
-          <p class="javascript-sort-variable">Wiezienie</p>
+        <div id="jail" class="8 field">
+          <div class="place-for-players"></div>
+          <p class="javascript-sort-variable">Więzienie</p>
+        </div>
+        
+        <div id="Durotar" class="9 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Durotar</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">250</p></div>
+          </div>
+        </div>
+        
+        <div id="Barrens" class="10 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>The Barrens</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">300</p></div>
+          </div>
         </div>
 
-        <div id="Durotar" class="9">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">250</p>
-          </span>
-          <p>Durotar</p>
+        <div id="Thousand_Needles" class="11 field ">
+          <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses"></div>
+              <div class="field-middle"><p>Thousand Needles</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">350</p></div>
+            </div>
         </div>
 
-        <div id="Barrens" class="10">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">300</p>
-          </span>
-          <p>The Barrens</p>
+        <div id="Card_Of_Horde" class="12 field">
+          <div class="place-for-players"></div>
+          <p class="javascript-sort-variable">Karta</p>
         </div>
 
-        <div id="Thousand_Needles" class="11">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">350</p>
-          </span>
-          <p>Thousand Needles</p>
+        <div id="Tanaris" class="13 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Tanaris</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">400</p></div>
+          </div>
         </div>
 
-        <div id="Card_Of_Horde" class="12"></span>
-          <p>KARTA</p>
-          <span class="tribute">
-            <p class="javascript-sort-variable"></p>
-          </span>
+        <div id="Orgrimmar" class="14 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information special-field-margin">
+            <div class="field-top"><img class="place-for-houses"></div>
+            <div class="field-middle"></div>
+            <div class="field-bottom"><p>Orgrimmar</p><p class="javascript-sort-variable">200</p></div>
+          </div>
         </div>
 
-        <div id="Tanaris" class="13">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">400</p>
-          </span>
-          <p>Tanaris</p>
+        <div id="Un_Goro" class="15 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Un Goro</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">500</p></div>
+          </div>
         </div>
 
-        <div id="Orgrimmar" class="14">
-          <span class="tribute">
-            <p class="javascript-sort-variable">200</p>
-          </span>
-          <p>Orgrimmar</p>
-        </div>
-
-        <div id="Un_Goro" class="15">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">500</p>
-          </span>
-          <p>Un'Goro</p>
-        </div>
-
-        <div id="Event" class="16">
-          <p>Event</p>
-          <p class="javascript-sort-variable"></p>
+        <div id="Event" class="16 field">
+          <div class="place-for-players"></div>
+          <p class="javascript-sort-variable">Event</p>
         </div>
       </div>
 
       <div class="board__center-container">
         <div class="board__eastern-kingdom-container">
 
-          <div id="Burning_Steppes" class="7">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">200</p>
-            </span>
-            <p>Burning Steppes</p>
+          <div id="Burning_Steppes" class="7 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses" ></div>
+              <div class="field-middle"><p>Burning Steppes</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">200</p></div>
+            </div>
           </div>
 
-          <div id="Hinterlands" class="6">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">175</p>
-            </span>
-            <p>The Hinterlands</p>
+          <div id="Hinterlands" class="6 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses" ></div>
+              <div class="field-middle"><p>Hinterlands</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">175</p></div>
+            </div>
           </div>
 
-          <div id="Stranglethorn" class="5">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">150</p>
-            </span>
-            <p>Northern Stranglethorn</p>
+          <div id="Stranglethorn" class="5 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses" ></div>
+              <div class="field-middle"><p>Northern Stranglethorn</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">150</p></div>
+            </div>
           </div>
 
-          <div id="Stormwind" class="4">
-            <span class="tribute">
-              <p class="javascript-sort-variable">200</p>
-            </span>
-            <p>Stormwind City</p>
+          <div id="Stormwind" class="4 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information special-field-margin">
+              <div class="field-top"><img class="place-for-houses" ></div>
+              <div class="field-middle"></div>
+              <div class="field-bottom"><p>Stormwind</p><p class="javascript-sort-variable">200</p></div>
+            </div>
           </div>
 
-          <div id="Hilsbrad" class="3">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">75</p>
-            </span>
-            <p>Hilsbrad Foothils</p>
+          <div id="Hilsbrad" class="3 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses" ></div>
+              <div class="field-middle"><p>Hillsbrad Foothills</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">75</p></div>
+            </div>
           </div>
 
-          <div id="Westfall" class="2">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">50</p>
-            </span>
-            <p>Westfall</p>
+          <div id="Westfall" class="2 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses" ></div>
+              <div class="field-middle"><p>Westfall</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">50</p></div>
+            </div>
           </div>
 
-          <div id="Elwynn" class="1">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">25</p>
-            </span>
-            <p>Elwynn Forest</p>
+          <div id="Elwynn" class="1 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses" ></div>
+              <div class="field-middle"><p>Elwynn Forest</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">25</p></div>
+            </div>
           </div>
         </div>
 
@@ -284,56 +299,63 @@
 
         <div class="board__outland-container">
 
-          <div id="Helfire" class="17">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">650</p>
-            </span>
-            <p>Helfire Peninsula</p>
+          <div id="Helfire" class="17 field ">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses"></div>
+              <div class="field-middle"><p>Helfire Peninsula</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">650</p></div>
+            </div>
           </div>
 
-          <div id="Zangramash" class="18">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">700</p>
-            </span>
-            <p>Zangramash</p>
+          <div id="Zangramash" class="18 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses"></div>
+              <div class="field-middle"><p>Zangramash</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">700</p></div>
+            </div>
           </div>
 
-          <div id="Shattrah" class="19">
-            <span class="tribute">
-              <p class="javascript-sort-variable">200</p>
-            </span>
-            <p>Shattrah City</p>
+          <div id="Shattrah" class="19 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information special-field-margin">
+              <div class="field-top"><img class="place-for-houses"></div>
+              <div class="field-middle"></div>
+              <div class="field-bottom"><p>Shattrah City</p><p class="javascript-sort-variable">200</p></div>
+            </div>
           </div>
 
-          <div id="CardOfAlliance" class="20">
-            <p>Karta</p>
-            <p class="javascript-sort-variable"></p>
+          <div id="CardOfAlliance" class="20 field">
+            <div class="place-for-players"></div>
+            <p class="javascript-sort-variable">Karta</p>
           </div>
 
-          <div id="Nagrand" class="21">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">750</p>
-            </span>
-            <p>NAGRAND</p>
+          <div id="Nagrand" class="21 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses"></div>
+              <div class="field-middle"><p>Nagrand</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">750</p></div>
+            </div>
           </div>
 
-          <div id="Netherstorm" class="22">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">800</p>
-            </span>
-            <p>Netherstorm</p>
+          <div id="Netherstorm" class="22 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses"></div>
+              <div class="field-middle"><p>Netherstorm</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">800</p></div>
+            </div>
           </div>
 
-          <div id="Shadowmoon" class="23">
-            <span class="tribute">
-              <img class="place-for-houses" src="data:," alt>
-              <p class="javascript-sort-variable">850</p>
-            </span>
-            <p>Shadowmoon Valley</p>
+          <div id="Shadowmoon" class="23 field">
+            <div class="place-for-players"></div>
+            <div class="place-for-house-and-information">
+              <div class="field-top"> <img class="place-for-houses"></div>
+              <div class="field-middle"><p>Shadowmoon Valley</p></div>
+              <div class="field-bottom"><p class="javascript-sort-variable">850</p></div>
+            </div>
           </div>
 
         </div>
@@ -341,66 +363,73 @@
      
       <div class="board__northrend-container">
 
-        <div id="start" class="0">
+        <div id="start" class="0 field">
+          <div class="place-for-players"></div>
           <p class="javascript-sort-variable">START</p>
         </div>
 
-        <div id="Icecrown" class="31">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">1200</p>
-          </span>
-          <p>Icecrown</p>
+        <div id="Icecrown" class="31 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Icecrown</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">1200</p></div>
+          </div>
         </div>
 
-        <div id="Storm_Peaks" class="30">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">1100</p>
-          </span>
-          <p>Storm Peaks</p>
+        <div id="Storm_Peaks" class="30 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Storm Peaks</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">1100</p></div>
+          </div>
         </div>
 
-        <div id="Zul_Drak" class="29">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">1050</p>
-          </span>
-          <p>Zul Drak</p>
+        <div id="Zul_Drak" class="29 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Zul Drak</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">1050</p></div>
+          </div>
         </div>
 
-        <div id="Card_Of_Demons" class="28">
-          <p>KARTA</p>
-          <span class="tribute">
-            <p class="javascript-sort-variable"></p>
-          </span>
+        <div id="Card_Of_Demons" class="28 field">
+          <div class="place-for-players"></div>
+          <p class="javascript-sort-variable">Karta</p>
         </div>
         
-        <div id="Grizzly" class="27">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">1000</p>
-          </span>
-          <p>Grizzly Hills</p>
+        <div id="Grizzly" class="27 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Grizzly</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">1000</p></div>
+          </div>
         </div>
 
-        <div id="Borean" class="26">
-          <span class="tribute">
-            <img class="place-for-houses" src="data:," alt>
-            <p class="javascript-sort-variable">950</p>
-          </span>
-          <p>Borean Tundra</p>
+        <div id="Borean" class="26 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information">
+            <div class="field-top"> <img class="place-for-houses"></div>
+            <div class="field-middle"><p>Borean Tundra</p></div>
+            <div class="field-bottom"><p class="javascript-sort-variable">950</p></div>
+          </div>
         </div>
 
-        <div id="Dalaran" class="25">
-          <span class="tribute">
-            <p class="javascript-sort-variable">200</p>
-          </span>
-          <p>Dalaran</p>
+        <div id="Dalaran" class="25 field">
+          <div class="place-for-players"></div>
+          <div class="place-for-house-and-information special-field-margin">
+            <div class="field-top"><img class="place-for-houses"></div>
+            <div class="field-middle"></div>
+            <div class="field-bottom"><p>Dalaran</p><p class="javascript-sort-variable">200</p></div>
+          </div>
         </div>
 
-        <div id="Teleport" class="24">
-          <p>TELEPORT OD MAGA</p>
+        <div id="Teleport" class="24 field">
+          <div class="place-for-players"></div>
+          <p class="javascript-sort-variable">Teleport od maga</p>
         </div>
 
       </div>
@@ -412,7 +441,7 @@
         <div class="box-of-buying-houses">
           <div class="box-of-buying-houses-left-side-container">
             <div class="left-side-container-houses-box">
-             <span class="left-side-container-image"> <img class="house"  src="images/(Red)1Houses.png"></span>
+             <span class="left-side-container-image"> <img class="house"  src="images/Blue1HOUSES.png"></span>
             </div>
             <div class="left-side-container-button">
               <button class="buying-button">KUPUJE !</button>
@@ -429,6 +458,7 @@
             <div class="right-side-build-and-price-divs"><input type="radio" id="3" class="checkboxes"><p>3 Budynki</p><p class="cost-of-house">Koszt</p></div>
             <div class="right-side-build-and-price-divs"><input type="radio" id="4" class="checkboxes"><p>4 Budynki</p><p class="cost-of-house">Koszt</p></div>
             <div class="right-side-build-and-price-divs"><input type="radio" id="5" class="checkboxes"><p>Hotel</p><p class="cost-of-house">Koszt</p></div>
+            <p class="text-showing-if-player-dont-have-money">Nie masz aż tyle golda !</p>
           </div>
         </div>
      
@@ -451,6 +481,11 @@
           <div class="string-element" id="doublet-option"><p>🎲</p>Proboje zrobic dublet!<p>🎲</p></div>
           <div class="string-element" id="jail-stay-option"><p>🔒</p>Zostaje w wiezieniu !<p>🔒</p></div>
           <div class="string-element" id="paying-300g-option"><p>💰</p>Place 300 monet !<p>💰</p><p class="text-showing-if-player-dont-have-money">Nie masz aż tyle golda !</p></div>
+        </div>
+
+        <div class="container-choose-option-if-do-not-have-money">
+          <p class="selling-buildings">Sprzedaje budynki</p>
+          <p class="surrender-string">🏳️ poddaje sie 🏳️</p>
         </div>
 
       </div>
