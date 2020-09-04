@@ -162,7 +162,7 @@ class Game {
         playerPick.checked = true;
         playerPick = Number(playerPick.id);
         if(playerPick != 0){
-          buyingHouseImage.src = `images/${thisPlayer.color}${playerPick}HOUSES.png`;
+          buyingHouseImage.src = `images/${thisPlayer.color}${playerPick}Houses.png`;
         }
         return playerPick;
       })
