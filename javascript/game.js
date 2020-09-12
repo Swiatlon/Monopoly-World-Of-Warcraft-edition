@@ -1,4 +1,4 @@
-let playerQueue = 0;
+let playerQueue = 1;
 let playerPick;
 let doublet = true;
 let flag = true;
@@ -228,15 +228,34 @@ class Game {
   surrenderOption(thisPlayer){ 
     for(let i = 0 ; i < Cities.length; i ++){
       if(Cities[i].ownerOfField === thisPlayer){
+        let money = (Cities[i].costOfOneHouse * Cities[i].houses + Cities[i].costOfTheField)/2;
+        let marginTop = map.allLands[i].offsetTop;
+        let marginLeft = map.allLands[i].offsetLeft;
         map.allLands[i].style.border = 'solid blue 3px';
-        arrayOfSellingFieldsCosts[i].style.display = 'grid';  
-        arrayOfSellingFieldsCosts[i].textContent = (Cities[i].costOfTheField + Cities[i].costOfOneHouse* Cities[i].houses)/2;
+        map.creatingDivForSellingField(money,marginLeft,marginTop,i);
       }
     }
     map.hidingDivs(containerIfDontHaveMoney);
+    map.showingDivs(sellingBuildingsOption);
     }
-   
-  }
+
+    kickPlayer(){
+      this.deletingEverythingThatPlayerHad();
+      this.players.splice(playerQueue,1);
+    }
+
+    deletingEverythingThatPlayerHad(){
+      for(let i = 0 ; i < Cities.length; i ++){
+        if(Cities[i].ownerOfField === this.players[playerQueue]){
+          Cities[i].ownerOfField = undefined;
+          Cities[i].houses = -1;
+          map.allLands[i].children[1].firstElementChild.firstElementChild.src = "data:,";
+          map.allLands[i].children[1].firstElementChild.firstElementChild.style.display = "none";
+        }
+      }
+
+   }
+}  
   
 
 function createPlayer(name, color) {
@@ -292,7 +311,10 @@ btn.addEventListener("click", () => {
   // console.log('[end in click]', movementStatus);
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
-surrenderString.addEventListener('click', () => game.surrenderOption(game.players[playerQueue]));
+sellingBuildings.addEventListener('click', () => game.surrenderOption(game.players[playerQueue]));
+surrenderString.addEventListener('click',() => {
+  game.kickPlayer(), map.hidingDivs(containerIfDontHaveMoney)
+} );
 doubletOption.addEventListener('click',function(){
  console.log("ROBIE DUBLET !");
  map.hidingDivs(jailChooseOptionBox);
@@ -336,16 +358,17 @@ for (let i = 0; i < 4; i++) {
   console.log('GRACZ:', game.players[i]);
 }
 // console.log(arrayOfTributeFields[2].parentElement.parentElement);
-// for(let i = 0 ; i <12 ;i++){
-//   Cities[i].ownerOfField = game.players[0];
-//   Cities[i].houses = 4;
-//   game.players[0].cities.push( Cities[i].fieldName); 
-// }
-// for(let i = 13 ; i < 16 ;i++){
-//   Cities[i].ownerOfField = game.players[1];
-//   Cities[i].houses = 4;
-//   game.players[1].cities.push( Cities[i].fieldName); 
-// }
+for(let i = 4 ; i <12 ;i++){
+  Cities[i].ownerOfField = game.players[0];
+  Cities[i].houses = 4;
+  game.players[0].cities.push( Cities[i].fieldName); 
+}
+for(let i = 29 ; i < 31 ;i++){
+  Cities[i].ownerOfField = game.players[1];
+  Cities[i].houses = 4;
+  game.players[1].cities.push( Cities[i].fieldName); 
+}
+
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
 // KOLEJNOSC GRACZY +++ 
@@ -355,7 +378,7 @@ for (let i = 0; i < 4; i++) {
 // MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +++
 // KICKOWANIE GRACZA JESLI NIE MA PIENIEDZY ---
 // INTERFEJS GRACZY I KTO ILE MA PIENIEDZY +++
-// UJEMNY BILANS PIENIEDZY ---
+// UJEMNY BILANS PIENIEDZY +-+
 // LADNY WYGLAD +++ 
 // NAZEWNICTWO(POPRAWNE) ZMIENNYCH/FUNKCJI +++
 // POPRAWNOSC KODU +++(Pewnie się mylę ;)
