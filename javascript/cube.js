@@ -76,4 +76,4 @@ class Cube {
 }
 
 const cube = new Cube();
-const btn = document.querySelector("button");
+const btn = document.querySelector(".roll-dice-button");
