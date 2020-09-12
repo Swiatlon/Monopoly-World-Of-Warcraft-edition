@@ -79,4 +79,74 @@
     cursor: pointer;
     margin-top: 0px;
 }
-
+.container-of-selling-field{
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    height: 70px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background:white;
+    display: grid;
+    grid-template-columns: 20% auto;
+    align-items: center;
+    /* transform: rotate3d(900, 600, -700, -0.8turn);  */
+    /* transform: rotate3d(0,10,120, 0turn);  */
+    transform: rotate(45deg);
+    margin-top: -50px;
+    margin-left: 50px;
+}
+.container-of-selling-field::after{
+    content: "";
+    background:white;
+    position: absolute;
+    display: block;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    width: 24px;
+    height: 24px;
+    -webkit-transform: rotate(45deg);
+    margin-top: 70px;
+    margin-left: 25px;
+}
+.checkbox-in-selling-field{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    z-index: 1;
+}
+.selling-field-money{
+    z-index: 1;
+    margin-left: 10px;
+    font-size: 24px;
+    color: rgb(70, 88, 255);
+    text-align: center;
+}
+.container-if-do-not-have-money-selling-buildings-option{
+    /* display: none; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    z-index: 1;
+    align-items: center;
+    justify-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    background-image: url(/images/5.jpg);
+    background-position: center;
+    background-size: cover;
+    display: none;
+   
+}
+.container-if-do-not-have-money-selling-buildings-option button{
+   width: 240px;
+   height: 100px;
+   background-image: linear-gradient(rgba(230, 188, 5, 0.918), orange);
+   border: 1px solid black;
+   border-radius: 28px;
+   text-align: center;
+   font-size: 28px;
+   overflow: hidden;
+   cursor: pointer;
+}
