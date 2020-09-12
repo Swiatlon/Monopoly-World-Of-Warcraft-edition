@@ -7,7 +7,7 @@ class Player {
         this.image = "images/player" + position + ".png";
         this.positionInQueue = position;
         this.cities = [];
-        this.money = 3000;
+        this.money = 0;
         this.color = color;
         this.jail = false;
         this.img = document.createElement("img");
@@ -51,5 +51,6 @@ class Player {
     endOfMoveAnimation() {
         game.gameMechanism(this);
     }
+    
 
 }
