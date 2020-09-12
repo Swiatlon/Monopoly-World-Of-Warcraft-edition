@@ -1,5 +1,5 @@
 const containerOfEvents = document.querySelector('.container-of-events');
-
+const wrapper = document.querySelector('.wrapper');
 const containerOfJailCommunicate = document.querySelector('.container-of-jail');
 const jailChooseOptionBox = document.querySelector('.container-choose-option-jail');
 const doubletOption = document.querySelector('#doublet-option');
@@ -20,7 +20,8 @@ const exit = document.querySelector('.exit') ;
 const containerIfDontHaveMoney = document.querySelector('.container-choose-option-if-do-not-have-money');
 const sellingBuildings = document.querySelector('.selling-buildings');
 const surrenderString = document.querySelector('.surrender-string');
-const arrayOfSellingFieldsCosts = [...document.querySelectorAll('.javascript-sort-second-variable')];
+const sellingBuildingsOption = document.querySelector('.container-if-do-not-have-money-selling-buildings-option');
+const arrayOfSellingFieldsCosts = [];
 
 const containerOfDoublet = document.querySelector('.container-of-doublet');
 
@@ -74,9 +75,9 @@ class Map {
   showingDivs(div) {
     div.style.display = "grid";
     switch(div){
-      case containerOfBuyingHouses : case jailChooseOptionBox : case containerIfDontHaveMoney : 
-        containerOfEvents.style.display = "grid";
-        break
+      // case containerOfBuyingHouses : case jailChooseOptionBox : case containerIfDontHaveMoney : 
+      //   containerOfEvents.style.display = "grid";
+      //   break
       case containerOfDoublet: case containerOfJailCommunicate:      //-----> Doublet
         setTimeout(function() { // Poczatek animacji
           containerOfEvents.style.opacity = 1;
@@ -110,7 +111,11 @@ class Map {
           }, 2000);
         }, 0);
         break;
+      case sellingBuildingsOption:
+        div.style.display = "grid";
+        break; 
       default:
+        containerOfEvents.style.display = "grid";
     }
   }
 
@@ -136,6 +141,34 @@ class Map {
       }
     }
   }
+
+  creatingDivForSellingField(money,marginLeft,marginTop,field){
+    let div;
+    let text;
+    let input;
+    div = document.createElement("div");
+    div.classList.add("container-of-selling-field");
+    console.log(marginLeft);
+    console.log(marginTop);
+    // div.style.marginLeft = (marginLeft -100) + "px";
+    // div.style.marginTop = marginTop-80  + "px";
+    // div.style.marginTop = marginTop + 30 + 'px';
+    // div.style.marginLeft = marginLeft - 50 + 'px';
+    text = document.createElement("p");
+    text.classList.add("selling-field-money");
+    text.textContent = money;
+
+    input = document.createElement("input");
+    input.classList.add("checkbox-in-selling-field");
+    input.type = "checkbox";
+    div.appendChild(input);
+    div.appendChild(text);
+    console.log(div);
+    map.allLands[field].appendChild(div);
+    // wrapper.appendChild(div);
+
+  }
+ 
 }
 const map = new Map();
 const jail = 8;
