@@ -37,9 +37,6 @@ class Cube {
     if (this.lastThrows.length > 2) {  // Not more than 2 throws in array
       this.lastThrows.splice(0, 2);
     }
-    if (playerQueue > game.players.length - 1) {
-      playerQueue = 0;
-    }  
   }
 
   animationOfCube(number, cube) {
