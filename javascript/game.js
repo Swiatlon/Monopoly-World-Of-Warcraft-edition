@@ -1,8 +1,8 @@
-let playerQueue = 1;
+let playerQueue = 0;
 let playerPick;
 let doublet = true;
 let flag = true;
-let NumberOfShowingPlayerQueue = 0;
+let NumberOfShowingPlayerQueue ;
 
 
 class Game {
@@ -41,6 +41,7 @@ class Game {
             checkboxesCounterOfHouses[i].disabled = false;
           }
         }
+        textShowingWhenPlayerDontHaveMoney.style = 'display:none ';//  Setting starting value after  the end of buying
         map.showingDivs(containerOfBuyingHouses);
         this.listenerHowMuchHouses(thisPlayer);
         break;
@@ -99,14 +100,14 @@ class Game {
           map.showingDivs(jailChooseOptionBox);
         }, 1510);
       } else {
-        if (thisPlayer.counterOfStayingInJail == 0){
+        if (thisPlayer.counterOfStayingInJail <= 1){
             thisPlayer.jail = false;
         } else {
           map.showingDivs(jailChooseOptionBox);   
           thisPlayer.counterOfStayingInJail --;
         }
       }
-      console.log('[LICZNIK SIEDZENIA W WIEZIENIU GRACZA]',thisPlayer.counterOfStayingInJail );
+      console.log(`[LICZNIK SIEDZENIA W WIEZIENIU GRACZA] + ${thisPlayer.nameOfPlayer}`,thisPlayer.counterOfStayingInJail );
       break;
     case Cities[thisPlayer.field].specialField === true :  
       console.log('Special Places')
@@ -211,11 +212,10 @@ class Game {
         btn.disabled = false;
         map.showingDivs(containerOfPlayerWhoHasMovement);
         map.showTheActualTributeOfField(thisPlayer);
-        textShowingWhenPlayerDontHaveMoney.style = 'display:none !important';//  Setting starting value at the end of buying
         checkboxesCounterOfHouses[playerPick].checked = false;
         playerPick = undefined;              // --||--
       } else {
-        textShowingWhenPlayerDontHaveMoney.style = 'display:block !important';
+        textShowingWhenPlayerDontHaveMoney.style = 'display:block';
         console.log('MASZ ZA MALO PIENIEDZY');
       }
     } else {
@@ -235,13 +235,15 @@ class Game {
         map.creatingDivForSellingField(money,marginLeft,marginTop,i);
       }
     }
-    map.hidingDivs(containerIfDontHaveMoney);
-    map.showingDivs(sellingBuildingsOption);
+    map.showingDivs(containerIfDontHaveMoney);
     }
 
     kickPlayer(){
       this.deletingEverythingThatPlayerHad();
       this.players.splice(playerQueue,1);
+      map.hidingDivs(containerIfDontHaveMoney);
+      playerQueue--;
+      map.showingDivs(containerOfPlayerWhoHasMovement);
     }
 
     deletingEverythingThatPlayerHad(){
@@ -253,7 +255,21 @@ class Game {
           map.allLands[i].children[1].firstElementChild.firstElementChild.style.display = "none";
         }
       }
-
+      
+      for(let i = 0 ; i < map.allLands[this.players[playerQueue].field].children[0].children.length ; i++){
+        console.log('[first ]', map.allLands[this.players[playerQueue].field].children[0].children[i].imgIdentyficator );
+        console.log('[second]', game.players[playerQueue].nameOfPlayer);
+        
+        
+        if(map.allLands[this.players[playerQueue].field].children[0].children[i].imgIdentyficator == game.players[playerQueue].nameOfPlayer){
+          map.allLands[this.players[playerQueue].field].children[0].removeChild( map.allLands[this.players[playerQueue].field].children[0].children[i]);
+          console.log('[BYLEM]', );
+          
+        } 
+      }
+      doublet = false;
+      
+// == `images/player${this.players[playerQueue].id}`
    }
 }  
   
@@ -271,7 +287,6 @@ animated.addEventListener('transitionend', function  ()  {
     if(game.players[playerQueue].jail === false){
       game.players[playerQueue].amountOfMoves = cube.lastThrows[0] + cube.lastThrows[1];  // first cube + Second cube
       if (doublet == true) {
-        NumberOfShowingPlayerQueue = playerQueue;
         setTimeout(function () {
           map.showingDivs(containerOfDoublet);
           setTimeout(function () {
@@ -279,7 +294,6 @@ animated.addEventListener('transitionend', function  ()  {
           }, 500) // set timeout of  start animation when  div hide away.
          }, 700); // set timeout for 0.5 sec for user look on cubes  and know he have a doublet.  
       } else {
-        NumberOfShowingPlayerQueue++
         game.sequenceOfMove();
         btn.disabled = true;
         }
@@ -304,16 +318,19 @@ animated.addEventListener('transitionend', function  ()  {
 btn.addEventListener("click", () => {
   btn.disabled = true;
   if (doublet == false && game.players[playerQueue].tryingDoublet == false) {
-    playerQueue++;
+    playerQueue++;    
+    if (playerQueue > game.players.length - 1) {
+      playerQueue = 0;
+    }  
   }
-
-  cube.getNumberRandom(7, 1); //7 -max  1 -min
+  cube.getNumberRandom(7, 1); //6 -max  1 -min
   // console.log('[end in click]', movementStatus);
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
-sellingBuildings.addEventListener('click', () => game.surrenderOption(game.players[playerQueue]));
+// sellingBuildings.addEventListener('click', () => game.surrenderOption(game.players[playerQueue]));
+sellingBuildings.addEventListener('click', () =>map.hidingDivs(containerIfDontHaveMoney) );
 surrenderString.addEventListener('click',() => {
-  game.kickPlayer(), map.hidingDivs(containerIfDontHaveMoney)
+  game.kickPlayer()
 } );
 doubletOption.addEventListener('click',function(){
  console.log("ROBIE DUBLET !");
@@ -321,8 +338,8 @@ doubletOption.addEventListener('click',function(){
  game.players[playerQueue].tryingDoublet = true;
 });
 jailStayOption.addEventListener('click',function(){
-  console.log('ZOSTAJE W WIEZIENIU');
   map.hidingDivs(jailChooseOptionBox);
+  map.showingDivs(containerOfPlayerWhoHasMovement);
 });
 paying300gOption.addEventListener('click',function(player){
   if( game.players[playerQueue].money >= 300){
@@ -331,6 +348,7 @@ paying300gOption.addEventListener('click',function(player){
     game.players[playerQueue].counterOfStayingInJail = 0;
     map.hidingDivs(jailChooseOptionBox);
     map.visualAmountOfMoney(game.players[playerQueue]);
+    doublet = true; // there i  used the variable with doublet bcs it have the same work to do as creating new variable with tell that player has payed and must do a move 
     console.log('PLACE 300 G'); 
   } else {
     textShowingWhenPlayerDontHaveMoney.style = 'display:block !important';
@@ -348,7 +366,7 @@ map.sortElements(map.allLands);
 // map.sortElements(arrayOfSellingFieldsCosts);
 map.appendPlayersOnMap();
 map.showingDivs(containerOfPlayerWhoHasMovement);
-// map.showingDivs(containerOfPlayerWhoHasMovement)
+// map.showingDivs(containerIfDontHaveMoney);
 // map.showingDivs(containerIfDontHaveMoney);
 // map.showingDivs(containerOfBuyingHouses); 
 map.sortElements(arrayOfTributeFields);
@@ -368,7 +386,8 @@ for(let i = 29 ; i < 31 ;i++){
   Cities[i].houses = 4;
   game.players[1].cities.push( Cities[i].fieldName); 
 }
-
+game.players[0].field = 2;
+game.players[2].field = 3;
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
 // KOLEJNOSC GRACZY +++ 
@@ -376,9 +395,9 @@ for(let i = 29 ; i < 31 ;i++){
 // PLACENIE GRACZOM +++
 // POSTAWIANIE DOMKOW +++
 // MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +++
-// KICKOWANIE GRACZA JESLI NIE MA PIENIEDZY ---
+// KICKOWANIE GRACZA JESLI NIE MA PIENIEDZY +-+
 // INTERFEJS GRACZY I KTO ILE MA PIENIEDZY +++
-// UJEMNY BILANS PIENIEDZY +-+
+// UJEMNY BILANS PIENIEDZY +++
 // LADNY WYGLAD +++ 
 // NAZEWNICTWO(POPRAWNE) ZMIENNYCH/FUNKCJI +++
 // POPRAWNOSC KODU +++(Pewnie się mylę ;)
