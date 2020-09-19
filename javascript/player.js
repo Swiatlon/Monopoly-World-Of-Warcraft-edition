@@ -1,7 +1,7 @@
 class Player {
     constructor(nameOfPlayer, position, color) {
         this.nameOfPlayer = nameOfPlayer;
-        this.field = 0;
+        this.field = 1;
         this.amountOfMoves = 0;
         this.id = position;
         this.image = "images/player" + position + ".png";
@@ -19,6 +19,7 @@ class Player {
         this.img.style.zIndex = '1';
         this.img.style.position = "Relative";
         this.img.style.transform =  " rotate3d(0, 1, 0.5, 0.4rad)";
+        this.img.imgIdentyficator = this.nameOfPlayer;
         // this.img.style.opacity = "0.7";
         this.counterOfStayingInJail = 0;
         this.tryingDoublet = false;
