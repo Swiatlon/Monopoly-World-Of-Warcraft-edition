@@ -17,10 +17,9 @@ const arrayOfHousesCosts = [...document.querySelectorAll('.cost-of-house')];
 const checkboxesCounterOfHouses = [...document.querySelectorAll('.checkboxes')];
 const buyingButton =  document.querySelector('.buying-button');
 const exit = document.querySelector('.exit') ;
-const containerIfDontHaveMoney = document.querySelector('.container-choose-option-if-do-not-have-money');
 const sellingBuildings = document.querySelector('.selling-buildings');
 const surrenderString = document.querySelector('.surrender-string');
-const sellingBuildingsOption = document.querySelector('.container-if-do-not-have-money-selling-buildings-option');
+const containerIfDontHaveMoney = document.querySelector('.container-if-do-not-have-money-selling-buildings-option');
 const arrayOfSellingFieldsCosts = [];
 
 const containerOfDoublet = document.querySelector('.container-of-doublet');
@@ -88,15 +87,22 @@ class Map {
               containerOfEvents.style.opacity = 1;
               containerOfEvents.style.display = "none";
               div.style.display = "none";
-            },500);
+            },300);
           }, 1000);
         }, 0);
         break
       case containerOfPlayerWhoHasMovement:     //-----> Ruch gracza
-        if (NumberOfShowingPlayerQueue == game.players.length) {
-          NumberOfShowingPlayerQueue = 0;
-        }
         setTimeout(function() { // Poczatek animacji
+          console.log('[numberOfShowing]',NumberOfShowingPlayerQueue);
+          console.log('playerQu',playerQueue);
+          NumberOfShowingPlayerQueue = playerQueue;
+          if(doublet == false){
+            NumberOfShowingPlayerQueue++;
+            if(NumberOfShowingPlayerQueue >= game.players.length){
+              NumberOfShowingPlayerQueue = 0 ;
+            }
+          }
+          console.log('[numberOfShowing]',NumberOfShowingPlayerQueue);
           nameOfPlayerWhoHasMovement.textContent = game.players[NumberOfShowingPlayerQueue].nameOfPlayer;
           imageOfPlayerWhoHasMovement.src = game.players[NumberOfShowingPlayerQueue].image;
           containerOfEvents.style.opacity = 1;
@@ -111,7 +117,7 @@ class Map {
           }, 2000);
         }, 0);
         break;
-      case sellingBuildingsOption:
+      case containerIfDontHaveMoney:
         div.style.display = "grid";
         break; 
       default:
