@@ -7,7 +7,7 @@ class Player {
         this.image = "images/player" + position + ".png";
         this.positionInQueue = position;
         this.cities = [];
-        this.money = 0;
+        this.money = 100;
         this.color = color;
         this.jail = false;
         this.img = document.createElement("img");
