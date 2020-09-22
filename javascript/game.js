@@ -1,9 +1,10 @@
-let playerQueue = 0;
+
+let playerQueue = 1;
 let playerPick;
 let doublet = true;
 let flag = true;
 let NumberOfShowingPlayerQueue ;
-
+let array ;
 
 class Game {
   constructor() {
@@ -41,7 +42,7 @@ class Game {
             checkboxesCounterOfHouses[i].disabled = false;
           }
         }
-        textShowingWhenPlayerDontHaveMoney.style = 'display:none ';//  Setting starting value after  the end of buying
+        textShowingWhenPlayerDontHaveMoney.style = 'display:none ';//  Setting starting value(text if dont have money) after  the end of buying
         map.showingDivs(containerOfBuyingHouses);
         this.listenerHowMuchHouses(thisPlayer);
         break;
@@ -80,8 +81,33 @@ class Game {
       }
       if(thisPlayer.money < Cities[thisPlayer.field].tribute * multiplierMoney ){
         console.log('[Masz za malo pieniedzy zeby zaplacic]' );
+        this.showingWhichBuildingsPlayerCanSell(thisPlayer);
         map.showingDivs(containerIfDontHaveMoney);
-        
+        neededGoldInSellingBuildings.textContent = "Potrzebny gold: " + Cities[thisPlayer.field].tribute * multiplierMoney;
+        actualGoldInSellingBuildings.textContent = "Aktualny gold: " + thisPlayer.money;
+        array = [...document.querySelectorAll('.checkbox-in-selling-field')];
+        // const amountOfMoney;
+        let number = thisPlayer.money ;
+        console.log(number);
+        for(let i = 0; i < array.length; i++){
+          array[i].addEventListener('click',function(e){
+            console.log(e.target.checked);
+            if(e.target.checked == true){
+              number = number + Number(e.target.nextElementSibling.textContent);
+              actualGoldInSellingBuildings.textContent = `Aktualny gold: ${number}`;
+              console.log(Number(e.target.nextElementSibling.textContent))
+              
+            }else{
+              if(number < 0) {
+                number = 0;
+              }
+              number = number - Number(e.target.nextElementSibling.textContent);
+              actualGoldInSellingBuildings.textContent = `Aktualny gold: ${number}`;
+              console.log(Number(e.target.nextElementSibling.textContent))
+            }
+          })
+        }
+
       } else{
         thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
         Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
@@ -225,7 +251,7 @@ class Game {
     }
   }
 
-  surrenderOption(thisPlayer){ 
+  showingWhichBuildingsPlayerCanSell(thisPlayer){ 
     for(let i = 0 ; i < Cities.length; i ++){
       if(Cities[i].ownerOfField === thisPlayer){
         let money = (Cities[i].costOfOneHouse * Cities[i].houses + Cities[i].costOfTheField)/2;
@@ -235,7 +261,6 @@ class Game {
         map.creatingDivForSellingField(money,marginLeft,marginTop,i);
       }
     }
-    map.showingDivs(containerIfDontHaveMoney);
     }
 
     kickPlayer(){
@@ -259,18 +284,29 @@ class Game {
       for(let i = 0 ; i < map.allLands[this.players[playerQueue].field].children[0].children.length ; i++){
         console.log('[first ]', map.allLands[this.players[playerQueue].field].children[0].children[i].imgIdentyficator );
         console.log('[second]', game.players[playerQueue].nameOfPlayer);
-        
-        
         if(map.allLands[this.players[playerQueue].field].children[0].children[i].imgIdentyficator == game.players[playerQueue].nameOfPlayer){
           map.allLands[this.players[playerQueue].field].children[0].removeChild( map.allLands[this.players[playerQueue].field].children[0].children[i]);
           console.log('[BYLEM]', );
-          
         } 
       }
       doublet = false;
       
-// == `images/player${this.players[playerQueue].id}`
    }
+
+   sellingBuilding(){
+     for(let i = 0; i < array.length; i++){
+       if(array[i].checked === true){
+         let numberOfField = array[i].offsetParent.offsetParent.classList[0]
+        Cities[numberOfField].ownerOfField = undefined;
+        Cities[numberOfField].houses = -1;
+        map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.src = "data:,";
+        map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.style.display = "none";
+        map.allLands[numberOfField].style.border = "2px solid black";
+        map.allLands[numberOfField].lastElementChild.remove();
+       }
+     }
+   }
+
 }  
   
 
@@ -327,8 +363,10 @@ btn.addEventListener("click", () => {
   // console.log('[end in click]', movementStatus);
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
-// sellingBuildings.addEventListener('click', () => game.surrenderOption(game.players[playerQueue]));
-sellingBuildings.addEventListener('click', () =>map.hidingDivs(containerIfDontHaveMoney) );
+sellingBuildingsBtn.addEventListener('click', () => {
+    game.sellingBuilding();
+});
+// sellingBuildings.addEventListener('click', () =>map.hidingDivs(containerIfDontHaveMoney) );
 surrenderString.addEventListener('click',() => {
   game.kickPlayer()
 } );
@@ -374,6 +412,7 @@ map.sortElements(arrayOfTributeFields);
 // console.log(arrayOfTributeFields[0].offsetParent);
 for (let i = 0; i < 4; i++) {
   console.log('GRACZ:', game.players[i]);
+  map.visualAmountOfMoney(game.players[i]);
 }
 // console.log(arrayOfTributeFields[2].parentElement.parentElement);
 for(let i = 4 ; i <12 ;i++){
@@ -403,3 +442,7 @@ game.players[2].field = 3;
 // POPRAWNOSC KODU +++(Pewnie się mylę ;)
 // WIDOCZNOSC KTO MA POLE +++
 // DUBLET +++
+
+//Wyswietla z dymkami do wyboru
+//Klikniete pola zostaja sprzedane
+//
