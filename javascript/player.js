@@ -1,13 +1,13 @@
 class Player {
     constructor(nameOfPlayer, position, color) {
         this.nameOfPlayer = nameOfPlayer;
-        this.field = 1;
+        this.field = 0;
         this.amountOfMoves = 0;
         this.id = position;
         this.image = "images/player" + position + ".png";
         this.positionInQueue = position;
         this.cities = [];
-        this.money = 100;
+        this.money = 3000;
         this.color = color;
         this.jail = false;
         this.img = document.createElement("img");
