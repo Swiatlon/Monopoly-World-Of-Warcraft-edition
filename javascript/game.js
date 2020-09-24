@@ -5,6 +5,8 @@ let doublet = true;
 let flag = true;
 let NumberOfShowingPlayerQueue ;
 let array ;
+let multiplierMoney;
+let number;
 
 class Game {
   constructor() {
@@ -54,7 +56,6 @@ class Game {
         this.listenerHowMuchHouses(thisPlayer);
         break;
       case otherPlayerField: 
-        let multiplierMoney;
         switch (Cities[thisPlayer.field].houses) { // tribute * multiplierMoney 
           case -1:
             multiplierMoney = 1;
@@ -87,7 +88,7 @@ class Game {
         actualGoldInSellingBuildings.textContent = "Aktualny gold: " + thisPlayer.money;
         array = [...document.querySelectorAll('.checkbox-in-selling-field')];
         // const amountOfMoney;
-        let number = thisPlayer.money ;
+        number = thisPlayer.money ;
         console.log(number);
         for(let i = 0; i < array.length; i++){
           array[i].addEventListener('click',function(e){
@@ -115,7 +116,7 @@ class Game {
         map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
         map.showingDivs(containerOfPlayerWhoHasMovement); 
       }  
-      break
+      break;
     case thisPlayer.field == jail:
       console.log('WIEZIENIE');
       if(thisPlayer.jail == false){
@@ -136,7 +137,15 @@ class Game {
       console.log(`[LICZNIK SIEDZENIA W WIEZIENIU GRACZA] + ${thisPlayer.nameOfPlayer}`,thisPlayer.counterOfStayingInJail );
       break;
     case Cities[thisPlayer.field].specialField === true :  
-      console.log('Special Places')
+      if(thisPlayer.field == 24){
+        console.log("teleport od maga")
+      }
+      else if(thisPlayer.field == 16){
+        console.log("Event");
+      }
+      else if (thisPlayer.field == 12 || 20 || 28) {
+        console.log("karty specyjalne")
+      }
       break;
     default:
     }
@@ -293,20 +302,41 @@ class Game {
       
    }
 
-   sellingBuilding(){
-     for(let i = 0; i < array.length; i++){
-       if(array[i].checked === true){
-         let numberOfField = array[i].offsetParent.offsetParent.classList[0]
-        Cities[numberOfField].ownerOfField = undefined;
-        Cities[numberOfField].houses = -1;
-        map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.src = "data:,";
-        map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.style.display = "none";
-        map.allLands[numberOfField].style.border = "2px solid black";
-        map.allLands[numberOfField].lastElementChild.remove();
-       }
-     }
-   }
-
+   sellingBuilding(thisPlayer){
+     console.log(multiplierMoney);
+     if(number >= Cities[thisPlayer.field].tribute * multiplierMoney){
+      let numberOfField ;
+      for(let i = 0; i < array.length; i++){
+        if(array[i].checked === true){
+          for(let i = 0;  i < thisPlayer.cities.length; i++){
+            if(thisPlayer.cities[i] == Cities[numberOfField].fieldName){
+              thisPlayer.cities.splice(thisPlayer.cities[i],1);
+            } 
+          }
+          numberOfField = array[i].offsetParent.offsetParent.classList[0];
+          Cities[numberOfField].ownerOfField = undefined;
+          Cities[numberOfField].houses = -1;
+          map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.src = "data:,";
+          map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.style.display = "none";
+          map.allLands[numberOfField].style.border = "2px solid black";
+          map.allLands[numberOfField].lastElementChild.remove();
+        }
+        else{
+          numberOfField = array[i].offsetParent.offsetParent.classList[0]
+          map.allLands[numberOfField].lastElementChild.remove();
+        }
+      }
+      thisPlayer.money = number
+      thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
+      Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
+      map.visualAmountOfMoney(thisPlayer);
+      map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
+      map.hidingDivs(containerIfDontHaveMoney);
+      map.showingDivs(containerOfPlayerWhoHasMovement);  
+    } else{
+      throw 'too low amount of money !';
+    }
+  }
 }  
   
 
@@ -364,10 +394,19 @@ btn.addEventListener("click", () => {
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
 sellingBuildingsBtn.addEventListener('click', () => {
-    game.sellingBuilding();
+    game.sellingBuilding(game.players[playerQueue]);
 });
 // sellingBuildings.addEventListener('click', () =>map.hidingDivs(containerIfDontHaveMoney) );
 surrenderString.addEventListener('click',() => {
+  for(let i = 0; i <  array.length; i++){
+    numberOfField = array[i].offsetParent.offsetParent.classList[0];
+    Cities[numberOfField].ownerOfField = undefined;
+    Cities[numberOfField].houses = -1;
+    map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.src = "data:,";
+    map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.style.display = "none";
+    map.allLands[numberOfField].style.border = "2px solid black";
+    map.allLands[numberOfField].lastElementChild.remove(); // clean 
+  }
   game.kickPlayer()
 } );
 doubletOption.addEventListener('click',function(){
@@ -415,18 +454,7 @@ for (let i = 0; i < 4; i++) {
   map.visualAmountOfMoney(game.players[i]);
 }
 // console.log(arrayOfTributeFields[2].parentElement.parentElement);
-for(let i = 4 ; i <12 ;i++){
-  Cities[i].ownerOfField = game.players[0];
-  Cities[i].houses = 4;
-  game.players[0].cities.push( Cities[i].fieldName); 
-}
-for(let i = 29 ; i < 31 ;i++){
-  Cities[i].ownerOfField = game.players[1];
-  Cities[i].houses = 4;
-  game.players[1].cities.push( Cities[i].fieldName); 
-}
-game.players[0].field = 2;
-game.players[2].field = 3;
+
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
 // KOLEJNOSC GRACZY +++ 
