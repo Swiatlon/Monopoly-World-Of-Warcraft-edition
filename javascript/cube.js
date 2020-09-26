@@ -5,9 +5,10 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
+    btn.disabled = false;
     let firstThrown = Math.floor(Math.random() * (max - min) + min); 
     let secondThrown = Math.floor(Math.random() * (max - min) + min);
-    // let firstThrown = 4;
+    // let firstThrown = 3;
     // let secondThrown = 4;
     if (firstThrown == secondThrown) {
       doublet = true;
@@ -22,7 +23,7 @@ class Cube {
       setTimeout(() => {
         flag = true; // Correct Animation after the reseting animation.
         this.animationOfCube(firstThrown, this.cubes[0]);
-      }, 1005);
+      }, 800);
     }
     if (this.lastThrows[1] !== secondThrown) {
       this.animationOfCube(secondThrown, this.cubes[1]);
@@ -30,7 +31,7 @@ class Cube {
       this.animationOfCube(10, this.cubes[1]);
       setTimeout(() => {
         this.animationOfCube(secondThrown, this.cubes[1]);
-      }, 1005);
+      }, 900);
     }
     this.lastThrows.push(firstThrown);
     this.lastThrows.push(secondThrown);
@@ -60,7 +61,7 @@ class Cube {
         cube.style.webkitTransform = "rotateX(-600deg) rotateY(3500deg)";
         break;
       default:
-        cube.style.webkitTransform = "rotateX(-250deg) rotateY(1500deg)";
+        cube.style.webkitTransform = "rotateX(0deg) rotateY(0deg)";
     }
   }
 
