@@ -2,12 +2,14 @@ class City {
     constructor(fieldName, costOfTheField, field, tribute,costOfOneHouse,specialField) {
         this.fieldName = fieldName;
         this.costOfTheField = costOfTheField;
-        this.tribute = tribute; 
+        this.eventMultiplier = 1;
+        this.tribute = tribute * this.eventMultiplier; 
         this.ownerOfField = undefined;
         this.field = field;
         this.houses = -1 ; // -1 --> none fields | 0 --> have field | 1+ --> amount of houses  
         this.costOfOneHouse = costOfOneHouse;
         this.specialField = specialField; // Like Event/Jail/Start etc..
+        
     }
 }
 
