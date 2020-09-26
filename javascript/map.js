@@ -6,6 +6,7 @@ const doubletOption = document.querySelector('#doublet-option');
 const jailStayOption = document.querySelector('#jail-stay-option');
 const paying300gOption = document.querySelector('#paying-300g-option');
 const textShowingWhenPlayerDontHaveMoney = document.querySelector('.text-showing-if-player-dont-have-money');
+const textShowingWhenPlayerDontHaveMoneyJail = document.querySelector('.text-showing-jail');
 
 const containerOfPlayerWhoHasMovement = document.querySelector('.container-of-player-queue');
 const imageOfPlayerWhoHasMovement = document.querySelector('.image-of-player-who-has-movement');
@@ -150,14 +151,12 @@ class Map {
     }
   }
 
-  creatingDivForSellingField(money,marginLeft,marginTop,field){
+  creatingDivForSellingField(money,field){
     let div;
     let text;
     let input;
     div = document.createElement("div");
     div.classList.add("container-of-selling-field");
-    console.log(marginLeft);
-    console.log(marginTop);
     // div.style.marginLeft = (marginLeft -100) + "px";
     // div.style.marginTop = marginTop-80  + "px";
     // div.style.marginTop = marginTop + 30 + 'px';
@@ -176,7 +175,83 @@ class Map {
     // wrapper.appendChild(div);
 
   }
- 
+  creatingInputsForPlayerTeleportingAndTeleportingPlayer(thisPlayer){
+    btn.disabled = true;
+    let inputArray = [];
+    for(let i = 0 ; i < Cities.length;  i++){
+      let input;
+      input = document.createElement("input");
+      input.type = "checkbox";
+      input.style.height = "30px";
+      input.style.width = "30px";
+      input.style.marginLeft = "auto";
+      input.style.marginRight = "auto";
+      input.style.marginTop  = "15px";
+      input.style.zIndex = "1";
+      map.allLands[i].appendChild(input);
+      inputArray.push(input);
+    }
+    console.log(inputArray);
+    inputArray.forEach(function(target){
+      target.addEventListener('click',function(){
+        btn.disabled = false;
+        thisPlayer.field = inputArray.indexOf(target);
+        map.allLands[inputArray.indexOf(target)].children[0].appendChild(thisPlayer.img);
+        for(let i = 0; i < map.allLands.length; i++){
+          map.allLands[i].removeChild(map.allLands[i].lastElementChild);
+        }
+      })
+    })
+  }
+  creatingInputForEventMultiplier(thisPlayer){
+    let inputArray = [];
+    if(thisPlayer.cities.length > 0){ 
+      for(let i = 0 ; i < Cities.length; i ++){ 
+        if(Cities[i].eventMultiplier > 1){
+          Cities[i].tribute = Cities[i].tribute / Cities[i].eventMultiplier; 
+          Cities[i].eventMultiplier = 1;
+          map.allLands[i].children[1].children[0].removeChild(map.allLands[i].children[1].children[0].lastElementChild);
+          arrayOfTributeFields[i].textContent = Cities[i].tribute + Cities[i].costOfOneHouse  *  Cities[i].houses ;
+        } 
+        if(Cities[i].ownerOfField === thisPlayer){   // tell me which fields player have 
+          let input;
+          input = document.createElement("input");
+          input.type = "checkbox";
+          input.style.height = "30px";
+          input.style.width = "30px";
+          input.style.marginLeft = "auto";
+          input.style.marginRight = "auto";
+          input.style.marginTop  = "15px";
+          input.style.zIndex = "1";
+          map.allLands[i].appendChild(input);
+          inputArray.push(input);
+        }
+      }
+      inputArray.forEach(function(target){
+          target.addEventListener('click',function(){
+            let image ;
+            image = document.createElement('img');
+            image.classList.add("place-for-banner");
+            image.src = "../images/banner.png"
+            image.identyficator = "banner";
+            console.log(target.offsetParent.classList[0]);
+            Cities[target.offsetParent.classList[0]].eventMultiplier = 2.5;
+            Cities[target.offsetParent.classList[0]].tribute= Cities[target.offsetParent.classList[0]].tribute * Cities[target.offsetParent.classList[0]].eventMultiplier; 
+            map.allLands[target.offsetParent.classList[0]].children[1].children[0].appendChild(image);
+            arrayOfTributeFields[target.offsetParent.classList[0]].textContent = Cities[target.offsetParent.classList[0]].tribute + Cities[target.offsetParent.classList[0]].costOfOneHouse  *  Cities[target.offsetParent.classList[0]].houses ;
+   
+            for(let i = 0 ; i < map.allLands.length ; i++){
+              if(Cities[i].ownerOfField == thisPlayer){
+                map.allLands[i].removeChild(map.allLands[i].lastElementChild);
+              }
+            }
+          })
+          btn.disabled = false;
+      })
+    }else{
+      btn.disabled = false;
+    }
+  }
 }
 const map = new Map();
 const jail = 8;
