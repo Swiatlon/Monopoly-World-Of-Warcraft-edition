@@ -23,6 +23,7 @@ class Player {
         // this.img.style.opacity = "0.7";
         this.counterOfStayingInJail = 0;
         this.tryingDoublet = false;
+        this.teleporting = false;
     }
 
     move() {
@@ -50,7 +51,9 @@ class Player {
     }
 
     endOfMoveAnimation() {
-        game.gameMechanism(this);
+        if(this.teleporting == false){
+            game.gameMechanism(this);
+        }
     }
     
 
