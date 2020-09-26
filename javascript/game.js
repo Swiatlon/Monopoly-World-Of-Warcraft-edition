@@ -1,5 +1,5 @@
 
-let playerQueue = 1;
+let playerQueue = 0;
 let playerPick;
 let doublet = true;
 let flag = true;
@@ -118,6 +118,7 @@ class Game {
       }  
       break;
     case thisPlayer.field == jail:
+      textShowingWhenPlayerDontHaveMoneyJail.style.display = "none";
       console.log('WIEZIENIE');
       if(thisPlayer.jail == false){
         map.showingDivs(containerOfJailCommunicate);
@@ -139,9 +140,11 @@ class Game {
     case Cities[thisPlayer.field].specialField === true :  
       if(thisPlayer.field == 24){
         console.log("teleport od maga")
+        map.creatingInputsForPlayerTeleportingAndTeleportingPlayer(thisPlayer) ;
       }
       else if(thisPlayer.field == 16){
         console.log("Event");
+        map.creatingInputForEventMultiplier(thisPlayer);
       }
       else if (thisPlayer.field == 12 || 20 || 28) {
         console.log("karty specyjalne")
@@ -149,7 +152,10 @@ class Game {
       break;
     default:
     }
-    btn.disabled = false;
+    if(thisPlayer.field !=24){ //  when player is on field teleport button must be blocked
+      btn.disabled = false;
+    }
+    
   }
 
   randomNum() {
@@ -264,10 +270,10 @@ class Game {
     for(let i = 0 ; i < Cities.length; i ++){
       if(Cities[i].ownerOfField === thisPlayer){
         let money = (Cities[i].costOfOneHouse * Cities[i].houses + Cities[i].costOfTheField)/2;
-        let marginTop = map.allLands[i].offsetTop;
-        let marginLeft = map.allLands[i].offsetLeft;
+        // let marginTop = map.allLands[i].offsetTop;
+        // let marginLeft = map.allLands[i].offsetLeft;
         map.allLands[i].style.border = 'solid blue 3px';
-        map.creatingDivForSellingField(money,marginLeft,marginTop,i);
+        map.creatingDivForSellingField(money,i);
       }
     }
     }
@@ -306,15 +312,17 @@ class Game {
      console.log(multiplierMoney);
      if(number >= Cities[thisPlayer.field].tribute * multiplierMoney){
       let numberOfField ;
+      console.log(numberOfField);
       for(let i = 0; i < array.length; i++){
+        numberOfField = array[i].offsetParent.offsetParent.classList[0];  
         if(array[i].checked === true){
           for(let i = 0;  i < thisPlayer.cities.length; i++){
+            console.log(numberOfField);
             if(thisPlayer.cities[i] == Cities[numberOfField].fieldName){
               thisPlayer.cities.splice(thisPlayer.cities[i],1);
             } 
           }
-          numberOfField = array[i].offsetParent.offsetParent.classList[0];
-          Cities[numberOfField].ownerOfField = undefined;
+          Cities[numberOfField].ownerOfField = undefined;   //reseting to default settings
           Cities[numberOfField].houses = -1;
           map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.src = "data:,";
           map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.style.display = "none";
@@ -327,6 +335,7 @@ class Game {
         }
       }
       thisPlayer.money = number
+      console.log(multiplierMoney);
       thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
       Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
       map.visualAmountOfMoney(thisPlayer);
@@ -428,7 +437,7 @@ paying300gOption.addEventListener('click',function(player){
     doublet = true; // there i  used the variable with doublet bcs it have the same work to do as creating new variable with tell that player has payed and must do a move 
     console.log('PLACE 300 G'); 
   } else {
-    textShowingWhenPlayerDontHaveMoney.style = 'display:block !important';
+    textShowingWhenPlayerDontHaveMoneyJail.style.display = "block";
     console.log('Nie masz tyle pieniedzy');
   }
   
@@ -453,6 +462,21 @@ for (let i = 0; i < 4; i++) {
   console.log('GRACZ:', game.players[i]);
   map.visualAmountOfMoney(game.players[i]);
 }
+// for(let i = 4 ; i <12 ;i++){
+//   Cities[i].ownerOfField = game.players[0];
+//   Cities[i].houses = 4;
+//   game.players[0].cities.push( Cities[i].fieldName); 
+// }
+// for(let i = 29 ; i < 31 ;i++){
+//   Cities[i].ownerOfField = game.players[1];
+//   Cities[i].houses = 4;
+//   game.players[1].cities.push( Cities[i].fieldName); 
+// }
+// Cities[27].ownerOfField = game.players[2];
+// Cities[27].houses = 4;
+// game.players[2].cities.push( Cities[27].fieldName); 
+// game.players[0].field = 2;
+// game.players[2].field = 3;
 // console.log(arrayOfTributeFields[2].parentElement.parentElement);
 
 // RUCH GRACZA +++ 
