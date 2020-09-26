@@ -8,8 +8,8 @@
   .cube {
     align-self: center;
     justify-self: center;
-    transition: transform 0.7s;
-    transform: rotate3d(100, 100, -400, -0.8turn);
+    transition: transform 1s;
+    /* transform: rotate3d(100, 100, -400, -0.8turn); */
     width: 100px;
     height: 140px;
     transform-style: preserve-3d;
@@ -24,37 +24,37 @@
   
   .front-cube-wall {
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     transform: rotatex(90deg) translateZ(45px);
   }
   
   .back-cube-wall {
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     transform: rotateY(-90deg) translateZ(45px);
   }
   
   .bottom-cube-wall {
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     transform: translateX(0px) translateY(0px) translateZ(45px);
   }
   
   .top-cube-wall {
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     transform: rotateY(90deg) translateZ(45px);
   }
   
   .left-cube-wall {
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     transform: rotateY(180deg) translateZ(45px);
   }
   
   .right-cube-wall {
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     transform: rotateX(-90deg) translateZ(45px);
   }
   
