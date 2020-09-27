@@ -9,7 +9,7 @@ class City {
         this.houses = -1 ; // -1 --> none fields | 0 --> have field | 1+ --> amount of houses  
         this.costOfOneHouse = costOfOneHouse;
         this.specialField = specialField; // Like Event/Jail/Start etc..
-        this.multiplierDependFromHouses = 1;
+        this.multiplierDependFromHouses = 1; // needed for having the old version of tribute
         
     }
 }
