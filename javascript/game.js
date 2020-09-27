@@ -5,7 +5,6 @@ let doublet = true;
 let flag = true;
 let NumberOfShowingPlayerQueue ;
 let array ;
-let multiplierMoney = 1;
 let number;
 
 class Game {
@@ -56,67 +55,44 @@ class Game {
         this.listenerHowMuchHouses(thisPlayer);
         break;
       case otherPlayerField: 
-        switch (Cities[thisPlayer.field].houses) { // tribute * multiplierMoney 
-          case -1:
-            multiplierMoney = 1;
-            break;
-          case 0:
-            multiplierMoney = 1;
-            break;
-          case 1:
-            multiplierMoney = 1.25;
-            break;
-          case 2:
-            multiplierMoney = 1.5;
-            break;
-          case 3:
-            multiplierMoney = 1.75;
-            break;
-          case 4:
-            multiplierMoney = 2;
-            break;
-          case 5:
-            multiplierMoney = 2.25;
-            break;
-          default:    
-      }
-      Cities[thisPlayer.field].multiplierDependFromHouses =  multiplierMoney;
-      if(thisPlayer.money < Cities[thisPlayer.field].tribute  *Cities[thisPlayer.field].eventMultiplier * multiplierMoney  ){
-        console.log('[Masz za malo pieniedzy zeby zaplacic]' );
-        this.showingWhichBuildingsPlayerCanSell(thisPlayer);
-        map.showingDivs(containerIfDontHaveMoney);
-        neededGoldInSellingBuildings.textContent = "Potrzebny gold: " + Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
-        actualGoldInSellingBuildings.textContent = "Aktualny gold: " + thisPlayer.money;
-        array = [...document.querySelectorAll('.checkbox-in-selling-field')];
-        // const amountOfMoney;
-        number = thisPlayer.money ;
-        console.log(number);
-        for(let i = 0; i < array.length; i++){
-          array[i].addEventListener('click',function(e){
-            console.log(e.target.checked);
-            if(e.target.checked == true){
-              number = number + Number(e.target.nextElementSibling.textContent);
-              actualGoldInSellingBuildings.textContent = `Aktualny gold: ${number}`;
-              console.log(Number(e.target.nextElementSibling.textContent))
-              
-            }else{
-              if(number < 0) {
-                number = 0;
+        const multiplierMoney = game.gettingMultiplierMoney(Cities[thisPlayer.field].houses);
+        Cities[thisPlayer.field].multiplierDependFromHouses =  multiplierMoney;
+        if(thisPlayer.money < Cities[thisPlayer.field].tribute  *Cities[thisPlayer.field].eventMultiplier * multiplierMoney  ){
+          console.log('[Masz za malo pieniedzy zeby zaplacic]' );
+          this.showingWhichBuildingsPlayerCanSell(thisPlayer);
+          map.showingDivs(containerIfDontHaveMoney);
+          neededGoldInSellingBuildings.textContent = "Potrzebny gold: " + Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
+          actualGoldInSellingBuildings.textContent = "Aktualny gold: " + thisPlayer.money;
+          array = [...document.querySelectorAll('.checkbox-in-selling-field')];
+          // const amountOfMoney;
+          number = thisPlayer.money ;
+          console.log(number);
+          for(let i = 0; i < array.length; i++){
+            array[i].addEventListener('click',function(e){
+              console.log(e.target.checked);
+              if(e.target.checked == true){
+                number = number + Number(e.target.nextElementSibling.textContent);
+                actualGoldInSellingBuildings.textContent = `Aktualny gold: ${number}`;
+                console.log(Number(e.target.nextElementSibling.textContent))
+                
+              }else{
+                if(number < 0) {
+                  number = 0;
+                }
+                number = number - Number(e.target.nextElementSibling.textContent);
+                actualGoldInSellingBuildings.textContent = `Aktualny gold: ${number}`;
+                console.log(Number(e.target.nextElementSibling.textContent))
               }
-              number = number - Number(e.target.nextElementSibling.textContent);
-              actualGoldInSellingBuildings.textContent = `Aktualny gold: ${number}`;
-              console.log(Number(e.target.nextElementSibling.textContent))
-            }
-          })
-        }
+            })
+          }
 
-      } else{
-        thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
-        Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
-        map.visualAmountOfMoney(thisPlayer);
-        map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
-        map.showingDivs(containerOfPlayerWhoHasMovement); 
-      }  
+        } else{
+          thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
+          Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
+          map.visualAmountOfMoney(thisPlayer);
+          map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
+          map.showingDivs(containerOfPlayerWhoHasMovement); 
+        }  
       break;
     case thisPlayer.field == jail:
       textShowingWhenPlayerDontHaveMoneyJail.style.display = "none";
@@ -192,6 +168,35 @@ class Game {
       return a.queue - b.queue
     })
   }
+
+  gettingMultiplierMoney(amountOfHouses){
+    let multiplierMoney;
+    switch (amountOfHouses) { // tribute * multiplierMoney 
+      case -1:
+        multiplierMoney = 1;
+        break;
+      case 0:
+        multiplierMoney = 1;
+        break;
+      case 1:
+        multiplierMoney = 1.25;
+        break;
+      case 2:
+        multiplierMoney = 1.5;
+        break;
+      case 3:
+        multiplierMoney = 1.75;
+        break;
+      case 4:
+        multiplierMoney = 2;
+        break;
+      case 5:
+        multiplierMoney = 2.25;
+        break;
+      default:    
+    }
+    return multiplierMoney;
+  }
   
   listenerHowMuchHouses(thisPlayer) {
     map.enteringThePriceOfBuildings(thisPlayer);
@@ -228,20 +233,9 @@ class Game {
       }
       if(thisPlayer.money >= requirement ){
         if (Cities[thisPlayer.field].houses === -1) { // Field is empty
-          console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
-          console.log('[KOSZT POLA]', Cities[thisPlayer.field].costOfTheField);
-          console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
-          console.log('[ILOSC DOMKOW]', playerPick);
-          console.log('[MATEMATYKA]', ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick)));
           thisPlayer.money -= ((Cities[thisPlayer.field].costOfTheField) + (Cities[thisPlayer.field].costOfOneHouse * playerPick));
-          console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
         } else if (Cities[thisPlayer.field].houses > -1) {
-          console.log('[PIENIADZE GRACZA PRZED MATEMATYKA]', thisPlayer.money);
-          console.log('[KOSZT DOMKU]', Cities[thisPlayer.field].costOfOneHouse);
-          console.log('[ILOSC DOMKOW JUZ NA POLU]', Cities[thisPlayer.field].houses);
-          console.log('[ILOSC DOMKOW KTORE KUPUJESZ]', playerPick);
           thisPlayer.money -= ((Cities[thisPlayer.field].costOfOneHouse * playerPick) - (Cities[thisPlayer.field].houses * Cities[thisPlayer.field].costOfOneHouse));
-          console.log('[PIENIADZE GRACZA PO MATEMATYCE]', thisPlayer.money);
          }
          if(playerPick === 0){
           map.allLands[thisPlayer.field].style.border = `2px solid ${thisPlayer.color}`
@@ -250,9 +244,12 @@ class Game {
           map.allLands[thisPlayer.field].children[1].firstElementChild.firstElementChild.style.display = "initial";
           map.allLands[thisPlayer.field].style.border = `2px solid ${thisPlayer.color}`
          }
+        const multiplierMoney = game.gettingMultiplierMoney(playerPick);
         map.visualAmountOfMoney(thisPlayer);
         Cities[thisPlayer.field].houses = playerPick;
         Cities[thisPlayer.field].ownerOfField = thisPlayer;
+        console.log(multiplierMoney);
+        Cities[thisPlayer.field].multiplierDependFromHouses = multiplierMoney;
         thisPlayer.cities += Cities[thisPlayer.field].fieldName;
         console.log(thisPlayer.cities);
         map.hidingDivs(containerOfBuyingHouses);
@@ -282,7 +279,7 @@ class Game {
         map.creatingDivForSellingField(money,i);
       }
     }
-    }
+  }
 
     kickPlayer(){
       this.deletingEverythingThatPlayerHad();
@@ -317,6 +314,7 @@ class Game {
    }
 
    sellingBuilding(thisPlayer){
+     const multiplierMoney = Cities[thisPlayer.field].multiplierDependFromHouses;
      console.log(multiplierMoney);
      if(number >= Cities[thisPlayer.field].tribute * multiplierMoney * Cities[thisPlayer.field].eventMultiplier ){
       let numberOfField ;
@@ -460,7 +458,6 @@ for (let i = 0; i < game.players.length; i++) {
   console.log('GRACZ:', game.players[i]);
   map.visualAmountOfMoney(game.players[i]);
 }
-
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
 // KOLEJNOSC GRACZY +++ 
