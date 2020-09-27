@@ -1,5 +1,6 @@
 const containerOfEvents = document.querySelector('.container-of-events');
 const wrapper = document.querySelector('.wrapper');
+
 const containerOfJailCommunicate = document.querySelector('.container-of-jail');
 const jailChooseOptionBox = document.querySelector('.container-choose-option-jail');
 const doubletOption = document.querySelector('#doublet-option');
@@ -18,6 +19,7 @@ const arrayOfHousesCosts = [...document.querySelectorAll('.cost-of-house')];
 const checkboxesCounterOfHouses = [...document.querySelectorAll('.checkboxes')];
 const buyingButton =  document.querySelector('.buying-button');
 const exit = document.querySelector('.exit') ;
+
 const sellingBuildingsBtn = document.querySelector('.selling-buildings');
 const actualGoldInSellingBuildings = document.querySelector('.actualGoldInSellingBuildings');
 const neededGoldInSellingBuildings = document.querySelector('.neededGoldInSellingBuildings');
@@ -77,9 +79,6 @@ class Map {
   showingDivs(div) {
     div.style.display = "grid";
     switch(div){
-      // case containerOfBuyingHouses : case jailChooseOptionBox : case containerIfDontHaveMoney : 
-      //   containerOfEvents.style.display = "grid";
-      //   break
       case containerOfDoublet: case containerOfJailCommunicate:      //-----> Doublet
         setTimeout(function() { // Poczatek animacji
           containerOfEvents.style.opacity = 1;
@@ -129,8 +128,7 @@ class Map {
   }
 
   showTheActualTributeOfField(actualPlayer){
-    console.log('this',actualPlayer);
-    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute + Cities[actualPlayer.field].costOfOneHouse  *  Cities[actualPlayer.field].houses ;
+    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute * Cities[actualPlayer.field].multiplierMoney *Cities[actualPlayer.field].eventMultiplier ;
   }
 
   enteringTheNamesOfThePlayers(player) {
@@ -155,12 +153,10 @@ class Map {
     let div;
     let text;
     let input;
+
     div = document.createElement("div");
     div.classList.add("container-of-selling-field");
-    // div.style.marginLeft = (marginLeft -100) + "px";
-    // div.style.marginTop = marginTop-80  + "px";
-    // div.style.marginTop = marginTop + 30 + 'px';
-    // div.style.marginLeft = marginLeft - 50 + 'px';
+
     text = document.createElement("p");
     text.classList.add("selling-field-money");
     text.textContent = money;
@@ -168,12 +164,11 @@ class Map {
     input = document.createElement("input");
     input.classList.add("checkbox-in-selling-field");
     input.type = "checkbox";
+
     div.appendChild(input);
     div.appendChild(text);
     console.log(div);
     map.allLands[field].appendChild(div);
-    // wrapper.appendChild(div);
-
   }
   creatingInputsForPlayerTeleportingAndTeleportingPlayer(thisPlayer){
     btn.disabled = true;
@@ -203,15 +198,15 @@ class Map {
       })
     })
   }
+
   creatingInputForEventMultiplier(thisPlayer){
     let inputArray = [];
     if(thisPlayer.cities.length > 0){ 
       for(let i = 0 ; i < Cities.length; i ++){ 
         if(Cities[i].eventMultiplier > 1){
-          Cities[i].tribute = Cities[i].tribute / Cities[i].eventMultiplier; 
           Cities[i].eventMultiplier = 1;
           map.allLands[i].children[1].children[0].removeChild(map.allLands[i].children[1].children[0].lastElementChild);
-          arrayOfTributeFields[i].textContent = Cities[i].tribute + Cities[i].costOfOneHouse  *  Cities[i].houses ;
+          arrayOfTributeFields[i].textContent = Cities[i].tribute * Cities[i].multiplierDependFromHouses * Cities[i].eventMultiplier;             
         } 
         if(Cities[i].ownerOfField === thisPlayer){   // tell me which fields player have 
           let input;
@@ -232,14 +227,12 @@ class Map {
             let image ;
             image = document.createElement('img');
             image.classList.add("place-for-banner");
-            image.src = "../images/banner.png"
+            image.src = "images/banner.png"
             image.identyficator = "banner";
             console.log(target.offsetParent.classList[0]);
             Cities[target.offsetParent.classList[0]].eventMultiplier = 2.5;
-            Cities[target.offsetParent.classList[0]].tribute= Cities[target.offsetParent.classList[0]].tribute * Cities[target.offsetParent.classList[0]].eventMultiplier; 
             map.allLands[target.offsetParent.classList[0]].children[1].children[0].appendChild(image);
-            arrayOfTributeFields[target.offsetParent.classList[0]].textContent = Cities[target.offsetParent.classList[0]].tribute + Cities[target.offsetParent.classList[0]].costOfOneHouse  *  Cities[target.offsetParent.classList[0]].houses ;
-   
+            arrayOfTributeFields[target.offsetParent.classList[0]].textContent = Cities[target.offsetParent.classList[0]].tribute * Cities[target.offsetParent.classList[0]].eventMultiplier * Cities[target.offsetParent.classList[0]].multiplierDependFromHouses;
             for(let i = 0 ; i < map.allLands.length ; i++){
               if(Cities[i].ownerOfField == thisPlayer){
                 map.allLands[i].removeChild(map.allLands[i].lastElementChild);

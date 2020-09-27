@@ -5,7 +5,7 @@ let doublet = true;
 let flag = true;
 let NumberOfShowingPlayerQueue ;
 let array ;
-let multiplierMoney;
+let multiplierMoney = 1;
 let number;
 
 class Game {
@@ -50,7 +50,7 @@ class Game {
         break;
       case playerField: // my field
         map.showingDivs(containerOfBuyingHouses);
-        for (let i = 0; i < Cities[thisPlayer.field].houses + 1; i++) { // Functions which disabled buying houses that we have
+        for (let i = 0; i <= Cities[thisPlayer.field].houses ; i++) { // Functions which disabled buying houses that we have
           checkboxesCounterOfHouses[i].checked = true;
         }
         this.listenerHowMuchHouses(thisPlayer);
@@ -80,11 +80,12 @@ class Game {
             break;
           default:    
       }
-      if(thisPlayer.money < Cities[thisPlayer.field].tribute * multiplierMoney ){
+      Cities[thisPlayer.field].multiplierDependFromHouses =  multiplierMoney;
+      if(thisPlayer.money < Cities[thisPlayer.field].tribute  *Cities[thisPlayer.field].eventMultiplier * multiplierMoney  ){
         console.log('[Masz za malo pieniedzy zeby zaplacic]' );
         this.showingWhichBuildingsPlayerCanSell(thisPlayer);
         map.showingDivs(containerIfDontHaveMoney);
-        neededGoldInSellingBuildings.textContent = "Potrzebny gold: " + Cities[thisPlayer.field].tribute * multiplierMoney;
+        neededGoldInSellingBuildings.textContent = "Potrzebny gold: " + Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
         actualGoldInSellingBuildings.textContent = "Aktualny gold: " + thisPlayer.money;
         array = [...document.querySelectorAll('.checkbox-in-selling-field')];
         // const amountOfMoney;
@@ -110,8 +111,8 @@ class Game {
         }
 
       } else{
-        thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
-        Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
+        thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
+        Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
         map.visualAmountOfMoney(thisPlayer);
         map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
         map.showingDivs(containerOfPlayerWhoHasMovement); 
@@ -194,13 +195,18 @@ class Game {
   
   listenerHowMuchHouses(thisPlayer) {
     map.enteringThePriceOfBuildings(thisPlayer);
-    let amountOfHouses = Cities[thisPlayer.field].houses + 1;
+    let amountOfHouses ;
+    amountOfHouses = 0;
+    buyingHouseImage.style.display = "none"; // hiding if player wont click
+    amountOfHouses = Cities[thisPlayer.field].houses + 1;
     for (let i = amountOfHouses; i < checkboxesCounterOfHouses.length; i++) {
       checkboxesCounterOfHouses[i].addEventListener('click', function () {
-        for (let i = amountOfHouses; i < checkboxesCounterOfHouses.length; i++) {
+        buyingHouseImage.style.display = "initial";  
+        for (let i = amountOfHouses; i < checkboxesCounterOfHouses.length; i++) { // reseting function to only be clicked one button
           checkboxesCounterOfHouses[i].checked = false;
         }
         playerPick = checkboxesCounterOfHouses[i];
+        console.log(playerPick);
         playerPick.checked = true;
         playerPick = Number(playerPick.id);
         if(playerPick != 0){
@@ -251,8 +257,8 @@ class Game {
         console.log(thisPlayer.cities);
         map.hidingDivs(containerOfBuyingHouses);
         btn.disabled = false;
-        map.showingDivs(containerOfPlayerWhoHasMovement);
         map.showTheActualTributeOfField(thisPlayer);
+        map.showingDivs(containerOfPlayerWhoHasMovement);
         checkboxesCounterOfHouses[playerPick].checked = false;
         playerPick = undefined;              // --||--
       } else {
@@ -283,6 +289,9 @@ class Game {
       this.players.splice(playerQueue,1);
       map.hidingDivs(containerIfDontHaveMoney);
       playerQueue--;
+      if(playerQueue == -1){
+        playerQueue = 0;
+      }
       map.showingDivs(containerOfPlayerWhoHasMovement);
     }
 
@@ -305,12 +314,11 @@ class Game {
         } 
       }
       doublet = false;
-      
    }
 
    sellingBuilding(thisPlayer){
      console.log(multiplierMoney);
-     if(number >= Cities[thisPlayer.field].tribute * multiplierMoney){
+     if(number >= Cities[thisPlayer.field].tribute * multiplierMoney * Cities[thisPlayer.field].eventMultiplier ){
       let numberOfField ;
       console.log(numberOfField);
       for(let i = 0; i < array.length; i++){
@@ -336,8 +344,8 @@ class Game {
       }
       thisPlayer.money = number
       console.log(multiplierMoney);
-      thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney;
-      Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney;
+      thisPlayer.money -= Cities[thisPlayer.field].tribute * multiplierMoney * Cities[thisPlayer.field].eventMultiplier;
+      Cities[thisPlayer.field].ownerOfField.money += Cities[thisPlayer.field].tribute * multiplierMoney * Cities[thisPlayer.field].eventMultiplier;
       map.visualAmountOfMoney(thisPlayer);
       map.visualAmountOfMoney(Cities[thisPlayer.field].ownerOfField);
       map.hidingDivs(containerIfDontHaveMoney);
@@ -348,7 +356,6 @@ class Game {
   }
 }  
   
-
 function createPlayer(name, color) {
   let position = game.players.length + 1;
   const newPlayer = new Player(name, position, color);
@@ -389,7 +396,6 @@ animated.addEventListener('transitionend', function  ()  {
       }
   }
 });
-// setInterval(function(),czas)
 btn.addEventListener("click", () => {
   btn.disabled = true;
   if (doublet == false && game.players[playerQueue].tryingDoublet == false) {
@@ -399,13 +405,11 @@ btn.addEventListener("click", () => {
     }  
   }
   cube.getNumberRandom(7, 1); //6 -max  1 -min
-  // console.log('[end in click]', movementStatus);
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
 sellingBuildingsBtn.addEventListener('click', () => {
     game.sellingBuilding(game.players[playerQueue]);
 });
-// sellingBuildings.addEventListener('click', () =>map.hidingDivs(containerIfDontHaveMoney) );
 surrenderString.addEventListener('click',() => {
   for(let i = 0; i <  array.length; i++){
     numberOfField = array[i].offsetParent.offsetParent.classList[0];
@@ -449,40 +453,18 @@ const game = new Game();
 game.initiatePlayers();
 game.whoIsFirst();
 map.sortElements(map.allLands);
-// map.sortElements(arrayOfSellingFieldsCosts);
 map.appendPlayersOnMap();
 map.showingDivs(containerOfPlayerWhoHasMovement);
-// map.showingDivs(containerIfDontHaveMoney);
-// map.showingDivs(containerIfDontHaveMoney);
-// map.showingDivs(containerOfBuyingHouses); 
 map.sortElements(arrayOfTributeFields);
-// console.log(arrayOfTributeFields);
-// console.log(arrayOfTributeFields[0].offsetParent);
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < game.players.length; i++) {
   console.log('GRACZ:', game.players[i]);
   map.visualAmountOfMoney(game.players[i]);
 }
-// for(let i = 4 ; i <12 ;i++){
-//   Cities[i].ownerOfField = game.players[0];
-//   Cities[i].houses = 4;
-//   game.players[0].cities.push( Cities[i].fieldName); 
-// }
-// for(let i = 29 ; i < 31 ;i++){
-//   Cities[i].ownerOfField = game.players[1];
-//   Cities[i].houses = 4;
-//   game.players[1].cities.push( Cities[i].fieldName); 
-// }
-// Cities[27].ownerOfField = game.players[2];
-// Cities[27].houses = 4;
-// game.players[2].cities.push( Cities[27].fieldName); 
-// game.players[0].field = 2;
-// game.players[2].field = 3;
-// console.log(arrayOfTributeFields[2].parentElement.parentElement);
 
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
 // KOLEJNOSC GRACZY +++ 
-// WIEZIENIE I KARTY I EVENT +---
+// WIEZIENIE I KARTY I EVENT +++-
 // PLACENIE GRACZOM +++
 // POSTAWIANIE DOMKOW +++
 // MNOZNIKI PIENIAZKOW W ZALEZNOSCI OD ILOSCI DOMKOW +++
