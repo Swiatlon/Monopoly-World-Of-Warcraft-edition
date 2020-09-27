@@ -5,11 +5,10 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
-    // btn.disabled = false;
     let firstThrown = Math.floor(Math.random() * (max - min) + min); 
     let secondThrown = Math.floor(Math.random() * (max - min) + min);
-    // let firstThrown = 5;
-    // let secondThrown = 3;
+    // let firstThrown = 2;
+    // let secondThrown = 4;
     if (firstThrown == secondThrown) {
       doublet = true;
     } else {
