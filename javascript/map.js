@@ -128,7 +128,7 @@ class Map {
   }
 
   showTheActualTributeOfField(actualPlayer){
-    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute * Cities[actualPlayer.field].multiplierMoney *Cities[actualPlayer.field].eventMultiplier ;
+    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute * Cities[actualPlayer.field].multiplierDependFromHouses *Cities[actualPlayer.field].eventMultiplier ;
   }
 
   enteringTheNamesOfThePlayers(player) {
