@@ -134,7 +134,7 @@
     justify-items: center;
     font-size: 30px;
     font-weight: bold;
-    background-image: url(/images/5.jpg);
+    background-image: url('../images/5.jpg');
     background-position: center;
     background-size: cover;
     display: none;
