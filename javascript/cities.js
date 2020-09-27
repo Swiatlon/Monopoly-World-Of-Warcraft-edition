@@ -3,12 +3,13 @@ class City {
         this.fieldName = fieldName;
         this.costOfTheField = costOfTheField;
         this.eventMultiplier = 1;
-        this.tribute = tribute * this.eventMultiplier; 
+        this.tribute = tribute 
         this.ownerOfField = undefined;
         this.field = field;
         this.houses = -1 ; // -1 --> none fields | 0 --> have field | 1+ --> amount of houses  
         this.costOfOneHouse = costOfOneHouse;
         this.specialField = specialField; // Like Event/Jail/Start etc..
+        this.multiplierDependFromHouses = 1;
         
     }
 }
