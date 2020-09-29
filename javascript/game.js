@@ -4,7 +4,7 @@ let playerPick;
 let doublet = true;
 let flag = true;
 let NumberOfShowingPlayerQueue ;
-let array ;
+let fieldsWhenKickingPlayer ;
 let number;
 
 class Game {
@@ -15,7 +15,7 @@ class Game {
   initiatePlayers() {
     const playersName = ["Wiercik", "Mateusz", "Michas", "Wojtini"];
     const playersColors = ["Red", "Blue", "Green", "Yellow"];
-    for (let i = 0; i < playersName.length; i++) {
+    for (let i = 0; i < 2; i++) {
       createPlayer(playersName[i], playersColors[i]); // adding players and giving colors
       map.enteringTheNamesOfThePlayers(game.players[i]);
     }
@@ -52,6 +52,14 @@ class Game {
         for (let i = 0; i <= Cities[thisPlayer.field].houses ; i++) { // Functions which disabled buying houses that we have
           checkboxesCounterOfHouses[i].checked = true;
         }
+        for (let i = Cities[thisPlayer.field].houses; i <= checkboxesCounterOfHouses-1  ; i++) { // Functions which give us chance to buy  a house
+          checkboxesCounterOfHouses[i].checked = false;
+        }
+        if(Cities[thisPlayer.field].houses < 4){
+          checkboxesCounterOfHouses[5].disabled = true;
+        } else {
+          checkboxesCounterOfHouses[5].disabled = false;
+        }
         this.listenerHowMuchHouses(thisPlayer);
         break;
       case otherPlayerField: 
@@ -63,12 +71,12 @@ class Game {
           map.showingDivs(containerIfDontHaveMoney);
           neededGoldInSellingBuildings.textContent = "Potrzebny gold: " + Cities[thisPlayer.field].tribute * multiplierMoney *Cities[thisPlayer.field].eventMultiplier;
           actualGoldInSellingBuildings.textContent = "Aktualny gold: " + thisPlayer.money;
-          array = [...document.querySelectorAll('.checkbox-in-selling-field')];
+          fieldsWhenKickingPlayer = [...document.querySelectorAll('.checkbox-in-selling-field')];
           // const amountOfMoney;
           number = thisPlayer.money ;
           console.log(number);
-          for(let i = 0; i < array.length; i++){
-            array[i].addEventListener('click',function(e){
+          for(let i = 0; i < fieldsWhenKickingPlayer.length; i++){
+            fieldsWhenKickingPlayer[i].addEventListener('click',function(e){
               console.log(e.target.checked);
               if(e.target.checked == true){
                 number = number + Number(e.target.nextElementSibling.textContent);
@@ -200,6 +208,7 @@ class Game {
   
   listenerHowMuchHouses(thisPlayer) {
     map.enteringThePriceOfBuildings(thisPlayer);
+    playerPick = 0;
     let amountOfHouses ;
     amountOfHouses = 0;
     buyingHouseImage.style.display = "none"; // hiding if player wont click
@@ -319,9 +328,9 @@ class Game {
      if(number >= Cities[thisPlayer.field].tribute * multiplierMoney * Cities[thisPlayer.field].eventMultiplier ){
       let numberOfField ;
       console.log(numberOfField);
-      for(let i = 0; i < array.length; i++){
-        numberOfField = array[i].offsetParent.offsetParent.classList[0];  
-        if(array[i].checked === true){
+      for(let i = 0; i < fieldsWhenKickingPlayer.length; i++){
+        numberOfField = fieldsWhenKickingPlayer[i].offsetParent.offsetParent.classList[0];  
+        if(fieldsWhenKickingPlayer[i].checked === true){
           for(let i = 0;  i < thisPlayer.cities.length; i++){
             console.log(numberOfField);
             if(thisPlayer.cities[i] == Cities[numberOfField].fieldName){
@@ -336,7 +345,7 @@ class Game {
           map.allLands[numberOfField].lastElementChild.remove();
         }
         else{
-          numberOfField = array[i].offsetParent.offsetParent.classList[0]
+          numberOfField = fieldsWhenKickingPlayer[i].offsetParent.offsetParent.classList[0]
           map.allLands[numberOfField].lastElementChild.remove();
         }
       }
@@ -409,8 +418,10 @@ sellingBuildingsBtn.addEventListener('click', () => {
     game.sellingBuilding(game.players[playerQueue]);
 });
 surrenderString.addEventListener('click',() => {
-  for(let i = 0; i <  array.length; i++){
-    numberOfField = array[i].offsetParent.offsetParent.classList[0];
+  Cities[game.players[playerQueue].field].ownerOfField.money +=  Cities[game.players[playerQueue].field].tribute * Cities[game.players[playerQueue].field].multiplierDependFromHouses *Cities[game.players[playerQueue].field].eventMultiplier;
+  map.visualAmountOfMoney(Cities[game.players[playerQueue].field].ownerOfField);
+  for(let i = 0; i <  fieldsWhenKickingPlayer.length; i++){
+    numberOfField = fieldsWhenKickingPlayer[i].offsetParent.offsetParent.classList[0];
     Cities[numberOfField].ownerOfField = undefined;
     Cities[numberOfField].houses = -1;
     map.allLands[numberOfField].children[1].firstElementChild.firstElementChild.src = "data:,";
@@ -447,7 +458,6 @@ paying300gOption.addEventListener('click',function(player){
 
 
 const game = new Game();
-
 game.initiatePlayers();
 game.whoIsFirst();
 map.sortElements(map.allLands);
@@ -458,6 +468,11 @@ for (let i = 0; i < game.players.length; i++) {
   console.log('GRACZ:', game.players[i]);
   map.visualAmountOfMoney(game.players[i]);
 }
+// for(let i = 0; i < 20; i++){
+//   Cities[i].ownerOfField = game.players[0];
+//   Cities[i].houses = 3;
+//   game.players[0].cities += Cities[i].fieldName + " ";
+// }
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
 // KOLEJNOSC GRACZY +++ 
