@@ -36,6 +36,8 @@ class Player {
                 this.field++;
                 if (this.field > lastField) {  // After last field (31) we go to the start (0)
                     this.field = firstField;
+                    this.money += 300;
+                    map.visualAmountOfMoney(this);
                 }
                 if (this.field == firstField) {
                     fieldBeforeAnimationOfMove = firstField;
