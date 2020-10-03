@@ -132,7 +132,123 @@ class Game {
         map.creatingInputForEventMultiplier(thisPlayer);
       }
       else if (thisPlayer.field == 12 || 20 || 28) {
+        map.showingDivs(containerOfCards);
         console.log("karty specyjalne")
+        // let randomNumber = Math.floor(Math.random() * (10 - 1) + 1); 
+        let randomNumber = 2;
+        const text = document.createElement("p");
+        const secondText = document.createElement("p");
+        const thirdText = document.createElement("p");
+        const input = document.createElement("input");
+        const fourthText = document.createElement("p");
+        const fifthText = document.createElement("p");
+
+        const div = document.createElement("div");
+        const firstButton = document.createElement('button');
+        const secondButton = document.createElement("button");
+        //PREPAIRING FOR APPENDING +  Doing card description
+        switch(randomNumber){
+          case 1:
+            let randomPlayer = Math.floor(Math.random() * (game.players.length - 0) + 0); 
+            while( thisPlayer.nameOfPlayer == game.players[randomPlayer].nameOfPlayer){
+              randomPlayer = Math.floor(Math.random() * (game.players.length - 0) + 0); 
+            }
+            text.textContent = `Płacisz graczowi ${game.players[randomPlayer].nameOfPlayer} 300 golda a jeśli masz mniej niż 300 golda  to gracz ${game.players[randomPlayer].nameOfPlayer} placi tobie 300 golda.Jesli zaden z graczy nie ma pieniedzy to zeruje sie konto jednego z graczy` ;
+            console.log(game.players[randomPlayer]);
+            containerOfCards.children[0].onclick = function(){
+              if(thisPlayer.money >= 300){
+                thisPlayer.money -= 300;
+                game.players[randomPlayer].money += 300;
+                map.visualAmountOfMoney(thisPlayer);
+                map.visualAmountOfMoney(game.players[randomPlayer]);
+              } 
+              else{
+                if(game.players[randomPlayer].money > 300){
+                  thisPlayer.money += 300;
+                  game.players[randomPlayer].money -= 300;
+                  map.visualAmountOfMoney(thisPlayer);
+                  map.visualAmountOfMoney(game.players[randomPlayer]);
+                }else{
+                  thisPlayer.money += 300;
+                  game.players[randomPlayer].money = 0;
+                  map.visualAmountOfMoney(thisPlayer);
+                  map.visualAmountOfMoney(game.players[randomPlayer]);
+                }
+              }
+            }
+          break;
+          case 2:
+            text.textContent = "Na jedno z twoich miast spadła bomba many i zniszczyła twoje domki.Jesli nie posiadasz domkow ta karta nie zadziala" ;
+            const arrayWithPlayerFieldWithHouses = [];
+            containerOfCards.children[0].onclick = function(){
+              if(thisPlayer.cities.length >0 ){
+                for(let i = 0 ; i < Cities.length; i ++){
+                  if(Cities[i].ownerOfField === thisPlayer && Cities[i].houses > 0){
+                    arrayWithPlayerFieldWithHouses.push(Cities[i]);
+                  }
+                }
+              const randomField = Math.floor(Math.random() * (arrayWithPlayerFieldWithHouses.length - 0) + 0);   
+              const choosedFieldToDelete = arrayWithPlayerFieldWithHouses[randomField];
+              console.log(choosedFieldToDelete)
+              Cities[choosedFieldToDelete.field].houses = 0;
+              map.allLands[choosedFieldToDelete.field].children[1].firstElementChild.firstElementChild.src = "data:,";
+              map.allLands[choosedFieldToDelete.field].children[1].firstElementChild.firstElementChild.style.display = "none";
+              }else{
+                console.log("Ten gracz nie posiada miast")
+              }
+            }
+          break;  
+          case 3:
+            text.textContent = "Udajesz się na pole start";
+            console.log(randomNumber + " Zestaw");
+          break;  
+          case 4:
+            text.textContent = "Trafiasz do więzienia za swoje złe czynny";
+            console.log(randomNumber + " Zestaw");
+          break;  
+          case 5:
+            text.textContent = "Obrabowaly cię pobliskie gobliny tracisz 200 golda";
+            console.log(randomNumber + " Zestaw");
+          break;  
+          case 6:
+            text.textContent = "Grasz w rolla z kolega z gildii o 400 golda ";
+            secondText.textContent = `Roll przeciwnika :`;
+            thirdText.textContent = "Wpisz /roll";
+            fourthText.textContent = "Twoj roll :"
+            fifthText.textContent = "Wygrał: "
+            input.style.width = '60px';
+            input.style.height = '20px';
+
+          break;
+          case 7:
+            text.textContent = `Kolega x podał ci dane do konta możesz usunąć jego domki i hotele na jednym polu  albo pominąć ta karte`;
+
+          break;  
+          case 8:
+            text.textContent = "Postanawiasz ze odpoczniesz w mieście (tracisz kolejkę w następnej turze)";
+            console.log(randomNumber + " Zestaw");
+          break;  
+          case 9:
+            text.textContent = "Miałeś potężne szczęście i tytani pozwalają ci wykonać jeszcze jeden ruch. ";
+            console.log(randomNumber + " Zestaw");
+          break;      
+        }
+        // APPENDING TO CONTAINER
+        containerOfCards.appendChild(text) ; // first text is on all switch options
+        switch(randomNumber){ // there is switch statement with appending childs
+          case 6:
+           containerOfCards.appendChild(secondText);
+           containerOfCards.appendChild(thirdText);
+           containerOfCards.appendChild(input);
+           containerOfCards.appendChild(fourthText);
+           containerOfCards.appendChild(fifthText);
+          break;
+          case 7:
+            containerOfCards.appendChild(div);
+            div.appendChild(firstButton);
+            div.appendChild(secondButton);
+          break;       
+        }
       }
       break;
     default:
@@ -259,7 +375,7 @@ class Game {
         Cities[thisPlayer.field].ownerOfField = thisPlayer;
         console.log(multiplierMoney);
         Cities[thisPlayer.field].multiplierDependFromHouses = multiplierMoney;
-        thisPlayer.cities += Cities[thisPlayer.field].fieldName;
+        thisPlayer.cities.push( Cities[thisPlayer.field].fieldName);
         console.log(thisPlayer.cities);
         map.hidingDivs(containerOfBuyingHouses);
         btn.disabled = false;
@@ -282,8 +398,6 @@ class Game {
     for(let i = 0 ; i < Cities.length; i ++){
       if(Cities[i].ownerOfField === thisPlayer){
         let money = (Cities[i].costOfOneHouse * Cities[i].houses + Cities[i].costOfTheField)/2;
-        // let marginTop = map.allLands[i].offsetTop;
-        // let marginLeft = map.allLands[i].offsetLeft;
         map.allLands[i].style.border = 'solid blue 3px';
         map.creatingDivForSellingField(money,i);
       }
@@ -414,6 +528,9 @@ btn.addEventListener("click", () => {
   cube.getNumberRandom(7, 1); //6 -max  1 -min
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
+containerOfCards.children[0].addEventListener("click",function(){ 
+  map.hidingDivs(containerOfCards) ;map.deletingChildsFromElement(containerOfCards) ; 
+})
 sellingBuildingsBtn.addEventListener('click', () => {
     game.sellingBuilding(game.players[playerQueue]);
 });
@@ -462,16 +579,25 @@ game.initiatePlayers();
 game.whoIsFirst();
 map.sortElements(map.allLands);
 map.appendPlayersOnMap();
-map.showingDivs(containerOfPlayerWhoHasMovement);
+// map.showingDivs(containerOfPlayerWhoHasMovement);
 map.sortElements(arrayOfTributeFields);
 for (let i = 0; i < game.players.length; i++) {
   console.log('GRACZ:', game.players[i]);
   map.visualAmountOfMoney(game.players[i]);
 }
-// for(let i = 0; i < 20; i++){
+// for(let i = 1; i < 8; i++){
+//   Cities[i].ownerOfField = game.players[0];
+//   Cities[i].houses = 0;
+//   game.players[0].cities.push(Cities[i].fieldName );
+//   map.allLands[i].children[1].firstElementChild.firstElementChild.style.display = "initial";
+//   map.allLands[i].children[1].firstElementChild.firstElementChild.src = `images/Red1Houses.png`;
+// }
+// for(let i = 9; i < 12; i++){
 //   Cities[i].ownerOfField = game.players[0];
 //   Cities[i].houses = 3;
-//   game.players[0].cities += Cities[i].fieldName + " ";
+//   game.players[0].cities.push(Cities[i].fieldName );
+//   map.allLands[i].children[1].firstElementChild.firstElementChild.style.display = "initial";
+//   map.allLands[i].children[1].firstElementChild.firstElementChild.src = `images/Blue3Houses.png`;
 // }
 // RUCH GRACZA +++ 
 // DIV Z INFORMACJA KTO WYKONUJE RUCH +++ 
