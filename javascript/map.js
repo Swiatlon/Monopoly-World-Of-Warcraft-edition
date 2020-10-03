@@ -27,6 +27,8 @@ const surrenderString = document.querySelector('.surrender-string');
 const containerIfDontHaveMoney = document.querySelector('.container-if-do-not-have-money-selling-buildings-option');
 const arrayOfSellingFieldsCosts = [];
 
+const containerOfCards = document.querySelector('.container-of-cards');
+
 const containerOfDoublet = document.querySelector('.container-of-doublet');
 
 const arrayOfTributeFields = [...document.querySelectorAll('.javascript-sort-variable')];
@@ -119,9 +121,9 @@ class Map {
           }, 2000);
         }, 0);
         break;
-      case containerIfDontHaveMoney:
+      case containerIfDontHaveMoney: 
         div.style.display = "grid";
-        break; 
+        break;
       default:
         containerOfEvents.style.display = "grid";
     }
@@ -245,6 +247,13 @@ class Map {
       btn.disabled = false;
     }
   }
+  deletingChildsFromElement(element){
+    console.log(element.children.length);
+    for(let i = 1; i < element.children.length ; i++){
+      element.removeChild(element.children[i]);
+    }
+  }
+
 }
 const map = new Map();
 const jail = 8;
