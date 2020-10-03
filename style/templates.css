@@ -13,6 +13,7 @@
   border-radius: 15px;
   align-self: center;
   justify-self: center;
+  position: relative;
   display: grid;
 }
 
@@ -59,6 +60,7 @@
   grid-template-rows: auto;
   font-size: 22px;
   align-items: center;
+  margin-top: 15px;
 }
 
 .right-side-first-div-information {
@@ -70,6 +72,8 @@
   justify-self: end;
   padding-right: 20px;
   cursor: pointer;
+  position: absolute;
+
 }
 
 .right-side-build-and-price-divs {
@@ -175,6 +179,20 @@
   font-size: 24px;
   cursor: pointer;
 }
+.container-of-cards{
+  background-image: url('/images/containerOfCards.jpg');
+  height: 100%;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-items: center;
+  display: none;
+}
+.container-of-cards p{
+  font-size: 35px;
+  text-shadow: 0px 3px 6px black;
+  padding: 15px;
+}
+
 
 @-webkit-keyframes rotation {
   0% {
