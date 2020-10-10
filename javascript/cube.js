@@ -5,17 +5,15 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
-    let firstThrown = Math.floor(Math.random() * (max - min) + min); 
+    let firstThrown = Math.floor(Math.random() * (max - min) + min);
     let secondThrown = Math.floor(Math.random() * (max - min) + min);
-    // let firstThrown = 2;
-    // let secondThrown = 4;
     if (firstThrown == secondThrown) {
       doublet = true;
     } else {
       doublet = false;
     }
     if (this.lastThrows[0] !== firstThrown) {
-      this.animationOfCube(firstThrown, this.cubes[0]); 
+      this.animationOfCube(firstThrown, this.cubes[0]);
     } else {
       flag = false; // Reseting Animation if thrown = last thrown.
       this.animationOfCube(10, this.cubes[0]);
@@ -34,7 +32,7 @@ class Cube {
     }
     this.lastThrows.push(firstThrown);
     this.lastThrows.push(secondThrown);
-    if (this.lastThrows.length > 2) {  // Not more than 2 throws in array
+    if (this.lastThrows.length > 2) { // Not more than 2 throws in array
       this.lastThrows.splice(0, 2);
     }
   }
