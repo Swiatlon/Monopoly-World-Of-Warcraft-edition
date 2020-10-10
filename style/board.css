@@ -5,33 +5,31 @@
     align-self: center;
     border: 1px solid black;
     box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.952);
-    transform: rotate3d(900, 600, -700, -0.8turn); 
+    transform: rotate3d(900, 600, -700, -0.8turn);
     font-size: 20px;
     margin-left: -60px;
     margin-top: -150px;
-  }
-  
-  .board__kalimdor-container,
-  .board__northrend-container {
+}
+
+.board__kalimdor-container,
+.board__northrend-container {
     display: grid;
     height: 130px;
     grid-template-columns: 130px 130px 130px 130px 130px 130px 130px 130px 130px;
+}
 
-  }
-  
-  .board__center-container {
+.board__center-container {
     display: grid;
-    grid-template-columns: 130px auto 130px; 
-  }
-  
-  .board__content-container {
-    /* width: 100 */
-    /* height: 100%;  */
+    grid-template-columns: 130px auto 130px;
+}
+
+.board__content-container {
     position: relative;
     display: grid;
-    font-size: 32px; 
-  }
-  .roll-dice-button {
+    font-size: 32px;
+}
+
+.roll-dice-button {
     width: 215px;
     height: 90px;
     justify-self: center;
@@ -44,256 +42,255 @@
     font-size: 28px;
     overflow: hidden;
     cursor: pointer;
-  }
-  
-  .board__eastern-kingdom-container,
-  .board__outland-container {
+}
+
+.board__eastern-kingdom-container,
+.board__outland-container {
     display: grid;
     grid-template-rows: 130px 130px 130px 130px 130px 130px 130px;
     width: 130px;
-  }
-  
-  .vertical-container{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display:grid;
-    grid-template-rows: repeat(2,1fr);
-  }
-  
-  .horizontal-container{
+}
+
+.vertical-container {
     width: 100%;
     height: 100%;
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-  }
-  
-  .string-kalimdor{
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.horizontal-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.string-kalimdor {
     margin-top: 25px;
-  }
-  
-  .string-northrend{
+}
+
+.string-northrend {
     align-self: flex-end;
     margin-bottom: 25px;
-  }
-  
-  .string-eastern-kingdom{
+}
+
+.string-eastern-kingdom {
     transform: rotate(90deg) translateY(30px);
     justify-self: left;
-    align-self: center;  
-  }
-  
-  .string-outland{
+    align-self: center;
+}
+
+.string-outland {
     transform: rotate(90deg) translateY(130px);
     justify-self: right;
     align-self: center;
     margin-right: -100px;
-  }
-  
-  .board__kalimdor-container > div,
-  .board__eastern-kingdom-container > div,
-  .board__northrend-container > div,
-  .board__outland-container > div {
+}
+
+.board__kalimdor-container>div,
+.board__eastern-kingdom-container>div,
+.board__northrend-container>div,
+.board__outland-container>div {
     border: 2px solid black;
     position: relative;
     background-position: center;
     background-size: cover;
     display: grid;
+}
 
-  }
-  
-  .board__kalimdor-container p,
-  .board__eastern-kingdom-container p,
-  .board__northrend-container p,
-  .board__outland-container p {
+.board__kalimdor-container p,
+.board__eastern-kingdom-container p,
+.board__northrend-container p,
+.board__outland-container p {
     max-width: 130px;
     text-shadow: 2px 2px 130px #000000;
     font-weight: 500;
-  }
-  
-  #Elwynn {
-    background-image: url("../images/Elwynn\ Forest.jpg"); 
-  }
-  
-  #Westfall {
+}
+
+#Elwynn {
+    background-image: url("../images/Elwynn\ Forest.jpg");
+}
+
+#Westfall {
     background-image: url("../images/Westfall.jpg");
-  }
-  
-  #Hilsbrad {
+}
+
+#Hilsbrad {
     background-image: url("../images/Hilsbrad\ Foothils.jpg");
-  }
-  
-  #Stormwind {
+}
+
+#Stormwind {
     background-image: url("../images/Stomwind.jpg");
-  }
-  
-  #Stranglethorn {
+}
+
+#Stranglethorn {
     background-image: url("../images/Stranglethorn.jpg");
-  }
-  
-  #Hinterlands {
+}
+
+#Hinterlands {
     background-image: url("../images/Hinterlands.jpg");
-  }
-  
-  #Burning_Steppes {
+}
+
+#Burning_Steppes {
     background-image: url("../images/Burnning\ Steppes.jpg");
-  }
-  
-  #jail {
+}
+
+#jail {
     background-image: url("../images/Jail.jpg");
-  }
-  
-  #Durotar {
+}
+
+#Durotar {
     background-image: url("../images/durotar.jpg");
-  }
-  
-  #Barrens {
+}
+
+#Barrens {
     background-image: url("../images/Barrens.jpg");
-  }
-  
-  #Thousand_Needles {
+}
+
+#Thousand_Needles {
     background-image: url("../images/Thousand\ Needles.jpg");
-  }
-  
-  #Card_Of_Horde {
+}
+
+#Card_Of_Horde {
     background-image: url("../images/cardOfHorde.jpg");
-  }
-  
-  #Tanaris {
+}
+
+#Tanaris {
     background-image: url("../images/Tanaris.jpg");
-  }
-  
-  #Orgrimmar {
+}
+
+#Orgrimmar {
     background-image: url("../images/Orgrimmar.jpg");
-  }
-  
-  #Un_Goro {
+}
+
+#Un_Goro {
     background-image: url("../images/Un\ Goro.jpg");
-  }
-  
-  #Event {
+}
+
+#Event {
     background-image: url("../images/Event2.jpg");
-  }
-  
-  #Helfire {
+}
+
+#Helfire {
     background-image: url("../images/Helfire\ Peninsula.jpg");
-  }
-  
-  #Zangramash {
+}
+
+#Zangramash {
     background-image: url("../images/zangramash.jpg");
-  }
-  
-  #Shattrah {
+}
+
+#Shattrah {
     background-image: url("../images/Shattrah.jpg");
-  }
-  
-  #CardOfAlliance {
+}
+
+#CardOfAlliance {
     background-image: url("../images/Alliance.png");
-  }
-  
-  #Nagrand {
+}
+
+#Nagrand {
     background-image: url("../images/Nagrand.jpg");
-  }
-  
-  #Netherstorm {
+}
+
+#Netherstorm {
     background-image: url("../images/Netherstorm.jpg");
-  }
-  
-  #Shadowmoon {
+}
+
+#Shadowmoon {
     background-image: url("../images/Shadowmoon.jpg");
-  }
-  
-  #Teleport {
+}
+
+#Teleport {
     background-image: url("../images/teleport1.jpg");
-  }
-  
-  #Dalaran {
+}
+
+#Dalaran {
     background-image: url("../images/Dalaran.jpg");
-  }
-  
-  #Borean {
+}
+
+#Borean {
     background-image: url("../images/Borean.jpg");
-  }
-  
-  #Grizzly {
+}
+
+#Grizzly {
     background-image: url("../images/Grizzly.jpg");
-  }
-  
-  #Card_Of_Demons {
+}
+
+#Card_Of_Demons {
     background-image: url("../images/cardOFDe.jpg");
-  }
-  
-  #Zul_Drak {
+}
+
+#Zul_Drak {
     background-image: url("../images/ZulDrak.jpg");
-  }
-  
-  #Storm_Peaks {
+}
+
+#Storm_Peaks {
     background-image: url("../images/StormPeaks.jpg");
-  }
-  
-  #Icecrown {
+}
+
+#Icecrown {
     background-image: url("../images/Icecrown.jpg");
-  }
-  
-  #start {
+}
+
+#start {
     background-image: url("../images/Event.png");
-  }
-  
-  .place-for-players{
-    position: absolute !important; 
+}
+
+.place-for-players {
+    position: absolute !important;
     /* display: grid; */
     justify-items: center;
     align-items: center;
     width: 100%;
     grid-template-columns: max-content;
-  }
-  .place-for-house-and-information{
+}
+
+.place-for-house-and-information {
     height: 100%;
     display: grid;
-    grid-template-rows:  10% auto 20%;
-    
-  }
-  .field-top{
+    grid-template-rows: 10% auto 20%;
+}
+
+.field-top {
     height: 100%;
     width: 100%;
     margin-top: -65px;
     margin-left: 10px;
-     position: relative;
-  }
-  .field-bottom,
-  .field-middle{
+    position: relative;
+}
+
+.field-bottom,
+.field-middle {
     margin-top: auto;
     font-size: 20px;
-  }
+}
 
-  .special-field-margin{
+.special-field-margin {
     grid-template-rows: 10% auto auto;
-  }
-  .place-for-houses{
-    transform: rotate3d(3, -1,-1.3, -0.19turn);
+}
+
+.place-for-houses {
+    transform: rotate3d(3, -1, -1.3, -0.19turn);
     height: 1000%;
     width: 80%;
     margin-top: 20px;
     display: none;
-  }
-  .place-for-banner{
-    transform: rotate3d(3, -1,-1.3, -0.19turn);
+}
+
+.place-for-banner {
+    transform: rotate3d(3, -1, -1.3, -0.19turn);
     height: 200px;
     width: 50%;
-    /* margin-left: -50px; */
-    margin-top: 10px;   
+    margin-top: 10px;
     position: absolute;
     z-index: 2;
-  }
-  .board__eastern-kingdom-container img{
-    /* transform: rotate3d(7, -1,-1.5, -0.2turn); */
-    transform: rotate3d(3, -1,-1.5, -0.18turn);
-  }
-  .javascript-sort-variable{
+}
+
+.board__eastern-kingdom-container img {
+    transform: rotate3d(3, -1, -1.5, -0.18turn);
+}
+
+.javascript-sort-variable {
     font-size: 24px;
-  }
-
-
-  
-  
+}
