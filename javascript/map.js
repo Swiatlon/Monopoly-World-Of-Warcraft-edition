@@ -17,8 +17,8 @@ const containerOfBuyingHouses = document.querySelector('.box-of-buying-houses');
 const buyingHouseImage = document.querySelector('.house');
 const arrayOfHousesCosts = [...document.querySelectorAll('.cost-of-house')];
 const checkboxesCounterOfHouses = [...document.querySelectorAll('.checkboxes')];
-const buyingButton =  document.querySelector('.buying-button');
-const exit = document.querySelector('.exit') ;
+const buyingButton = document.querySelector('.buying-button');
+const exit = document.querySelector('.exit');
 
 const sellingBuildingsBtn = document.querySelector('.selling-buildings');
 const actualGoldInSellingBuildings = document.querySelector('.actualGoldInSellingBuildings');
@@ -63,7 +63,7 @@ class Map {
         b = b.offsetParent;
         result = a.classList[0] - b.classList[0];
       }
-    return result ;
+      return result;
     });
   }
 
@@ -80,48 +80,49 @@ class Map {
 
   showingDivs(div) {
     div.style.display = "grid";
-    switch(div){
-      case containerOfDoublet: case containerOfJailCommunicate:      //-----> Doublet
+    switch (div) {
+      case containerOfDoublet:
+      case containerOfJailCommunicate: //-----> Doublet
         setTimeout(function() { // Poczatek animacji
           containerOfEvents.style.opacity = 1;
           containerOfEvents.style.display = "grid";
-          setTimeout(function() {    // 2sekundy animacji
+          setTimeout(function() { // 2sekundy animacji
             containerOfEvents.style.opacity = 0;
-            setTimeout(function() {    // Koniec animacji 
+            setTimeout(function() { // Koniec animacji 
               containerOfEvents.style.opacity = 1;
               containerOfEvents.style.display = "none";
               div.style.display = "none";
-            },300);
+            }, 300);
           }, 1000);
         }, 0);
         break
-      case containerOfPlayerWhoHasMovement:     //-----> Ruch gracza
+      case containerOfPlayerWhoHasMovement: //-----> Ruch gracza
         setTimeout(function() { // Poczatek animacji
-          console.log('[numberOfShowing]',NumberOfShowingPlayerQueue);
-          console.log('playerQu',playerQueue);
+          console.log('[numberOfShowing]', NumberOfShowingPlayerQueue);
+          console.log('playerQu', playerQueue);
           NumberOfShowingPlayerQueue = playerQueue;
-          if(doublet == false){
+          if (doublet == false) {
             NumberOfShowingPlayerQueue++;
-            if(NumberOfShowingPlayerQueue >= game.players.length){
-              NumberOfShowingPlayerQueue = 0 ;
+            if (NumberOfShowingPlayerQueue >= game.players.length) {
+              NumberOfShowingPlayerQueue = 0;
             }
           }
-          console.log('[numberOfShowing]',NumberOfShowingPlayerQueue);
+          console.log('[numberOfShowing]', NumberOfShowingPlayerQueue);
           nameOfPlayerWhoHasMovement.textContent = game.players[NumberOfShowingPlayerQueue].nameOfPlayer;
           imageOfPlayerWhoHasMovement.src = game.players[NumberOfShowingPlayerQueue].image;
           containerOfEvents.style.opacity = 1;
-          containerOfEvents.style.display = "grid";    
-          setTimeout(function() {    // 2sekundy animacji
+          containerOfEvents.style.display = "grid";
+          setTimeout(function() { // 2sekundy animacji
             containerOfEvents.style.opacity = 0;
-            setTimeout(function() {    // Koniec animacji 
-              containerOfEvents.style.opacity = 1;             
+            setTimeout(function() { // Koniec animacji 
+              containerOfEvents.style.opacity = 1;
               containerOfEvents.style.display = "none";
               div.style.display = "none";
-            },500);
+            }, 500);
           }, 2000);
         }, 0);
         break;
-      case containerIfDontHaveMoney: 
+      case containerIfDontHaveMoney:
         div.style.display = "grid";
         break;
       default:
@@ -129,29 +130,29 @@ class Map {
     }
   }
 
-  showTheActualTributeOfField(actualPlayer){
-    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute * Cities[actualPlayer.field].multiplierDependFromHouses *Cities[actualPlayer.field].eventMultiplier ;
+  showTheActualTributeOfField(actualPlayer) {
+    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute * Cities[actualPlayer.field].multiplierDependFromHouses * Cities[actualPlayer.field].eventMultiplier;
   }
 
   enteringTheNamesOfThePlayers(player) {
-    arraysOfPlayersName[player.id - 1].textContent = player.nameOfPlayer ;   
+    arraysOfPlayersName[player.id - 1].textContent = player.nameOfPlayer;
   }
 
   visualAmountOfMoney(player) {
-    arrayOfPlayersMoney[player.id - 1].textContent = "Money: " + player.money;    // od 0 sie zacyznaja id a tablica od 1  dlatego -1
+    arrayOfPlayersMoney[player.id - 1].textContent = "Money: " + player.money; // od 0 sie zacyznaja id a tablica od 1  dlatego -1
   }
 
-  enteringThePriceOfBuildings(actualPlayer){
-    for(let i = 0 ; i <= 5; i++){
-      if(Cities[actualPlayer.field].houses  > -1){
-        arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse *i;
+  enteringThePriceOfBuildings(actualPlayer) {
+    for (let i = 0; i <= 5; i++) {
+      if (Cities[actualPlayer.field].houses > -1) {
+        arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse * i;
       } else {
-        arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse *i + Cities[actualPlayer.field].costOfTheField;
+        arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse * i + Cities[actualPlayer.field].costOfTheField;
       }
     }
   }
 
-  creatingDivForSellingField(money,field){
+  creatingDivForSellingField(money, field) {
     let div;
     let text;
     let input;
@@ -172,10 +173,10 @@ class Map {
     console.log(div);
     map.allLands[field].appendChild(div);
   }
-  creatingInputsForPlayerTeleportingAndTeleportingPlayer(thisPlayer){
+  creatingInputsForPlayerTeleportingAndTeleportingPlayer(thisPlayer) {
     btn.disabled = true;
     let inputArray = [];
-    for(let i = 0 ; i < Cities.length;  i++){
+    for (let i = 0; i < Cities.length; i++) {
       let input;
       input = document.createElement("input");
       input.type = "checkbox";
@@ -183,34 +184,34 @@ class Map {
       input.style.width = "30px";
       input.style.marginLeft = "auto";
       input.style.marginRight = "auto";
-      input.style.marginTop  = "15px";
+      input.style.marginTop = "15px";
       input.style.zIndex = "1";
       map.allLands[i].appendChild(input);
       inputArray.push(input);
     }
     console.log(inputArray);
-    inputArray.forEach(function(target){
-      target.addEventListener('click',function(){
+    inputArray.forEach(function(target) {
+      target.addEventListener('click', function() {
         btn.disabled = false;
         thisPlayer.field = inputArray.indexOf(target);
         map.allLands[inputArray.indexOf(target)].children[0].appendChild(thisPlayer.img);
-        for(let i = 0; i < map.allLands.length; i++){
+        for (let i = 0; i < map.allLands.length; i++) {
           map.allLands[i].removeChild(map.allLands[i].lastElementChild);
         }
       })
     })
   }
 
-  creatingInputForEventMultiplier(thisPlayer){
+  creatingInputForEventMultiplier(thisPlayer) {
     let inputArray = [];
-    if(thisPlayer.cities.length > 0){ 
-      for(let i = 0 ; i < Cities.length; i ++){ 
-        if(Cities[i].eventMultiplier > 1){
+    if (thisPlayer.cities.length > 0) {
+      for (let i = 0; i < Cities.length; i++) {
+        if (Cities[i].eventMultiplier > 1) {
           Cities[i].eventMultiplier = 1;
           map.allLands[i].children[1].children[0].removeChild(map.allLands[i].children[1].children[0].lastElementChild);
-          arrayOfTributeFields[i].textContent = Cities[i].tribute * Cities[i].multiplierDependFromHouses * Cities[i].eventMultiplier;             
-        } 
-        if(Cities[i].ownerOfField === thisPlayer){   // tell me which fields player have 
+          arrayOfTributeFields[i].textContent = Cities[i].tribute * Cities[i].multiplierDependFromHouses * Cities[i].eventMultiplier;
+        }
+        if (Cities[i].ownerOfField === thisPlayer) { // tell me which fields player have 
           let input;
           input = document.createElement("input");
           input.type = "checkbox";
@@ -218,43 +219,42 @@ class Map {
           input.style.width = "30px";
           input.style.marginLeft = "auto";
           input.style.marginRight = "auto";
-          input.style.marginTop  = "15px";
+          input.style.marginTop = "15px";
           input.style.zIndex = "1";
           map.allLands[i].appendChild(input);
           inputArray.push(input);
         }
       }
-      inputArray.forEach(function(target){
-          target.addEventListener('click',function(){
-            let image ;
-            image = document.createElement('img');
-            image.classList.add("place-for-banner");
-            image.src = "images/banner.png"
-            image.identyficator = "banner";
-            console.log(target.offsetParent.classList[0]);
-            Cities[target.offsetParent.classList[0]].eventMultiplier = 2.5;
-            map.allLands[target.offsetParent.classList[0]].children[1].children[0].appendChild(image);
-            arrayOfTributeFields[target.offsetParent.classList[0]].textContent = Cities[target.offsetParent.classList[0]].tribute * Cities[target.offsetParent.classList[0]].eventMultiplier * Cities[target.offsetParent.classList[0]].multiplierDependFromHouses;
-            for(let i = 0 ; i < map.allLands.length ; i++){
-              if(Cities[i].ownerOfField == thisPlayer){
-                map.allLands[i].removeChild(map.allLands[i].lastElementChild);
-              }
+      inputArray.forEach(function(target) {
+        target.addEventListener('click', function() {
+          let image;
+          image = document.createElement('img');
+          image.classList.add("place-for-banner");
+          image.src = "images/banner.png"
+          image.identyficator = "banner";
+          console.log(target.offsetParent.classList[0]);
+          Cities[target.offsetParent.classList[0]].eventMultiplier = 2.5;
+          map.allLands[target.offsetParent.classList[0]].children[1].children[0].appendChild(image);
+          arrayOfTributeFields[target.offsetParent.classList[0]].textContent = Cities[target.offsetParent.classList[0]].tribute * Cities[target.offsetParent.classList[0]].eventMultiplier * Cities[target.offsetParent.classList[0]].multiplierDependFromHouses;
+          for (let i = 0; i < map.allLands.length; i++) {
+            if (Cities[i].ownerOfField == thisPlayer) {
+              map.allLands[i].removeChild(map.allLands[i].lastElementChild);
             }
-          })
+          }
           btn.disabled = false;
+        })
       })
-    }else{
+    } else {
       btn.disabled = false;
     }
   }
-  deletingChildsFromElement(element){
-    console.log(element.children.length);
-    for(let i = 1; i < element.children.length ; i++){
-      element.removeChild(element.children[i]);
+  deletingChildsFromElement(element) {
+    const elementLen = element.children.length;
+    for (let i = 1; i < elementLen; i++) {
+      element.removeChild(element.lastElementChild);
     }
-  }
 
+  }
 }
 const map = new Map();
 const jail = 8;
-
