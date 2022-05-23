@@ -685,13 +685,13 @@ paying300gOption.addEventListener('click', function(player) {
 });
 
 const game = new Game();
+
+window.addEventListener('load', function () {
 game.initiatePlayers();
 game.whoIsFirst();
 map.sortElements(map.allLands);
 map.appendPlayersOnMap();
 map.showingDivs(containerOfPlayerWhoHasMovement);
 map.sortElements(arrayOfTributeFields);
-for (let i = 0; i < game.players.length; i++) {
-  console.log('GRACZ:', game.players[i]);
-  map.visualAmountOfMoney(game.players[i]);
-}
+console.log("zaladowalem strone");
+})
