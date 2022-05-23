@@ -70,8 +70,8 @@
 }
 
 .exit {
-    justify-self: end;
     padding-right: 20px;
+    top: 5px;
     cursor: pointer;
     position: absolute;
 }
@@ -183,7 +183,7 @@
 }
 
 .container-of-cards {
-    background-image: url('/images/containerOfCards.jpg');
+    background-image: url('../images/containerOfCards.jpg');
     height: 100%;
     grid-template-rows: auto;
     align-items: center;
