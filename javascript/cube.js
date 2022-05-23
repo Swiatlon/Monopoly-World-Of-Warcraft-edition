@@ -5,8 +5,8 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
-    let firstThrown = Math.floor(Math.random() * (max - min) + min);
-    let secondThrown = Math.floor(Math.random() * (max - min) + min);
+     let firstThrown = Math.floor(Math.random() * (max - min) + min);
+     let secondThrown = Math.floor(Math.random() * (max - min) + min);
     if (firstThrown == secondThrown) {
       doublet = true;
     } else {

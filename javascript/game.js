@@ -112,8 +112,9 @@ class Game {
             map.showingDivs(jailChooseOptionBox);
           }, 1510);
         } else {
-          if (thisPlayer.counterOfStayingInJail <= 1) {
+          if (thisPlayer.counterOfStayingInJail < 2) {
             thisPlayer.jail = false;
+            cube.getNumberRandom(7, 1);
           } else {
             map.showingDivs(jailChooseOptionBox);
             thisPlayer.counterOfStayingInJail--;
@@ -128,7 +129,7 @@ class Game {
         } else if (thisPlayer.field == 16) {
           console.log("Event");
           map.creatingInputForEventMultiplier(thisPlayer);
-        } else if (thisPlayer.field == 12 || 20 || 28) {
+        } else if (thisPlayer.field == 12 || thisPlayer.field == 20 || thisPlayer.field == 28) {
           map.showingDivs(containerOfCards);
           console.log("karty specyjalne")
           let randomNumber = Math.floor(Math.random() * (10 - 1) + 1);
@@ -506,7 +507,6 @@ class Game {
       console.log(Cities[i].ownerOfField === thisPlayer);
       if (Cities[i].ownerOfField === thisPlayer) {
         let money = (Cities[i].costOfOneHouse * Cities[i].houses + Cities[i].costOfTheField) / 2;
-        map.allLands[i].style.border = 'solid blue 3px';
         map.creatingDivForSellingField(money, i);
       }
     }
@@ -629,7 +629,12 @@ btn.addEventListener("click", () => {
       playerQueue = 0;
     }
   }
-  cube.getNumberRandom(7, 1); //6 -max  1 -min
+  if (game.players[playerQueue].tryingDoublet !== true) {
+    cube.getNumberRandom(7, 1); //6 -max  1 -min
+  } else {
+    game.gameMechanism(game.players[playerQueue]);
+  }
+
 });
 buyingButton.addEventListener('click', () => game.buyingHouses(game.players[playerQueue]));
 containerOfCards.children[0].addEventListener("click", function() {
