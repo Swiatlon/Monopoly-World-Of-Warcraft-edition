@@ -5,8 +5,8 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
-    let firstThrown = Math.floor(Math.random() * (7 - 1) + 1); //7 -max  1 -min
-    let secondThrown = Math.floor(Math.random() * (7 - 1) + 1);
+     let firstThrown = Math.floor(Math.random() * (7 - 1) + 1); //7 -max  1 -min
+     let secondThrown = Math.floor(Math.random() * (7 - 1) + 1);
     // if (number == secondNumber) {
     //   // console.log('[dublet]');
     // } else if (number !== secondNumber) {
