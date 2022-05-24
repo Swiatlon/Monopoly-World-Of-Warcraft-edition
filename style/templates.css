@@ -72,6 +72,7 @@
 .exit {
     padding-right: 20px;
     top: 5px;
+    right: 0;
     cursor: pointer;
     position: absolute;
 }
