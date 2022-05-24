@@ -1,18 +1,17 @@
 class City {
-    constructor(fieldName, costOfTheField, field, tribute,costOfOneHouse,specialField) {
-        this.fieldName = fieldName;
-        this.costOfTheField = costOfTheField;
-        this.eventMultiplier = 1;
-        this.tribute = tribute 
-        this.ownerOfField = undefined;
-        this.field = field;
-        this.houses = -1 ; // -1 --> none fields | 0 --> have field | 1+ --> amount of houses  
-        this.costOfOneHouse = costOfOneHouse;
-        this.specialField = specialField; // Like Event/Jail/Start etc..
-        this.multiplierDependFromHouses = 1; // needed for having the old version of tribute
-        
+    constructor(fieldName, costOfTheField, field, tribute, costOfOneHouse, specialField) {
+      this.fieldName = fieldName;
+      this.costOfTheField = costOfTheField;
+      this.eventMultiplier = 1;
+      this.tribute = tribute;
+      this.ownerOfField = undefined;
+      this.field = field;
+      this.houses = -1; // -1 --> none fields | 0 --> have field | 1+ --> amount of houses
+      this.costOfOneHouse = costOfOneHouse;
+      this.specialField = specialField; // Like Event/Jail/Start etc..
+      this.multiplierDependFromHouses = 1; // needed for having the old version of tribute
     }
-}
+  }
 
 const Cities = [
     start                   = new City("Start",                 0,   0,  0, undefined,  true),

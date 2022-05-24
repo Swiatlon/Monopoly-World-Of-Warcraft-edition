@@ -201,6 +201,7 @@
     0% {
         transform: perspective(300px) rotateY(0);
     }
+
     100% {
         transform: perspective(300px) rotateY(360deg);
     }

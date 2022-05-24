@@ -4,7 +4,7 @@
       justify-self: center;
       display: grid;
   }
-  
+
   .cube {
       align-self: center;
       justify-self: center;
@@ -13,50 +13,50 @@
       height: 140px;
       transform-style: preserve-3d;
   }
-  
+
   .cube div {
       width: 88px;
       height: 88px;
       position: absolute;
       float: left;
   }
-  
+
   .front-cube-wall {
       background: white;
       border: 1px solid black;
       transform: rotatex(90deg) translateZ(45px);
   }
-  
+
   .back-cube-wall {
       background: white;
       border: 1px solid black;
       transform: rotateY(-90deg) translateZ(45px);
   }
-  
+
   .bottom-cube-wall {
       background: white;
       border: 1px solid black;
       transform: translateX(0px) translateY(0px) translateZ(45px);
   }
-  
+
   .top-cube-wall {
       background: white;
       border: 1px solid black;
       transform: rotateY(90deg) translateZ(45px);
   }
-  
+
   .left-cube-wall {
       background: white;
       border: 1px solid black;
       transform: rotateY(180deg) translateZ(45px);
   }
-  
+
   .right-cube-wall {
       background: white;
       border: 1px solid black;
       transform: rotateX(-90deg) translateZ(45px);
   }
-  
+
   .dot {
       width: 15px;
       height: 15px;
@@ -65,52 +65,52 @@
       position: absolute;
       border-radius: 45px;
   }
-  
+
   .dot1 {
       top: 40%;
       left: 40%;
   }
-  
+
   .dot2 {
       left: 20%;
       top: 60%;
   }
-  
+
   .dot3 {
       left: 60%;
       top: 15%;
   }
-  
+
   .dot4 {
       left: 20%;
       top: 15%;
   }
-  
+
   .dot5 {
       left: 60%;
       top: 60%;
   }
-  
+
   .dot6 {
       left: 60%;
       top: 40%;
   }
-  
+
   .back-cube-wall .dot1 {
       top: 60%;
       left: 60%;
   }
-  
+
   .back-cube-wall .dot2 {
       top: 20%;
       left: 20%;
   }
-  
+
   .bottom-cube-wall .dot1 {
       left: 60%;
       top: 60%;
   }
-  
+
   .right-cube-wall .dot1 {
       left: 20%;
   }

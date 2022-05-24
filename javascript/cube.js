@@ -5,8 +5,8 @@ class Cube {
   }
 
   getNumberRandom(max, min) {
-     let firstThrown = Math.floor(Math.random() * (max - min) + min);
-     let secondThrown = Math.floor(Math.random() * (max - min) + min);
+    let firstThrown = Math.floor(Math.random() * (max - min) + min);
+    let secondThrown = Math.floor(Math.random() * (max - min) + min);
     if (firstThrown == secondThrown) {
       doublet = true;
     } else {
@@ -32,7 +32,8 @@ class Cube {
     }
     this.lastThrows.push(firstThrown);
     this.lastThrows.push(secondThrown);
-    if (this.lastThrows.length > 2) { // Not more than 2 throws in array
+    if (this.lastThrows.length > 2) {
+      // Not more than 2 throws in array
       this.lastThrows.splice(0, 2);
     }
   }
@@ -40,35 +41,32 @@ class Cube {
   animationOfCube(number, cube) {
     switch (number) {
       case 1:
-        cube.style.webkitTransform = "rotateX(640deg) rotateY(1400deg)";
+        cube.style.webkitTransform = 'rotateX(640deg) rotateY(1400deg)';
         break;
       case 2:
-        cube.style.webkitTransform = "rotateX(380deg) rotateY(460deg)";
+        cube.style.webkitTransform = 'rotateX(380deg) rotateY(460deg)';
         break;
       case 3:
-        cube.style.webkitTransform = "rotateX(570deg) rotateY(440deg)";
+        cube.style.webkitTransform = 'rotateX(570deg) rotateY(440deg)';
         break;
       case 4:
-        cube.style.webkitTransform = "rotateX(-1250deg) rotateY(1250deg)";
+        cube.style.webkitTransform = 'rotateX(-1250deg) rotateY(1250deg)';
         break;
       case 5:
-        cube.style.webkitTransform = "rotateX(-1250deg) rotateY(1800deg)";
+        cube.style.webkitTransform = 'rotateX(-1250deg) rotateY(1800deg)';
         break;
       case 6:
-        cube.style.webkitTransform = "rotateX(-600deg) rotateY(3500deg)";
+        cube.style.webkitTransform = 'rotateX(-600deg) rotateY(3500deg)';
         break;
       default:
-        cube.style.webkitTransform = "rotateX(0deg) rotateY(0deg)";
+        cube.style.webkitTransform = 'rotateX(0deg) rotateY(0deg)';
     }
   }
 
   getCubes() {
-    return [
-      document.querySelector(".firstCube"),
-      document.querySelector(".secondCube")
-    ];
+    return [document.querySelector('.firstCube'), document.querySelector('.secondCube')];
   }
 }
 
 const cube = new Cube();
-const btn = document.querySelector(".roll-dice-button");
+const btn = document.querySelector('.roll-dice-button');

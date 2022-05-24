@@ -34,28 +34,26 @@ const containerOfDoublet = document.querySelector('.container-of-doublet');
 const arrayOfTributeFields = [...document.querySelectorAll('.javascript-sort-variable')];
 
 const arrayOfPlayersMoney = [
-  playerFirstOnMapMoney = document.querySelector('.player-first-money'),
-  playerSecondOnMapMoney = document.querySelector('.player-second-money'),
-  playerThirdOnMapMoney = document.querySelector('.player-third-money'),
-  playerFourthOnMapMoney = document.querySelector('.player-fourth-money'),
-]
+  (playerFirstOnMapMoney = document.querySelector('.player-first-money')),
+  (playerSecondOnMapMoney = document.querySelector('.player-second-money')),
+  (playerThirdOnMapMoney = document.querySelector('.player-third-money')),
+  (playerFourthOnMapMoney = document.querySelector('.player-fourth-money')),
+];
 const arraysOfPlayersName = [
-  playerFirstName = document.querySelector('.player-first-name'),
-  playerSecondName = document.querySelector('.player-second-name'),
-  playerThirdName = document.querySelector('.player-third-name'),
-  playerFourthName = document.querySelector('.player-fourth-name'),
-]
+  (playerFirstName = document.querySelector('.player-first-name')),
+  (playerSecondName = document.querySelector('.player-second-name')),
+  (playerThirdName = document.querySelector('.player-third-name')),
+  (playerFourthName = document.querySelector('.player-fourth-name')),
+];
 
 class Map {
   constructor() {
-    this.allLands = [
-      ...document.querySelectorAll(".field"),
-    ];
+    this.allLands = [...document.querySelectorAll('.field')];
   }
 
   sortElements(element) {
     let result;
-    element.sort(function(a, b) {
+    element.sort(function (a, b) {
       if (element == map.allLands) {
         result = a.classList[0] - b.classList[0];
       } else {
@@ -74,30 +72,34 @@ class Map {
   }
 
   hidingDivs(div) {
-    containerOfEvents.style.display = "none";
-    div.style.display = "none";
+    containerOfEvents.style.display = 'none';
+    div.style.display = 'none';
   }
 
   showingDivs(div) {
-    div.style.display = "grid";
+    div.style.display = 'grid';
     switch (div) {
       case containerOfDoublet:
       case containerOfJailCommunicate: //-----> Doublet
-        setTimeout(function() { // Poczatek animacji
+        setTimeout(function () {
+          // Poczatek animacji
           containerOfEvents.style.opacity = 1;
-          containerOfEvents.style.display = "grid";
-          setTimeout(function() { // 2sekundy animacji
+          containerOfEvents.style.display = 'grid';
+          setTimeout(function () {
+            // 2sekundy animacji
             containerOfEvents.style.opacity = 0;
-            setTimeout(function() { // Koniec animacji 
+            setTimeout(function () {
+              // Koniec animacji
               containerOfEvents.style.opacity = 1;
-              containerOfEvents.style.display = "none";
-              div.style.display = "none";
+              containerOfEvents.style.display = 'none';
+              div.style.display = 'none';
             }, 300);
           }, 1000);
         }, 0);
-        break
+        break;
       case containerOfPlayerWhoHasMovement: //-----> Ruch gracza
-        setTimeout(function() { // Poczatek animacji
+        setTimeout(function () {
+          // Poczatek animacji
           console.log('[numberOfShowing]', NumberOfShowingPlayerQueue);
           console.log('playerQu', playerQueue);
           NumberOfShowingPlayerQueue = playerQueue;
@@ -111,27 +113,32 @@ class Map {
           nameOfPlayerWhoHasMovement.textContent = game.players[NumberOfShowingPlayerQueue].nameOfPlayer;
           imageOfPlayerWhoHasMovement.src = game.players[NumberOfShowingPlayerQueue].image;
           containerOfEvents.style.opacity = 1;
-          containerOfEvents.style.display = "grid";
-          setTimeout(function() { // 2sekundy animacji
+          containerOfEvents.style.display = 'grid';
+          setTimeout(function () {
+            // 2sekundy animacji
             containerOfEvents.style.opacity = 0;
-            setTimeout(function() { // Koniec animacji 
+            setTimeout(function () {
+              // Koniec animacji
               containerOfEvents.style.opacity = 1;
-              containerOfEvents.style.display = "none";
-              div.style.display = "none";
+              containerOfEvents.style.display = 'none';
+              div.style.display = 'none';
             }, 500);
           }, 2000);
         }, 0);
         break;
       case containerIfDontHaveMoney:
-        div.style.display = "grid";
+        div.style.display = 'grid';
         break;
       default:
-        containerOfEvents.style.display = "grid";
+        containerOfEvents.style.display = 'grid';
     }
   }
 
   showTheActualTributeOfField(actualPlayer) {
-    arrayOfTributeFields[actualPlayer.field].textContent = Cities[actualPlayer.field].tribute * Cities[actualPlayer.field].multiplierDependFromHouses * Cities[actualPlayer.field].eventMultiplier;
+    arrayOfTributeFields[actualPlayer.field].textContent =
+      Cities[actualPlayer.field].tribute *
+      Cities[actualPlayer.field].multiplierDependFromHouses *
+      Cities[actualPlayer.field].eventMultiplier;
   }
 
   enteringTheNamesOfThePlayers(player) {
@@ -139,7 +146,7 @@ class Map {
   }
 
   visualAmountOfMoney(player) {
-    arrayOfPlayersMoney[player.id - 1].textContent = "Money: " + player.money; // od 0 sie zacyznaja id a tablica od 1  dlatego -1
+    arrayOfPlayersMoney[player.id - 1].textContent = 'Money: ' + player.money; // od 0 sie zacyznaja id a tablica od 1  dlatego -1
   }
 
   enteringThePriceOfBuildings(actualPlayer) {
@@ -147,7 +154,8 @@ class Map {
       if (Cities[actualPlayer.field].houses > -1) {
         arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse * i;
       } else {
-        arrayOfHousesCosts[i].textContent = Cities[actualPlayer.field].costOfOneHouse * i + Cities[actualPlayer.field].costOfTheField;
+        arrayOfHousesCosts[i].textContent =
+          Cities[actualPlayer.field].costOfOneHouse * i + Cities[actualPlayer.field].costOfTheField;
       }
     }
   }
@@ -157,16 +165,16 @@ class Map {
     let text;
     let input;
 
-    div = document.createElement("div");
-    div.classList.add("container-of-selling-field");
+    div = document.createElement('div');
+    div.classList.add('container-of-selling-field');
 
-    text = document.createElement("p");
-    text.classList.add("selling-field-money");
+    text = document.createElement('p');
+    text.classList.add('selling-field-money');
     text.textContent = money;
 
-    input = document.createElement("input");
-    input.classList.add("checkbox-in-selling-field");
-    input.type = "checkbox";
+    input = document.createElement('input');
+    input.classList.add('checkbox-in-selling-field');
+    input.type = 'checkbox';
 
     div.appendChild(input);
     div.appendChild(text);
@@ -178,28 +186,28 @@ class Map {
     let inputArray = [];
     for (let i = 0; i < Cities.length; i++) {
       let input;
-      input = document.createElement("input");
-      input.type = "checkbox";
-      input.style.height = "30px";
-      input.style.width = "30px";
-      input.style.marginLeft = "auto";
-      input.style.marginRight = "auto";
-      input.style.marginTop = "15px";
-      input.style.zIndex = "1";
+      input = document.createElement('input');
+      input.type = 'checkbox';
+      input.style.height = '30px';
+      input.style.width = '30px';
+      input.style.marginLeft = 'auto';
+      input.style.marginRight = 'auto';
+      input.style.marginTop = '15px';
+      input.style.zIndex = '1';
       map.allLands[i].appendChild(input);
       inputArray.push(input);
     }
     console.log(inputArray);
-    inputArray.forEach(function(target) {
-      target.addEventListener('click', function() {
+    inputArray.forEach(function (target) {
+      target.addEventListener('click', function () {
         btn.disabled = false;
         thisPlayer.field = inputArray.indexOf(target);
         map.allLands[inputArray.indexOf(target)].children[0].appendChild(thisPlayer.img);
         for (let i = 0; i < map.allLands.length; i++) {
           map.allLands[i].removeChild(map.allLands[i].lastElementChild);
         }
-      })
-    })
+      });
+    });
   }
 
   creatingInputForEventMultiplier(thisPlayer) {
@@ -209,41 +217,46 @@ class Map {
         if (Cities[i].eventMultiplier > 1) {
           Cities[i].eventMultiplier = 1;
           map.allLands[i].children[1].children[0].removeChild(map.allLands[i].children[1].children[0].lastElementChild);
-          arrayOfTributeFields[i].textContent = Cities[i].tribute * Cities[i].multiplierDependFromHouses * Cities[i].eventMultiplier;
+          arrayOfTributeFields[i].textContent =
+            Cities[i].tribute * Cities[i].multiplierDependFromHouses * Cities[i].eventMultiplier;
         }
-        if (Cities[i].ownerOfField === thisPlayer) { // tell me which fields player have 
+        if (Cities[i].ownerOfField === thisPlayer) {
+          // tell me which fields player have
           let input;
-          input = document.createElement("input");
-          input.type = "checkbox";
-          input.style.height = "30px";
-          input.style.width = "30px";
-          input.style.marginLeft = "auto";
-          input.style.marginRight = "auto";
-          input.style.marginTop = "15px";
-          input.style.zIndex = "1";
+          input = document.createElement('input');
+          input.type = 'checkbox';
+          input.style.height = '30px';
+          input.style.width = '30px';
+          input.style.marginLeft = 'auto';
+          input.style.marginRight = 'auto';
+          input.style.marginTop = '15px';
+          input.style.zIndex = '1';
           map.allLands[i].appendChild(input);
           inputArray.push(input);
         }
       }
-      inputArray.forEach(function(target) {
-        target.addEventListener('click', function() {
+      inputArray.forEach(function (target) {
+        target.addEventListener('click', function () {
           let image;
           image = document.createElement('img');
-          image.classList.add("place-for-banner");
-          image.src = "images/banner.png"
-          image.identyficator = "banner";
+          image.classList.add('place-for-banner');
+          image.src = 'images/banner.png';
+          image.identyficator = 'banner';
           console.log(target.offsetParent.classList[0]);
           Cities[target.offsetParent.classList[0]].eventMultiplier = 2.5;
           map.allLands[target.offsetParent.classList[0]].children[1].children[0].appendChild(image);
-          arrayOfTributeFields[target.offsetParent.classList[0]].textContent = Cities[target.offsetParent.classList[0]].tribute * Cities[target.offsetParent.classList[0]].eventMultiplier * Cities[target.offsetParent.classList[0]].multiplierDependFromHouses;
+          arrayOfTributeFields[target.offsetParent.classList[0]].textContent =
+            Cities[target.offsetParent.classList[0]].tribute *
+            Cities[target.offsetParent.classList[0]].eventMultiplier *
+            Cities[target.offsetParent.classList[0]].multiplierDependFromHouses;
           for (let i = 0; i < map.allLands.length; i++) {
             if (Cities[i].ownerOfField == thisPlayer) {
               map.allLands[i].removeChild(map.allLands[i].lastElementChild);
             }
           }
           btn.disabled = false;
-        })
-      })
+        });
+      });
     } else {
       btn.disabled = false;
     }
@@ -253,7 +266,6 @@ class Map {
     for (let i = 1; i < elementLen; i++) {
       element.removeChild(element.lastElementChild);
     }
-
   }
 }
 const map = new Map();

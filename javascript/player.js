@@ -4,21 +4,21 @@ class Player {
     this.field = 0;
     this.amountOfMoves = 0;
     this.id = position;
-    this.image = "images/player" + position + ".png";
+    this.image = 'images/player' + position + '.png';
     this.positionInQueue = position;
     this.cities = [];
     this.money = 3000;
     this.color = color;
     this.jail = false;
-    this.img = document.createElement("img");
+    this.img = document.createElement('img');
     this.img.width = 60;
     this.img.height = 60;
     this.img.src = this.image;
-    this.img.style.marginLeft = "auto";
-    this.img.style.marginRight = "auto";
+    this.img.style.marginLeft = 'auto';
+    this.img.style.marginRight = 'auto';
     this.img.style.zIndex = '1';
-    this.img.style.position = "Relative";
-    this.img.style.transform = " rotate3d(0, 1, 0.5, 0.4rad)";
+    this.img.style.position = 'Relative';
+    this.img.style.transform = ' rotate3d(0, 1, 0.5, 0.4rad)';
     this.img.imgIdentyficator = this.nameOfPlayer;
     this.counterOfStayingInJail = 0;
     this.tryingDoublet = false;
@@ -29,12 +29,14 @@ class Player {
     let fieldBeforeAnimationOfMove = this.field;
     const lastField = 31;
     const firstField = 0;
-    let mathAlgorithm = lastField - fieldBeforeAnimationOfMove; // There is my algorithm to calculate how much fields we need to the last field 
+    let mathAlgorithm = lastField - fieldBeforeAnimationOfMove; // There is my algorithm to calculate how much fields we need to the last field
     btn.disabled = true;
     let playerAnimationOfMove = setInterval(() => {
-      if (this.field !== fieldBeforeAnimationOfMove + this.amountOfMoves) { //  Moving player untill end of movement
+      if (this.field !== fieldBeforeAnimationOfMove + this.amountOfMoves) {
+        //  Moving player untill end of movement
         this.field++;
-        if (this.field > lastField) { // After last field (31) we go to the start (0)
+        if (this.field > lastField) {
+          // After last field (31) we go to the start (0)
           this.field = firstField;
           this.money += 300;
           map.visualAmountOfMoney(this);
@@ -56,6 +58,4 @@ class Player {
       game.gameMechanism(this);
     }
   }
-
-
 }
